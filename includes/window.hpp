@@ -17,8 +17,20 @@ private:
 	bool				create();
 	void				destroy();
 	void				initOpengl();
+	void				processEvents();
+
+	
 public:
 	window();
 	window(std::string title, sf::Vector2i size);
 	~window();
+	
+	void				update();
+	void				toggleFullscreen();
+	void				clear();
+	void				clear(sf::Color color);
+	void				clear(float r, float g, float b, float a);
+	void				display();
+
+	bool				isOpen(){return (mWindow.isOpen());};
 };

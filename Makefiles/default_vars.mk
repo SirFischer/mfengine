@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:39:47 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/06 00:08:57 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/15 00:17:21 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME			:=	mfengine
 
 CFLAGS			:=	-Wall -Werror -Wextra
 
-CLIBS			+= -lsfml-graphics -lsfml-window -lsfml-system
+CLIBS			+= -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lglut
 
 BLACK_LIST_SRCS :=	
 
