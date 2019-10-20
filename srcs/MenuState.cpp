@@ -15,14 +15,14 @@ MenuState::ReturnCtrl	MenuState::run()
 	sf::Time	elapsedTime;
 
 	mRunning = true;
-	elapsedTime = sf::seconds(DELTATIME);
+	elapsedTime = sf::seconds(MENUDELTATIME);
 	while (mRunning  && mWindow->isOpen())
 	{
-		while (elapsedTime.asSeconds() > DELTATIME)
+		while (elapsedTime.asSeconds() > MENUDELTATIME)
 		{
 			handle_events();
 			update();
-			elapsedTime -= sf::seconds(DELTATIME);
+			elapsedTime -= sf::seconds(MENUDELTATIME);
 		}
 		render();
 		elapsedTime += mGameLoop.restart();
@@ -33,6 +33,7 @@ MenuState::ReturnCtrl	MenuState::run()
 void				MenuState::update()
 {
 	mWindow->update();
+	mTestButton->Update();
 }
 
 void				MenuState::handle_events()

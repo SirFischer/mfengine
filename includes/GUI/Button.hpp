@@ -15,5 +15,6 @@ namespace MFGUI
 		~Button();
 
 		void	Draw();
+		void	Update();
 	};
 }

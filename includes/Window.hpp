@@ -32,5 +32,7 @@ public:
 	void				draw(sf::Drawable *tDrawable);
 	void				display();
 
-	bool				isOpen(){return (mWindow.isOpen());};
+	bool				isOpen(){return (mWindow.isOpen());}
+
+	sf::Vector2i		getRelMousePos(){return (sf::Mouse::getPosition(mWindow));}
 };
