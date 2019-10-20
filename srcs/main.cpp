@@ -1,14 +1,10 @@
-# include "window.hpp"
+#include "StateManager.hpp"
 
 int main()
 {
-	window	window("TESTS", sf::Vector2i(1920, 1080));
-
-	while (window.isOpen())
-	{
-		window.update();
-		window.clear();
-		window.display();
-	}
+	Window	window("TESTS", sf::Vector2i(1920, 1080));
+	StateManager	stateManager(&window);
+	stateManager.state_push(new MenuState(&window));
+	stateManager.run();
 	return (0);
 }

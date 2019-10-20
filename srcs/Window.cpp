@@ -1,26 +1,26 @@
-#include "window.hpp"
+#include "Window.hpp"
 
 
-window::window():
+Window::Window():
 mSize(DEFAULT_WIN_WIDTH, DEFAULT_WIN_HEIGHT),
 mTitle("Default Window Title")
 {
 	create();
 }
 
-window::window(std::string tTitle, sf::Vector2i tSize):
+Window::Window(std::string tTitle, sf::Vector2i tSize):
 mSize(tSize),
 mTitle(tTitle)
 {
 	create();
 }
 
-window::~window()
+Window::~Window()
 {
 	destroy();
 }
 
-bool	window::create()
+bool	Window::create()
 {
 	sf::VideoMode mode(mSize.x, mSize.y);
 
@@ -32,17 +32,17 @@ bool	window::create()
 	return (true);
 }
 
-void	window::initOpengl()
+void	Window::initOpengl()
 {
 	glEnable(GL_TEXTURE_2D);
 }
 
-void	window::destroy()
+void	Window::destroy()
 {
 	mWindow.close();
 }
 
-void	window::processEvents()
+void	Window::processEvents()
 {
 	sf::Event	event;
 
@@ -56,37 +56,37 @@ void	window::processEvents()
 	}
 }
 
-void	window::update()
+void	Window::update()
 {
 	processEvents();
 }
 
-void	window::toggleFullscreen()
+void	Window::toggleFullscreen()
 {
 	mIsFullscreen = !mIsFullscreen;
 	destroy();
 	create();
 }
 
-void	window::clear()
+void	Window::clear()
 {
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void	window::clear(float r, float g, float b, float a)
+void	Window::clear(float r, float g, float b, float a)
 {
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void	window::clear(sf::Color color)
+void	Window::clear(sf::Color color)
 {
 	glClearColor(color.r / 255.0, color.g / 255.0, color.b / 255.0, color.a / 255.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void	window::display()
+void	Window::display()
 {
 	mWindow.display();
 }

@@ -6,7 +6,7 @@
 # define DEFAULT_WIN_HEIGHT		1080
 # define DEFAULT_WIN_WIDTH		1920
 
-class window
+class Window
 {
 private:
 	sf::RenderWindow	mWindow;
@@ -21,9 +21,9 @@ private:
 
 	
 public:
-	window();
-	window(std::string title, sf::Vector2i size);
-	~window();
+	Window();
+	Window(std::string title, sf::Vector2i size);
+	~Window();
 	
 	void				update();
 	void				toggleFullscreen();
