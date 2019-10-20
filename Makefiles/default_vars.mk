@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:39:47 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/15 00:17:21 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/20 23:16:33 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCDIRS			:=	srcs
 SRCS			+=	$(shell find $(SRCDIRS) -name '*.cpp')
 
 INC_PATHS		:=	includes
+
+INC_PATHS		:=	$(shell find $(INC_PATHS) -type d)
 
 INCLUDES		+=	$(foreach d, $(INC_PATHS), -I $d)
 

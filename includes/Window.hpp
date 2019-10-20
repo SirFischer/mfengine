@@ -18,7 +18,6 @@ private:
 	void				destroy();
 	void				initOpengl();
 	void				processEvents();
-
 	
 public:
 	Window();
@@ -30,6 +29,7 @@ public:
 	void				clear();
 	void				clear(sf::Color color);
 	void				clear(float r, float g, float b, float a);
+	void				draw(sf::Drawable *tDrawable);
 	void				display();
 
 	bool				isOpen(){return (mWindow.isOpen());};

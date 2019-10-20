@@ -3,6 +3,7 @@
 MenuState::MenuState(Window *tWindow)
 {
 	mWindow = tWindow;
+	mTestButton = new MFGUI::Button(tWindow);
 }
 
 MenuState::~MenuState()
@@ -42,6 +43,8 @@ void				MenuState::handle_events()
 void				MenuState::render()
 {
 	mWindow->clear(sf::Color::Green);
+
+	mTestButton->Draw();
 
 	mWindow->display();
 }

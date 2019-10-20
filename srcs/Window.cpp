@@ -86,6 +86,11 @@ void	Window::clear(sf::Color color)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void	Window::draw(sf::Drawable *tDrawable)
+{
+	mWindow.draw(*tDrawable);
+}
+
 void	Window::display()
 {
 	mWindow.display();
