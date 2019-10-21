@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:26:22 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/20 23:17:23 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/21 03:50:08 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,11 @@ obj:
 	@echo "$(_BLUE)Creating object directories...$(_END)"
 	@mkdir -p $@ $(SRC_DIR)
 
+-include $(DEPS)
+
 obj/%.o: srcs/%.cpp
 	@echo "$(_YELLOW)Compiling $(notdir $<)...$(_END)"
-	$(CC) $(CFLAGS) $(INC_DIRS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_DIRS) $(INCLUDES) -MMD -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(_BLUE)Linking binary...$(_END)"

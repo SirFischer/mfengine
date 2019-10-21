@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:39:47 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/20 23:16:33 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/21 03:52:30 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ INCLUDES		+=	$(foreach d, $(INC_PATHS), -I $d)
 SRC_DIR			:=	$(patsubst srcs/%,obj/%,$(shell find srcs/* -type d))
 
 OBJS			:=	$(patsubst srcs/%.cpp,obj/%.o,$(SRCS))
+
+DEPS			:=	$(patsubst %.o,%.d,$(OBJS))
 
 UNAME			:=	$(shell uname -s)
 

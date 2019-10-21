@@ -40,5 +40,4 @@ void	MFGUI::Button::Update()
 		mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::INSIDE;
 		break;
 	}
-	printf("%d\n", (int)mMouseState);
 }
