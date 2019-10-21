@@ -6,13 +6,17 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:26:22 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/21 03:50:08 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/21 04:06:34 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include		Makefiles/default_vars.mk
 
+ifdef RELEASE
 CFLAGS += -O3
+else
+CFLAGS += -g
+endif
 
 .PHONY:		install_dep obj clean fclean all GEN_SOURCES test
 
