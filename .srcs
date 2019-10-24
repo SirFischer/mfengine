@@ -1,0 +1,6 @@
+srcs/Window.cpp \
+srcs/StateManager.cpp \
+srcs/main.cpp \
+srcs/GameState.cpp \
+srcs/GUI/Button.cpp \
+srcs/MenuState.cpp

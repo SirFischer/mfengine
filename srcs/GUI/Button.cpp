@@ -3,41 +3,29 @@
 MFGUI::Button::Button(Window *tWindow)
 {
 	mWindow = tWindow;
-	mContainer = new sf::RectangleShape(sf::Vector2f(100, 100));
-	((sf::RectangleShape *)mContainer)->setFillColor(sf::Color::Red);
+	mDefaultTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(0, 0, 30, 20));
+	mOnHoverTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(0, 0, 30, 20));
+	mOnClickTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(30, 0, 30, 20));
+	mContainer.setTexture(mDefaultTexture);
+	mContainer.setScale(3, 3);
 }
 
 MFGUI::Button::~Button()
 {
-	delete mContainer;
 }
 
 void	MFGUI::Button::Draw()
 {
-	mWindow->draw(mContainer);
+	mWindow->draw(&mContainer);
 }
 
 void	MFGUI::Button::Update()
 {
-	bool			outside;
-	sf::Vector2i	mousePos;
-	sf::Vector2f	conPos;
-	sf::Vector2f	size;
-
-	size = ((sf::RectangleShape *)mContainer)->getSize();
-	conPos = ((sf::RectangleShape *)mContainer)->getPosition();
-	mousePos = mWindow->getRelMousePos();
-	outside = (mousePos.x > conPos.x + size.x|| mousePos.y > conPos.y + size.y || mousePos.x < conPos.x || mousePos.y < conPos.y);
-	switch (mMouseState)
-	{
-	case MouseState::INSIDE:
-		mMouseState = (outside) ? MouseState::EXITED : MouseState::INSIDE;
-		break;
-	case MouseState::OUTSIDE:
-		mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::ENTERED;
-		break;
-	default:
-		mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::INSIDE;
-		break;
-	}
+	this->UpdateState();
+	if (mMouseState == MouseState::CLICKED)
+		mContainer.setTexture(mOnClickTexture);
+	else if (mMouseState == MouseState::INSIDE || mMouseState == MouseState::ENTERED)
+		mContainer.setTexture(mOnHoverTexture);
+	else
+		mContainer.setTexture(mDefaultTexture);
 }

@@ -10,11 +10,15 @@ namespace MFGUI
 	class Button : public Container
 	{
 	private:
-	public:
-		Button(Window *tWindow);
-		~Button();
+		sf::Texture		mDefaultTexture;
+		sf::Texture		mOnClickTexture;
+		sf::Texture		mOnHoverTexture;
 
-		void	Draw();
-		void	Update();
+	public:
+						Button(Window *tWindow);
+						~Button();
+
+		void			Draw();
+		void			Update();
 	};
 }

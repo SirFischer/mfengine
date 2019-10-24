@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:26:22 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/21 04:06:34 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/22 02:27:38 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ else
 CFLAGS += -g
 endif
 
-.PHONY:		install_dep obj clean fclean all GEN_SOURCES test
+.PHONY:		install_dep obj clean fclean all GEN_SOURCES test check
 
 all: install_dep $(OBJS) $(NAME)
 
@@ -61,6 +61,8 @@ re: fclean all
 GEN_SOURCES:
 	@echo "${_BLUE}Generating source list...${_END}"
 	@-rm .srcs
-	@find . -type f | grep "\.c$$" $(foreach V, $(BLACK_LIST_SRCS), | grep -v "$(V)") | cut -f2- -d/ | grep -v " " | sed "s/$$/ \\\\/" | sed "1s/^       //" | sed "$$ s/..$$//" >> .srcs
+	@find . -type f | grep "\.cpp$$" $(foreach V, $(BLACK_LIST_SRCS), | grep -v "$(V)") | cut -f2- -d/ | grep -v " " | sed "s/$$/ \\\\/" | sed "1s/^       //" | sed "$$ s/..$$//" >> .srcs
 	@echo "${_GREEN}Done!${_END}"
 
+check:
+	cppcheck --enable=all $(INCLUDES) $(SRCS)

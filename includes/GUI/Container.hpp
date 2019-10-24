@@ -14,11 +14,15 @@ namespace MFGUI
 	{
 	protected:
 		Window			*mWindow = NULL;
-		sf::Drawable	*mContainer = NULL;
+		sf::Sprite		mContainer;
 		MouseState		mMouseState = MouseState::OUTSIDE;
+		void			UpdateState();
+
 	public:
 		virtual 		~Container(){}
 		virtual void	Draw() = 0;
 		virtual void	Update() = 0;
+
+		MouseState		GetState(){return (mMouseState);}
 	};
 }
