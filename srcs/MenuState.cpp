@@ -1,20 +1,11 @@
 #include "MenuState.hpp"
 
-MenuState::MenuState(Window *tWindow)
+MenuState::MenuState(Window *tWindow):
+mPlayButton(tWindow, &mResourceManager),
+mQuitButton(tWindow, &mResourceManager)
 {
 	mWindow = tWindow;
-	mTestButton[0] = new mf::Button(tWindow, &mResourceManager);
-	mTestButton[0]->SetPosition(sf::Vector2f(100, 100));
-	mTestButton[0]->SetScale(sf::Vector2f(4, 3));
-	mTestButton[1] = new mf::Button(tWindow, &mResourceManager);
-	mTestButton[1]->SetPosition(sf::Vector2f(100, 200));
-	mTestButton[1]->SetScale(sf::Vector2f(4, 3));
-	mTestButton[2] = new mf::Button(tWindow, &mResourceManager);
-	mTestButton[2]->SetPosition(sf::Vector2f(100, 300));
-	mTestButton[2]->SetScale(sf::Vector2f(4, 3));
-	mTestButton[3] = new mf::Button(tWindow, &mResourceManager);
-	mTestButton[3]->SetPosition(sf::Vector2f(100, 400));
-	mTestButton[3]->SetScale(sf::Vector2f(4, 3));
+	initButtons();
 }
 
 MenuState::~MenuState()
@@ -45,10 +36,19 @@ MenuState::ReturnCtrl	MenuState::run()
 void				MenuState::update()
 {
 	mWindow->update();
-	mTestButton[0]->Update();
-	mTestButton[1]->Update();
-	mTestButton[2]->Update();
-	mTestButton[3]->Update();
+	mPlayButton.Update();
+	mQuitButton.Update();
+
+	if (mQuitButton.GetState() == mf::MouseState::CLICKED)
+	{
+		mReturn = ReturnCtrl::END;
+		mRunning = false;
+	}
+	if (mPlayButton.GetState() == mf::MouseState::CLICKED)
+	{
+		mReturn = ReturnCtrl::GAME;
+		mRunning = false;
+	}
 }
 
 void				MenuState::handle_events()
@@ -60,10 +60,22 @@ void				MenuState::render()
 {
 	mWindow->clear(sf::Color::Green);
 
-	mTestButton[0]->Draw();
-	mTestButton[1]->Draw();
-	mTestButton[2]->Draw();
-	mTestButton[3]->Draw();
+	mPlayButton.Draw();
+	mQuitButton.Draw();
 
 	mWindow->display();
+}
+
+void				MenuState::initButtons()
+{
+	mPlayButton.SetPosition(sf::Vector2f(850, 400));
+	mPlayButton.SetScale(sf::Vector2f(8, 5));
+	mPlayButton.SetFont("assets/fonts/pdark.ttf");
+	mPlayButton.SetText("PLAY");
+	mPlayButton.SetTextOffset(sf::Vector2f(50, 20));
+	mQuitButton.SetPosition(sf::Vector2f(850, 500));
+	mQuitButton.SetScale(sf::Vector2f(8, 5));
+	mQuitButton.SetFont("assets/fonts/pdark.ttf");
+	mQuitButton.SetText("QUIT");
+	mQuitButton.SetTextOffset(sf::Vector2f(50, 20));
 }

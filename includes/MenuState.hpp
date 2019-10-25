@@ -8,9 +8,12 @@
 class MenuState : public ScreenState
 {
 private:
-	mf::Button				*mTestButton[4];
 	mf::ResourceManager		mResourceManager;
+	mf::Button				mPlayButton;
+	mf::Button				mQuitButton;
 
+
+	void			initButtons();
 public:
 	MenuState(Window *tWindow);
 	~MenuState();

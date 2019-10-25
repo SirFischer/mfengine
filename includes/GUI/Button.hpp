@@ -14,6 +14,9 @@ namespace mf
 		sf::Texture				mDefaultTexture;
 		sf::Texture				mOnClickTexture;
 		sf::Texture				mOnHoverTexture;
+		sf::Font				mFont;
+		sf::Text				mText;
+		sf::Vector2f			mTextPos;
 
 		mf::ResourceManager		*mResourceManager;
 
@@ -23,5 +26,9 @@ namespace mf
 
 		void			Draw();
 		void			Update();
+
+		void			SetFont(std::string path);
+		void			SetText(std::string text);
+		void			SetTextOffset(sf::Vector2f offset);
 	};
 }

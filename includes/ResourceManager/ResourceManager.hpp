@@ -8,7 +8,9 @@ namespace mf
 	class ResourceManager
 	{
 	private:
-		std::map<std::string, void *>	mResources;
+		std::map<std::string, sf::Font>		mFonts;
+		std::map<std::string, sf::Image>	mImages;
+		
 	public:
 		static bool						verbose;
 

@@ -37,7 +37,8 @@ void				GameState::update()
 
 void				GameState::handle_events()
 {
-	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		mRunning = false;
 }
 
 void				GameState::render()
