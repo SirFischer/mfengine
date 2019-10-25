@@ -1,6 +1,6 @@
 #include "Container.hpp"
 
-void		MFGUI::Container::UpdateState()
+void		mf::Container::UpdateState()
 {
 	bool			outside;
 	sf::Vector2i	mousePos;
@@ -26,4 +26,14 @@ void		MFGUI::Container::UpdateState()
 		mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::INSIDE;
 		break;
 	}
+}
+
+void			mf::Container::SetPosition(sf::Vector2f position)
+{
+	mContainer.setPosition(position);
+}
+
+void			mf::Container::SetScale(sf::Vector2f scale)
+{
+	mContainer.setScale(scale);
 }

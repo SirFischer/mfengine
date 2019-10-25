@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:39:47 by mfischer          #+#    #+#              #
-#    Updated: 2019/10/21 03:52:30 by mfischer         ###   ########.fr        #
+#    Updated: 2019/10/25 18:01:15 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC				:=	g++
 
 NAME			:=	mfengine
 
-CFLAGS			:=	-Wall -Werror -Wextra
+CFLAGS			:=	-Wall -Werror -Wextra -std=c++17
 
 CLIBS			+= -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lglut
 

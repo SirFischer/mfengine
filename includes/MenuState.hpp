@@ -8,7 +8,8 @@
 class MenuState : public ScreenState
 {
 private:
-	MFGUI::Button	*mTestButton;
+	mf::Button				*mTestButton[4];
+	mf::ResourceManager		mResourceManager;
 
 public:
 	MenuState(Window *tWindow);

@@ -1,25 +1,25 @@
 #include "Button.hpp"
 
-MFGUI::Button::Button(Window *tWindow)
+mf::Button::Button(Window *tWindow, mf::ResourceManager *tResourceManager)
 {
 	mWindow = tWindow;
-	mDefaultTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(0, 0, 30, 20));
-	mOnHoverTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(0, 0, 30, 20));
-	mOnClickTexture.loadFromFile("assets/textures/GUI/Button_1.png", sf::IntRect(30, 0, 30, 20));
+	mResourceManager = tResourceManager;
+	mDefaultTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
+	mOnHoverTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
+	mOnClickTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(33, 0, 28, 18));
 	mContainer.setTexture(mDefaultTexture);
-	mContainer.setScale(3, 3);
 }
 
-MFGUI::Button::~Button()
+mf::Button::~Button()
 {
 }
 
-void	MFGUI::Button::Draw()
+void	mf::Button::Draw()
 {
 	mWindow->draw(&mContainer);
 }
 
-void	MFGUI::Button::Update()
+void	mf::Button::Update()
 {
 	this->UpdateState();
 	if (mMouseState == MouseState::CLICKED)
