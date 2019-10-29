@@ -10,7 +10,7 @@ private:
 	Window						*mWindow;
 
 public:
-	StateManager(Window	*tWindow);
+	explicit StateManager(Window	*tWindow);
 	~StateManager();
 
 	void		state_pop();

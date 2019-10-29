@@ -7,7 +7,7 @@ mf::Button::Button(Window *tWindow, mf::ResourceManager *tResourceManager)
 	mDefaultTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
 	mOnHoverTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
 	mOnClickTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(34, 0, 28, 18));
-	mContainer.setTexture(mDefaultTexture);
+	mSprite.setTexture(mDefaultTexture);
 	mTextPos = sf::Vector2f(10, 10);
 }
 
@@ -17,8 +17,8 @@ mf::Button::~Button()
 
 void	mf::Button::Draw()
 {
-	mText.setPosition(mContainer.getPosition() + mTextPos);
-	mWindow->draw(&mContainer);
+	mText.setPosition(mSprite.getPosition() + mTextPos);
+	mWindow->draw(&mSprite);
 	mWindow->draw(&mText);
 }
 
@@ -26,11 +26,11 @@ void	mf::Button::Update()
 {
 	this->UpdateState();
 	if (mMouseState == MouseState::CLICKED)
-		mContainer.setTexture(mOnClickTexture);
+		mSprite.setTexture(mOnClickTexture);
 	else if (mMouseState == MouseState::INSIDE || mMouseState == MouseState::ENTERED)
-		mContainer.setTexture(mOnHoverTexture);
+		mSprite.setTexture(mOnHoverTexture);
 	else
-		mContainer.setTexture(mDefaultTexture);
+		mSprite.setTexture(mDefaultTexture);
 }
 
 

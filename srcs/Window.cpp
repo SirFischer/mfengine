@@ -8,7 +8,7 @@ mTitle("Default Window Title")
 	create();
 }
 
-Window::Window(std::string tTitle, sf::Vector2i tSize):
+Window::Window(std::string &tTitle, sf::Vector2i tSize):
 mSize(tSize),
 mTitle(tTitle)
 {

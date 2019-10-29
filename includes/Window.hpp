@@ -21,7 +21,7 @@ private:
 	
 public:
 	Window();
-	Window(std::string title, sf::Vector2i size);
+	Window(std::string &title, sf::Vector2i size);
 	~Window();
 	
 	void				update();

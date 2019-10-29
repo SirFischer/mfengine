@@ -1,30 +1,22 @@
 #include "Window.hpp"
+#include "aContainerItem.hpp"
 
 namespace mf
 {
-	enum class MouseState
+	class Container : public aContainerItem
 	{
-		OUTSIDE,
-		INSIDE,
-		ENTERED,
-		EXITED,
-		CLICKED
-	};
-	class Container
-	{
-	protected:
-		Window			*mWindow = NULL;
-		sf::Sprite		mContainer;
-		MouseState		mMouseState = MouseState::OUTSIDE;
-		void			UpdateState();
+	private:
+		std::vector<aContainerItem *>	mContainerItems;
+		sf::Sprite						mContainerSprite;
+		bool							mIsExpandable = true;
+		void							UpdateItems();
+		void							DrawItems();
 
 	public:
-		virtual 		~Container(){}
-		virtual void	Draw() = 0;
-		virtual void	Update() = 0;
+		explicit Container(Window *tWindow);
+		~Container();
 
-		MouseState		GetState(){return (mMouseState);}
-		void			SetPosition(sf::Vector2f position);
-		void			SetScale(sf::Vector2f scale);
+		void							Update();
+		void							Draw();
 	};
 }

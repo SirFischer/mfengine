@@ -15,7 +15,7 @@ private:
 
 	void			initButtons();
 public:
-	MenuState(Window *tWindow);
+	explicit MenuState(Window *tWindow);
 	~MenuState();
 
 	ReturnCtrl		run();

@@ -8,7 +8,7 @@
 
 namespace mf
 {
-	class Button : public Container
+	class Button : public aContainerItem
 	{
 	private:
 		sf::Texture				mDefaultTexture;

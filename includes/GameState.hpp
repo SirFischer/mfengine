@@ -7,7 +7,7 @@
 class GameState : public ScreenState
 {
 public:
-	GameState(Window *tWindow);
+	explicit GameState(Window *tWindow);
 	~GameState();
 
 	ReturnCtrl		run();
