@@ -5,22 +5,25 @@
 
 #define MENUDELTATIME		1.f/64.f
 
-class MenuState : public ScreenState
+class MenuState : public mf::ScreenState
 {
 private:
 	mf::ResourceManager		mResourceManager;
+	mf::Container			mContainer;
 	mf::Button				mPlayButton;
+	mf::Button				mOptionsButton;
 	mf::Button				mQuitButton;
 
+	mf::Container			mOptionsContainer;
 
 	void			initButtons();
 public:
-	explicit MenuState(Window *tWindow);
+	explicit MenuState(mf::Window *tWindow);
 	~MenuState();
 
-	ReturnCtrl		run();
-	void			update();
-	void			handle_events();
-	void			render();
+	mf::ScreenState::ReturnCtrl	run();
+	void						update();
+	void						handle_events();
+	void						render();
 };
 

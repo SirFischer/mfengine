@@ -4,14 +4,14 @@
 
 #define DELTATIME		1.f/64.f
 
-class GameState : public ScreenState
+class GameState : public mf::ScreenState
 {
 public:
-	explicit GameState(Window *tWindow);
+	explicit GameState(mf::Window *tWindow);
 	~GameState();
 
-	ReturnCtrl		run();
-	void			update();
-	void			handle_events();
-	void			render();
+	mf::ScreenState::ReturnCtrl		run();
+	void							update();
+	void							handle_events();
+	void							render();
 };

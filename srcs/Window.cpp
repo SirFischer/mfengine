@@ -1,5 +1,7 @@
 #include "Window.hpp"
 
+namespace mf
+{
 
 Window::Window():
 mSize(DEFAULT_WIN_WIDTH, DEFAULT_WIN_HEIGHT),
@@ -94,4 +96,6 @@ void	Window::draw(sf::Drawable *tDrawable)
 void	Window::display()
 {
 	mWindow.display();
+}
+
 }

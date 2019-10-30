@@ -1,6 +1,6 @@
 #include "GameState.hpp"
 
-GameState::GameState(Window *tWindow)
+GameState::GameState(mf::Window *tWindow)
 {
 	mWindow = tWindow;
 }

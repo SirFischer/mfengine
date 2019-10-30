@@ -1,8 +1,11 @@
 #include "MenuState.hpp"
 
-MenuState::MenuState(Window *tWindow):
+MenuState::MenuState(mf::Window *tWindow):
+mContainer(tWindow),
 mPlayButton(tWindow, &mResourceManager),
-mQuitButton(tWindow, &mResourceManager)
+mOptionsButton(tWindow, &mResourceManager),
+mQuitButton(tWindow, &mResourceManager),
+mOptionsContainer(tWindow)
 {
 	mWindow = tWindow;
 	initButtons();
@@ -36,8 +39,7 @@ MenuState::ReturnCtrl	MenuState::run()
 void				MenuState::update()
 {
 	mWindow->update();
-	mPlayButton.Update();
-	mQuitButton.Update();
+	mContainer.Update();
 
 	if (mQuitButton.GetState() == mf::MouseState::CLICKED)
 	{
@@ -60,8 +62,7 @@ void				MenuState::render()
 {
 	mWindow->clear(sf::Color::Green);
 
-	mPlayButton.Draw();
-	mQuitButton.Draw();
+	mContainer.Draw();
 
 	mWindow->display();
 }
@@ -73,9 +74,17 @@ void				MenuState::initButtons()
 	mPlayButton.SetFont("assets/fonts/pdark.ttf");
 	mPlayButton.SetText("PLAY");
 	mPlayButton.SetTextOffset(sf::Vector2f(50, 20));
-	mQuitButton.SetPosition(sf::Vector2f(850, 500));
+	mContainer.AddItem(&mPlayButton);
+	mOptionsButton.SetPosition(sf::Vector2f(850, 500));
+	mOptionsButton.SetScale(sf::Vector2f(8, 5));
+	mOptionsButton.SetFont("assets/fonts/pdark.ttf");
+	mOptionsButton.SetText("Options");
+	mOptionsButton.SetTextOffset(sf::Vector2f(30, 20));
+	mContainer.AddItem(&mOptionsButton);
+	mQuitButton.SetPosition(sf::Vector2f(850, 600));
 	mQuitButton.SetScale(sf::Vector2f(8, 5));
 	mQuitButton.SetFont("assets/fonts/pdark.ttf");
 	mQuitButton.SetText("QUIT");
 	mQuitButton.SetTextOffset(sf::Vector2f(50, 20));
+	mContainer.AddItem(&mQuitButton);
 }

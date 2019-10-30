@@ -18,5 +18,7 @@ namespace mf
 
 		void							Update();
 		void							Draw();
+
+		void							AddItem(aContainerItem *tItem);
 	};
 }

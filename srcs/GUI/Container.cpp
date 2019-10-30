@@ -12,28 +12,32 @@ namespace mf
 
 	}
 
-	void			Container::UpdateItems()
+	void	Container::UpdateItems()
 	{
 		for (aContainerItem *value: mContainerItems)
 			value->Update();
 	}
 
-	void			Container::DrawItems()
+	void	Container::DrawItems()
 	{
 		for (aContainerItem *value: mContainerItems)
 			value->Draw();
 	}
 
-	void			Container::Update()
+	void	Container::Update()
 	{
 		UpdateItems();
 	}
 
-	void			Container::Draw()
+	void	Container::Draw()
 	{
 		DrawItems();
 	}
 
+	void	Container::AddItem(aContainerItem *tItem)
+	{
+		mContainerItems.push_back(tItem);
+	}
 }
 
 

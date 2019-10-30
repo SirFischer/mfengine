@@ -2,6 +2,9 @@
 
 #include "Window.hpp"
 
+namespace mf
+{
+
 class ScreenState
 {
 public:
@@ -23,3 +26,5 @@ protected:
 	bool			mRunning = true;
 	ReturnCtrl		mReturn = ReturnCtrl::END;
 };
+
+}
