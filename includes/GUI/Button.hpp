@@ -30,5 +30,6 @@ namespace mf
 		void			SetFont(std::string path);
 		void			SetText(std::string text);
 		void			SetTextOffset(sf::Vector2f offset);
+		void			SetTextSize(unsigned int size);
 	};
 }

@@ -11,7 +11,8 @@ public:
 	enum class ReturnCtrl{
 		END,
 		GAME,
-		MENU
+		MENU,
+		OPTIONS
 	};
 
 	virtual ~ScreenState(){}

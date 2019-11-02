@@ -5,10 +5,14 @@ mContainer(tWindow),
 mPlayButton(tWindow, &mResourceManager),
 mOptionsButton(tWindow, &mResourceManager),
 mQuitButton(tWindow, &mResourceManager),
-mOptionsContainer(tWindow)
+mContainerOptions(tWindow),
+mFullScreenButton(tWindow, &mResourceManager)
 {
 	mWindow = tWindow;
-	initButtons();
+	mState = MENU_STATE::MAIN;
+	mReturn = ReturnCtrl::END;
+	mRunning = true;
+	initMenuButtons();
 }
 
 MenuState::~MenuState()
@@ -39,8 +43,26 @@ MenuState::ReturnCtrl	MenuState::run()
 void				MenuState::update()
 {
 	mWindow->update();
-	mContainer.Update();
 
+	switch (mState)
+	{
+	case MENU_STATE::MAIN:
+		mContainer.Update();
+		updateMain();
+		break;
+	case MENU_STATE::OPTIONS:
+		mContainerOptions.Update();
+		updateOptions();
+		break;
+	default:
+		mContainer.Update();
+		updateMain();
+		break;
+	}
+}
+
+void			MenuState::updateMain()
+{
 	if (mQuitButton.GetState() == mf::MouseState::CLICKED)
 	{
 		mReturn = ReturnCtrl::END;
@@ -50,6 +72,19 @@ void				MenuState::update()
 	{
 		mReturn = ReturnCtrl::GAME;
 		mRunning = false;
+	}
+	if (mOptionsButton.GetState() == mf::MouseState::CLICKED)
+	{
+		mState = MENU_STATE::OPTIONS;
+	}
+}
+
+void			MenuState::updateOptions()
+{
+	if (mFullScreenButton.GetState() == mf::MouseState::CLICKED)
+	{
+		mWindow->toggleFullscreen();
+		mFullScreenButton.SetText((mWindow->isFullscreen()) ? "Windowed" : "Fullscreen");
 	}
 }
 
@@ -62,13 +97,25 @@ void				MenuState::render()
 {
 	mWindow->clear(sf::Color::Green);
 
-	mContainer.Draw();
-
+	switch (mState)
+	{
+	case MENU_STATE::MAIN:
+		mContainer.Draw();
+		break;
+	case MENU_STATE::OPTIONS:
+		mContainerOptions.Draw();
+		break;
+	default:
+		mContainer.Draw();
+		break;
+	}
+	
 	mWindow->display();
 }
 
-void				MenuState::initButtons()
+void				MenuState::initMenuButtons()
 {
+	//MAIN
 	mPlayButton.SetPosition(sf::Vector2f(850, 400));
 	mPlayButton.SetScale(sf::Vector2f(8, 5));
 	mPlayButton.SetFont("assets/fonts/pdark.ttf");
@@ -87,4 +134,13 @@ void				MenuState::initButtons()
 	mQuitButton.SetText("QUIT");
 	mQuitButton.SetTextOffset(sf::Vector2f(50, 20));
 	mContainer.AddItem(&mQuitButton);
+
+	//OPTIONS
+	mFullScreenButton.SetPosition(sf::Vector2f(850, 400));
+	mFullScreenButton.SetScale(sf::Vector2f(8, 5));
+	mFullScreenButton.SetFont("assets/fonts/pdark.ttf");
+	mFullScreenButton.SetText("Fullscreen");
+	mFullScreenButton.SetTextOffset(sf::Vector2f(50, 20));
+	mFullScreenButton.SetTextSize(20);
+	mContainerOptions.AddItem(&mFullScreenButton);
 }

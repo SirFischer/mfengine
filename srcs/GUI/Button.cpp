@@ -50,3 +50,8 @@ void	mf::Button::SetTextOffset(sf::Vector2f offset)
 {
 	mTextPos = offset;
 }
+
+void	mf::Button::SetTextSize(unsigned int size)
+{
+	mText.setCharacterSize(size);
+}

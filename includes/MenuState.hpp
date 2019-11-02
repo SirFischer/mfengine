@@ -8,15 +8,26 @@
 class MenuState : public mf::ScreenState
 {
 private:
+	enum class	MENU_STATE
+	{
+		MAIN,
+		OPTIONS
+	};
+
 	mf::ResourceManager		mResourceManager;
 	mf::Container			mContainer;
 	mf::Button				mPlayButton;
 	mf::Button				mOptionsButton;
 	mf::Button				mQuitButton;
 
-	mf::Container			mOptionsContainer;
+	mf::Container			mContainerOptions;
+	mf::Button				mFullScreenButton;
 
-	void			initButtons();
+	MENU_STATE				mState;
+
+	void			initMenuButtons();
+	void			updateMain();
+	void			updateOptions();
 public:
 	explicit MenuState(mf::Window *tWindow);
 	~MenuState();

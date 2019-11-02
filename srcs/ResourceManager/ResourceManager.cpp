@@ -43,3 +43,32 @@ sf::Font	mf::ResourceManager::LoadFont(std::string path)
 	mFonts.insert(std::make_pair(path, font));
 	return (font);
 }
+
+void	mf::ResourceManager::LoadShader(std::string name, std::string vertex, std::string fragment)
+{
+	if (mShaders.count(name) > 0)
+	{
+		if (verbose)
+			std::cout << name << " already loaded...\n";
+	}
+	if (verbose)
+		std::cout << "Loading " << name << "..." << std::endl;
+	sf::Shader	*shader = new sf::Shader;
+	if (!(shader->loadFromFile(vertex, fragment)))
+	{
+		std::cout << "Failed to load " << name << std::endl;
+	}
+	mShaders.insert(std::make_pair(name, shader));
+}
+
+
+void	mf::ResourceManager::BindShader(std::string name)
+{
+	if (mShaders.count(name) > 0)
+	{
+		sf::Shader::bind(mShaders[name]);
+	}
+	else
+		sf::Shader::bind(NULL);
+}
+

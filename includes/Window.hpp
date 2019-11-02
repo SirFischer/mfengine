@@ -35,6 +35,7 @@ namespace mf
 		void				display();
 
 		bool				isOpen(){return (mWindow.isOpen());}
+		bool				isFullscreen(){return (mIsFullscreen);}
 
 		sf::Vector2i		getRelMousePos(){return (sf::Mouse::getPosition(mWindow));}
 	};
