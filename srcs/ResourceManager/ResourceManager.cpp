@@ -72,3 +72,11 @@ void	mf::ResourceManager::BindShader(std::string name)
 		sf::Shader::bind(NULL);
 }
 
+sf::Shader		*mf::ResourceManager::GetShader(std::string name)
+{
+	if (mShaders.count(name) > 0)
+	{
+		return (mShaders[name]);
+	}
+	return (NULL);
+}

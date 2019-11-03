@@ -23,5 +23,6 @@ namespace mf
 		void			LoadShader(std::string name, std::string vertex, std::string fragment);
 
 		void			BindShader(std::string name);
+		sf::Shader		*GetShader(std::string name);
 	};
 }

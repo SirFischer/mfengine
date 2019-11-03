@@ -45,14 +45,13 @@ void				GameState::handle_events()
 
 void				GameState::render()
 {
-	static float i = 0;
+	static float x = 0;
+
 	mWindow->clear();
 
-	glPointSize((sin(((float)(i) * 3.1415) / 180.0) + 1) * 100);
-
-	i += 0.01;
-
-	glDrawArrays(GL_POINTS, 0, 1);
+	x += 0.01;
+	mResourceManager.GetShader("helloworld")->setUniform("rel", (float)(sin((x / 180.0) * 3.1416)));
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	mWindow->display();
 }
