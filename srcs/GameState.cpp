@@ -1,6 +1,7 @@
 #include "GameState.hpp"
 
-GameState::GameState(mf::Window *tWindow)
+GameState::GameState(mf::Window *tWindow):
+mesh(vertex, NULL, sizeof(vertex), 0)
 {
 	mWindow = tWindow;
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
@@ -45,13 +46,9 @@ void				GameState::handle_events()
 
 void				GameState::render()
 {
-	static float x = 0;
-
 	mWindow->clear();
 
-	x += 0.01;
-	mResourceManager.GetShader("helloworld")->setUniform("rel", (float)(sin((x / 180.0) * 3.1416)));
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	mesh.Draw();
 
 	mWindow->display();
 }

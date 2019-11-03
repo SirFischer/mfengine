@@ -22,6 +22,7 @@ private:
 
 	mf::Container			mContainerOptions;
 	mf::Button				mFullScreenButton;
+	mf::Button				mBackButton;
 
 	MENU_STATE				mState;
 

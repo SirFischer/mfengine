@@ -6,7 +6,8 @@ mPlayButton(tWindow, &mResourceManager),
 mOptionsButton(tWindow, &mResourceManager),
 mQuitButton(tWindow, &mResourceManager),
 mContainerOptions(tWindow),
-mFullScreenButton(tWindow, &mResourceManager)
+mFullScreenButton(tWindow, &mResourceManager),
+mBackButton(tWindow, &mResourceManager)
 {
 	mWindow = tWindow;
 	mState = MENU_STATE::MAIN;
@@ -86,6 +87,8 @@ void			MenuState::updateOptions()
 		mWindow->toggleFullscreen();
 		mFullScreenButton.SetText((mWindow->isFullscreen()) ? "Windowed" : "Fullscreen");
 	}
+	if (mBackButton.GetState() == mf::MouseState::CLICKED)
+		mState = MENU_STATE::MAIN;
 }
 
 void				MenuState::handle_events()
@@ -143,4 +146,11 @@ void				MenuState::initMenuButtons()
 	mFullScreenButton.SetTextOffset(sf::Vector2f(50, 20));
 	mFullScreenButton.SetTextSize(20);
 	mContainerOptions.AddItem(&mFullScreenButton);
+	mBackButton.SetPosition(sf::Vector2f(250, 100));
+	mBackButton.SetScale(sf::Vector2f(8, 5));
+	mBackButton.SetFont("assets/fonts/pdark.ttf");
+	mBackButton.SetText("Back");
+	mBackButton.SetTextOffset(sf::Vector2f(50, 20));
+	mBackButton.SetTextSize(20);
+	mContainerOptions.AddItem(&mBackButton);
 }

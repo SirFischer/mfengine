@@ -36,6 +36,8 @@ bool	Window::create()
 
 void	Window::initOpengl()
 {
+	glewExperimental = GL_TRUE; 
+	glewInit();
 	glEnable(GL_TEXTURE_2D);
 }
 
