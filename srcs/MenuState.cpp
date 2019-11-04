@@ -26,6 +26,8 @@ MenuState::ReturnCtrl	MenuState::run()
 	sf::Time	elapsedTime;
 
 	mRunning = true;
+	mReturn = ReturnCtrl::END;
+	mGameLoop.restart();
 	elapsedTime = sf::seconds(MENUDELTATIME);
 	while (mRunning  && mWindow->isOpen())
 	{
@@ -48,16 +50,16 @@ void				MenuState::update()
 	switch (mState)
 	{
 	case MENU_STATE::MAIN:
-		mContainer.Update();
 		updateMain();
+		mContainer.Update();
 		break;
 	case MENU_STATE::OPTIONS:
-		mContainerOptions.Update();
 		updateOptions();
+		mContainerOptions.Update();
 		break;
 	default:
-		mContainer.Update();
 		updateMain();
+		mContainer.Update();
 		break;
 	}
 }
@@ -99,7 +101,10 @@ void				MenuState::handle_events()
 void				MenuState::render()
 {
 	mWindow->clear(sf::Color::Green);
-
+	mWindow->pushGLStates();
+	glBindBuffer(GL_ARRAY_BUFFER,0);
+    glDisableVertexArrayAttribEXT(0,0);
+	mWindow->resetGLStates();
 	switch (mState)
 	{
 	case MENU_STATE::MAIN:
@@ -112,7 +117,7 @@ void				MenuState::render()
 		mContainer.Draw();
 		break;
 	}
-	
+	mWindow->popGLStates();
 	mWindow->display();
 }
 

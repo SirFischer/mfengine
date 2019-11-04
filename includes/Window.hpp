@@ -34,6 +34,10 @@ namespace mf
 		void				draw(sf::Drawable *tDrawable);
 		void				display();
 
+		void				resetGLStates();
+		void				pushGLStates();
+		void				popGLStates();
+
 		bool				isOpen(){return (mWindow.isOpen());}
 		bool				isFullscreen(){return (mIsFullscreen);}
 

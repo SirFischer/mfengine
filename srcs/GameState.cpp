@@ -47,8 +47,9 @@ void				GameState::handle_events()
 void				GameState::render()
 {
 	mWindow->clear();
-
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
 	mesh.Draw();
-
 	mWindow->display();
 }

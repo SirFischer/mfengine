@@ -37,5 +37,6 @@ public:
 	void						update();
 	void						handle_events();
 	void						render();
+	
 };
 

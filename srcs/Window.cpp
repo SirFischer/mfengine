@@ -100,4 +100,19 @@ void	Window::display()
 	mWindow.display();
 }
 
+void	Window::resetGLStates()
+{
+	mWindow.resetGLStates();
+}
+
+void	Window::pushGLStates()
+{
+	mWindow.pushGLStates();
+}
+
+void	Window::popGLStates()
+{
+	mWindow.popGLStates();
+}
+
 }
