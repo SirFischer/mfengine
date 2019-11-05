@@ -4,7 +4,7 @@ GameState::GameState(mf::Window *tWindow) :
 terrain(10, 10)
 {
 	mWindow = tWindow;
-	terrain.Randomize(0, -20, 20);
+	terrain.Randomize(0, -150, 150);
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 }
 
@@ -31,8 +31,6 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
 	mf::Shader *shader = mResourceManager.GetShader("helloworld");
 	if (shader)
 	{

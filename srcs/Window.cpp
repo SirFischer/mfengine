@@ -28,8 +28,12 @@ bool	Window::create()
 
 	if (mIsFullscreen && !mode.isValid())
 		mode = sf::VideoMode::getFullscreenModes().front();
+	sf::ContextSettings Settings;
+		Settings.depthBits         = 24;
+		Settings.stencilBits       = 8;
+		Settings.antialiasingLevel = 4; 
 	mWindow.create(mode, mTitle,
-		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close);
+		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close, Settings);
 	initOpengl();
 	return (true);
 }
@@ -40,6 +44,7 @@ void	Window::initOpengl()
 	glewInit();
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 }
 
 void	Window::destroy()

@@ -34,8 +34,6 @@ void		Terrain::InitTerrain()
 	j = 0;
 	while (i < (mWidth - 1) * 2 * (mLength - 1) * 3)
 	{
-		std::cout << "i = " << i << std::endl;
-		std::cout << "j = " << j << std::endl;
 		mIndices[i] = j;
 		mIndices[i + 1] = j + mWidth;
 		mIndices[i + 2] = j + 1 + mWidth;
