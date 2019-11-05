@@ -13,34 +13,13 @@ mBackButton(tWindow, &mResourceManager)
 	mState = MENU_STATE::MAIN;
 	mReturn = ReturnCtrl::END;
 	mRunning = true;
+	mDeltaTime = 1.f / 32.f;
 	initMenuButtons();
 }
 
 MenuState::~MenuState()
 {
 	
-}
-
-MenuState::ReturnCtrl	MenuState::run()
-{
-	sf::Time	elapsedTime;
-
-	mRunning = true;
-	mReturn = ReturnCtrl::END;
-	mGameLoop.restart();
-	elapsedTime = sf::seconds(MENUDELTATIME);
-	while (mRunning  && mWindow->isOpen())
-	{
-		while (elapsedTime.asSeconds() > MENUDELTATIME)
-		{
-			handle_events();
-			update();
-			elapsedTime -= sf::seconds(MENUDELTATIME);
-		}
-		render();
-		elapsedTime += mGameLoop.restart();
-	}
-	return (mReturn);
 }
 
 void				MenuState::update()
@@ -50,16 +29,14 @@ void				MenuState::update()
 	switch (mState)
 	{
 	case MENU_STATE::MAIN:
-		updateMain();
 		mContainer.Update();
+		updateMain();
 		break;
 	case MENU_STATE::OPTIONS:
-		updateOptions();
 		mContainerOptions.Update();
+		updateOptions();
 		break;
 	default:
-		updateMain();
-		mContainer.Update();
 		break;
 	}
 }
@@ -70,12 +47,12 @@ void			MenuState::updateMain()
 	{
 		mReturn = ReturnCtrl::END;
 		mRunning = false;
-	}
+	} else
 	if (mPlayButton.GetState() == mf::MouseState::CLICKED)
 	{
 		mReturn = ReturnCtrl::GAME;
 		mRunning = false;
-	}
+	} else
 	if (mOptionsButton.GetState() == mf::MouseState::CLICKED)
 	{
 		mState = MENU_STATE::OPTIONS;
@@ -88,7 +65,7 @@ void			MenuState::updateOptions()
 	{
 		mWindow->toggleFullscreen();
 		mFullScreenButton.SetText((mWindow->isFullscreen()) ? "Windowed" : "Fullscreen");
-	}
+	} else
 	if (mBackButton.GetState() == mf::MouseState::CLICKED)
 		mState = MENU_STATE::MAIN;
 }
@@ -113,9 +90,6 @@ void				MenuState::render()
 	case MENU_STATE::OPTIONS:
 		mContainerOptions.Draw();
 		break;
-	default:
-		mContainer.Draw();
-		break;
 	}
 	mWindow->popGLStates();
 	mWindow->display();
@@ -124,38 +98,39 @@ void				MenuState::render()
 void				MenuState::initMenuButtons()
 {
 	//MAIN
-	mPlayButton.SetPosition(sf::Vector2f(850, 400));
+	mContainer.AddItem(&mPlayButton);
+	mContainer.SetPosition(sf::Vector2f(850, 400));
+	mPlayButton.SetPosition(sf::Vector2f(0, 0));
 	mPlayButton.SetScale(sf::Vector2f(8, 5));
 	mPlayButton.SetFont("assets/fonts/pdark.ttf");
 	mPlayButton.SetText("PLAY");
 	mPlayButton.SetTextOffset(sf::Vector2f(50, 20));
-	mContainer.AddItem(&mPlayButton);
-	mOptionsButton.SetPosition(sf::Vector2f(850, 500));
+	mContainer.AddItem(&mOptionsButton);
+	mOptionsButton.SetPosition(sf::Vector2f(0, 100));
 	mOptionsButton.SetScale(sf::Vector2f(8, 5));
 	mOptionsButton.SetFont("assets/fonts/pdark.ttf");
 	mOptionsButton.SetText("Options");
 	mOptionsButton.SetTextOffset(sf::Vector2f(30, 20));
-	mContainer.AddItem(&mOptionsButton);
-	mQuitButton.SetPosition(sf::Vector2f(850, 600));
+	mContainer.AddItem(&mQuitButton);
+	mQuitButton.SetPosition(sf::Vector2f(0, 200));
 	mQuitButton.SetScale(sf::Vector2f(8, 5));
 	mQuitButton.SetFont("assets/fonts/pdark.ttf");
 	mQuitButton.SetText("QUIT");
 	mQuitButton.SetTextOffset(sf::Vector2f(50, 20));
-	mContainer.AddItem(&mQuitButton);
 
 	//OPTIONS
+	mContainerOptions.AddItem(&mFullScreenButton);
 	mFullScreenButton.SetPosition(sf::Vector2f(850, 400));
 	mFullScreenButton.SetScale(sf::Vector2f(8, 5));
 	mFullScreenButton.SetFont("assets/fonts/pdark.ttf");
 	mFullScreenButton.SetText("Fullscreen");
 	mFullScreenButton.SetTextOffset(sf::Vector2f(50, 20));
 	mFullScreenButton.SetTextSize(20);
-	mContainerOptions.AddItem(&mFullScreenButton);
+	mContainerOptions.AddItem(&mBackButton);
 	mBackButton.SetPosition(sf::Vector2f(250, 100));
 	mBackButton.SetScale(sf::Vector2f(8, 5));
 	mBackButton.SetFont("assets/fonts/pdark.ttf");
 	mBackButton.SetText("Back");
 	mBackButton.SetTextOffset(sf::Vector2f(50, 20));
 	mBackButton.SetTextSize(20);
-	mContainerOptions.AddItem(&mBackButton);
 }

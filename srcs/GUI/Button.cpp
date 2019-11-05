@@ -17,7 +17,6 @@ mf::Button::~Button()
 
 void	mf::Button::Draw()
 {
-	mText.setPosition(mSprite.getPosition() + mTextPos);
 	mWindow->draw(&mSprite);
 	mWindow->draw(&mText);
 }
@@ -31,6 +30,8 @@ void	mf::Button::Update()
 		mSprite.setTexture(mOnHoverTexture);
 	else
 		mSprite.setTexture(mDefaultTexture);
+	mSprite.setPosition(mPosition);
+	mText.setPosition(mPosition + mTextPos);
 }
 
 

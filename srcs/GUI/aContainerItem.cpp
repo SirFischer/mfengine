@@ -32,11 +32,25 @@ namespace mf
 	
 	void		aContainerItem::SetPosition(sf::Vector2f position)
 	{
-		mSprite.setPosition(position);
+		if (mPlacement == ContainerPlacement::ABSOLUTE || !mParent)
+			mPosition = position;
+		else
+			mPosition = mParent->GetPosition() + position;
 	}
 
 	void		aContainerItem::SetScale(sf::Vector2f scale)
 	{
 		mSprite.setScale(scale);
+	}
+
+	void		aContainerItem::SetParent(aContainerItem *item)
+	{
+		mParent = item;
+	}
+
+	void		aContainerItem::SetPlacement(ContainerPlacement placement)
+	{
+		mPlacement = placement;
+		SetPosition(mPosition);
 	}
 }

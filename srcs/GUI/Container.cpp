@@ -36,7 +36,11 @@ namespace mf
 
 	void	Container::AddItem(aContainerItem *tItem)
 	{
-		mContainerItems.push_back(tItem);
+		if (tItem)
+		{
+			tItem->SetParent(this);
+			mContainerItems.push_back(tItem);
+		}
 	}
 }
 

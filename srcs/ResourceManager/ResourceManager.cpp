@@ -55,7 +55,7 @@ void	ResourceManager::LoadShader(std::string name, std::string vertex, std::stri
 	}
 	if (verbose)
 		std::cout << "Loading " << name << "..." << std::endl;
-	Shader	shader;
+	mf::Shader	shader;
 	
 	if (!(shader.LoadFromFile(vertex, fragment)))
 	{
