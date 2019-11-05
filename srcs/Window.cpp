@@ -39,6 +39,7 @@ void	Window::initOpengl()
 	glewExperimental = GL_TRUE; 
 	glewInit();
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void	Window::destroy()

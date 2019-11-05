@@ -2,7 +2,7 @@
 
 #include "ScreenState.hpp"
 #include "ResourceManager.hpp"
-#include "Mesh.hpp"
+#include "Terrain.hpp"
 #include "Camera.hpp"
 
 #include <math.h>
@@ -12,19 +12,9 @@
 class GameState : public mf::ScreenState
 {
 private:
-	//TEST
-	float	vertex[18] = {
-		0.5, -0.5, -0.5,
-		-0.5, 0.5, -0.5,
-		-0.5, -0.5, 0.5,
-		0.5, 0.5, 0.5,
-		-0.5, 0.5, -0.5,
-		0.5, -0.5, -0.5
-	};
-
 	mf::ResourceManager		mResourceManager;
-	mf::Mesh				mesh;
 	mf::Camera				mSpectatorCamera;
+	mf::Terrain				terrain;
 
 public:
 	explicit GameState(mf::Window *tWindow);

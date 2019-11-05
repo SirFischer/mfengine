@@ -133,4 +133,7 @@ void				MenuState::initMenuButtons()
 	mBackButton.SetText("Back");
 	mBackButton.SetTextOffset(sf::Vector2f(50, 20));
 	mBackButton.SetTextSize(20);
+
+	mContainer.Update();
+	mContainerOptions.Update();
 }

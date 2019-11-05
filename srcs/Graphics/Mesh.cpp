@@ -12,6 +12,10 @@ Mesh::Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint in
 	initMesh();
 }
 
+Mesh::Mesh()
+{
+}
+
 Mesh::~Mesh()
 {
 }
@@ -40,11 +44,16 @@ void		Mesh::Bind()
 
 void		Mesh::Draw()
 {
+	Draw(GL_TRIANGLES);
+}
+
+void		Mesh::Draw(GLenum mode)
+{
 	glBindVertexArray(mVAO);
 	if (mIndices)
-		glDrawElements(GL_TRIANGLES, mIndiceSize, GL_UNSIGNED_INT, 0);
+		glDrawElements(mode, mIndiceSize, GL_UNSIGNED_INT, 0);
 	else
-		glDrawArrays(GL_TRIANGLES, 0, mVerticeSize / 3);
+		glDrawArrays(mode, 0, mVerticeSize / 3);
 	glBindVertexArray(0);
 }
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <string.h>
+#include <iostream>
 #include <GL/glew.h>
 
 
@@ -20,11 +22,13 @@ void				initMesh();
 
 public:
 	Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize);
+	Mesh();
 	~Mesh();
 
 	void			Bind();
 
 	void			Draw();
+	void			Draw(GLenum mode);
 };
 
 }

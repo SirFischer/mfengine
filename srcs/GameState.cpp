@@ -1,9 +1,10 @@
 #include "GameState.hpp"
 
-GameState::GameState(mf::Window *tWindow):
-mesh(vertex, NULL, sizeof(vertex), 0)
+GameState::GameState(mf::Window *tWindow) :
+terrain(10, 10)
 {
 	mWindow = tWindow;
+	terrain.Randomize(0, -20, 20);
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 }
 
@@ -17,7 +18,7 @@ void				GameState::update()
 	static float range = 0;
 	mWindow->update();
 	range += 0.02;
-	mSpectatorCamera.Update(glm::vec3(cos(range), 0, 2 + sin(range)), glm::vec3(0, 0, 1), glm::vec3(0, 1, 0));
+	mSpectatorCamera.Update(glm::vec3(0, 3.0 + (sin(range) * 1.0), 8.0), glm::vec3(0, 0.5, 1), glm::vec3(0, 1, 0));
 }
 
 void				GameState::handle_events()
@@ -39,6 +40,6 @@ void				GameState::render()
 		shader->SetMat4("view", mSpectatorCamera.GetViewMatrix());
 		shader->SetMat4("projection", mSpectatorCamera.GetProjectionMatrix());
 	}
-	mesh.Draw();
+	terrain.Draw();
 	mWindow->display();
 }
