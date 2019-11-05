@@ -1,18 +1,20 @@
 #include "ResourceManager.hpp"
 
+namespace mf
+{
 bool mf::ResourceManager::verbose = false;
 
-mf::ResourceManager::ResourceManager()
+ResourceManager::ResourceManager()
 {
 
 }
 	
-mf::ResourceManager::~ResourceManager()
+ResourceManager::~ResourceManager()
 {
 	
 }
 
-sf::Image	mf::ResourceManager::LoadImage(std::string path)
+sf::Image	ResourceManager::LoadImage(std::string path)
 {
 	if (mImages.count(path) > 0)
 	{
@@ -28,7 +30,7 @@ sf::Image	mf::ResourceManager::LoadImage(std::string path)
 	return (image);
 }
 
-sf::Font	mf::ResourceManager::LoadFont(std::string path)
+sf::Font	ResourceManager::LoadFont(std::string path)
 {
 	if (mFonts.count(path) > 0)
 	{
@@ -44,7 +46,7 @@ sf::Font	mf::ResourceManager::LoadFont(std::string path)
 	return (font);
 }
 
-void	mf::ResourceManager::LoadShader(std::string name, std::string vertex, std::string fragment)
+void	ResourceManager::LoadShader(std::string name, std::string vertex, std::string fragment)
 {
 	if (mShaders.count(name) > 0)
 	{
@@ -53,30 +55,23 @@ void	mf::ResourceManager::LoadShader(std::string name, std::string vertex, std::
 	}
 	if (verbose)
 		std::cout << "Loading " << name << "..." << std::endl;
-	sf::Shader	*shader = new sf::Shader;
-	if (!(shader->loadFromFile(vertex, fragment)))
+	Shader	shader;
+	
+	if (!(shader.LoadFromFile(vertex, fragment)))
 	{
 		std::cout << "Failed to load " << name << std::endl;
 	}
 	mShaders.insert(std::make_pair(name, shader));
 }
 
-
-void	mf::ResourceManager::BindShader(std::string name)
+mf::Shader		*ResourceManager::GetShader(std::string name)
 {
 	if (mShaders.count(name) > 0)
 	{
-		sf::Shader::bind(mShaders[name]);
-	}
-	else
-		sf::Shader::bind(NULL);
-}
-
-sf::Shader		*mf::ResourceManager::GetShader(std::string name)
-{
-	if (mShaders.count(name) > 0)
-	{
-		return (mShaders[name]);
+		return (&mShaders[name]);
 	}
 	return (NULL);
 }
+} // namespace mf
+
+

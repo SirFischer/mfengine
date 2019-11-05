@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "Shader.hpp"
+
 namespace mf
 {
 	class ResourceManager
@@ -10,7 +12,7 @@ namespace mf
 	private:
 		std::map<std::string, sf::Font>		mFonts;
 		std::map<std::string, sf::Image>	mImages;
-		std::map<std::string, sf::Shader*>	mShaders;
+		std::map<std::string, mf::Shader>	mShaders;
 		
 	public:
 		static bool						verbose;
@@ -22,7 +24,6 @@ namespace mf
 		sf::Font		LoadFont(std::string path);
 		void			LoadShader(std::string name, std::string vertex, std::string fragment);
 
-		void			BindShader(std::string name);
-		sf::Shader		*GetShader(std::string name);
+		mf::Shader		*GetShader(std::string name);
 	};
 }
