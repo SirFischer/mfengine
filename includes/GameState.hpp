@@ -13,7 +13,7 @@ class GameState : public mf::ScreenState
 {
 private:
 	mf::ResourceManager		mResourceManager;
-	mf::Camera				mSpectatorCamera;
+	mf::Camera				mCamera;
 	mf::Terrain				terrain;
 
 public:

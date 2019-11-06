@@ -29,9 +29,11 @@ bool	Window::create()
 	if (mIsFullscreen && !mode.isValid())
 		mode = sf::VideoMode::getFullscreenModes().front();
 	sf::ContextSettings Settings;
-		Settings.depthBits         = 24;
-		Settings.stencilBits       = 8;
-		Settings.antialiasingLevel = 4; 
+	Settings.majorVersion = 4;
+	Settings.minorVersion = 6;
+	Settings.depthBits = 24;
+	Settings.stencilBits = 8;
+	Settings.antialiasingLevel = 4;
 	mWindow.create(mode, mTitle,
 		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close, Settings);
 	initOpengl();

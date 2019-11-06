@@ -1,7 +1,11 @@
 #pragma once
 
 #include "Mesh.hpp"
+
 #include <random>
+#include <libnoise/noise.h>
+#include <libnoise/misc.h>
+#include "noiseutils.h"
 
 namespace mf
 {
@@ -19,6 +23,7 @@ public:
 	~Terrain();
 
 	void		Randomize(int seed, float lower, float higher);
+	void		GenHeightMap();
 };
 
 }
