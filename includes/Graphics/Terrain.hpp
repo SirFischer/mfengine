@@ -23,7 +23,7 @@ public:
 	~Terrain();
 
 	void		Randomize(int seed, float lower, float higher);
-	void		GenHeightMap();
+	void		GenHeightMap(int seed);
 };
 
 }

@@ -59,13 +59,14 @@ void		Terrain::Randomize(int seed, float lower, float higher)
 	initMesh();
 }
 
-void		Terrain::GenHeightMap()
+void		Terrain::GenHeightMap(int seed)
 {
 	noise::module::Perlin				perlin;
 	noise::utils::NoiseMap				map;
 	noise::utils::NoiseMapBuilderPlane	plane;
 	int i = 0;
 
+	perlin.SetSeed(seed);
 	plane.SetSourceModule(perlin);
 	plane.SetDestNoiseMap(map);
 	plane.SetDestSize(mWidth, mLength);

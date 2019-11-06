@@ -5,7 +5,7 @@ terrain(100, 100)
 {
 	mWindow = tWindow;
 	//terrain.Randomize(0, -10, 10);
-	terrain.GenHeightMap();
+	terrain.GenHeightMap(time(0));
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 }
 
