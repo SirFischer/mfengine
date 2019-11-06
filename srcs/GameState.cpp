@@ -1,7 +1,7 @@
 #include "GameState.hpp"
 
 GameState::GameState(mf::Window *tWindow) :
-terrain(100, 100)
+terrain(200, 200)
 {
 	mWindow = tWindow;
 	//terrain.Randomize(0, -10, 10);
