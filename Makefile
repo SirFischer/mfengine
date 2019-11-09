@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:26:22 by mfischer          #+#    #+#              #
-#    Updated: 2019/11/10 00:53:27 by mfischer         ###   ########.fr        #
+#    Updated: 2019/11/10 00:56:42 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME): $(OBJS)
 ifeq ($(UNAME), Linux)
 install_dep:
 	@echo "$(_BLUE)Fetching dependencies...$(_END)"
-	@sudo apt-get install libsfml-dev libglm-dev libglm-doc libnoise-dev freeglut3-dev
+	@sudo apt-get install libsfml-dev libglm-dev libglm-doc libnoise-dev freeglut3-dev libglew-dev
 endif
 
 test:	all
