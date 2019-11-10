@@ -6,7 +6,7 @@
 #    By: mfischer <mfischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 13:26:22 by mfischer          #+#    #+#              #
-#    Updated: 2019/11/10 01:39:01 by mfischer         ###   ########.fr        #
+#    Updated: 2019/11/10 01:41:32 by mfischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,15 +43,6 @@ ifeq ($(UNAME), Linux)
 install_dep:
 	@echo "$(_BLUE)Fetching dependencies...$(_END)"
 	@sudo apt-get install libsfml-dev libglm-dev libglm-doc libnoise-dev freeglut3-dev libglew-dev
-	@sudo apt-get install libpthread-stubs0-dev
-	@sudo apt-get install libgl1-mesa-dev
-	@sudo apt-get install libx11-dev
-	@sudo apt-get install libxrandr-dev
-	@sudo apt-get install libfreetype6-dev
-	@sudo apt-get install libglew1.5-dev
-	@sudo apt-get install libjpeg8-dev
-	@sudo apt-get install libsndfile1-dev
-	@sudo apt-get install libopenal-dev
 endif
 
 test:	all
