@@ -54,6 +54,11 @@ void	Window::destroy()
 	mWindow.close();
 }
 
+bool	Window::pollEvent(sf::Event &event)
+{
+	return (mWindow.pollEvent(event));
+}
+
 void	Window::processEvents()
 {
 	sf::Event	event;
@@ -70,7 +75,7 @@ void	Window::processEvents()
 
 void	Window::update()
 {
-	processEvents();
+	//processEvents();
 }
 
 void	Window::toggleFullscreen()

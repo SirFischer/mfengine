@@ -27,6 +27,7 @@ namespace mf
 		~Window();
 		
 		void				update();
+		bool				pollEvent(sf::Event &event);
 		void				toggleFullscreen();
 		void				clear();
 		void				clear(sf::Color color);

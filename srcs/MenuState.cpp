@@ -1,6 +1,7 @@
 #include "MenuState.hpp"
 
 MenuState::MenuState(mf::Window *tWindow):
+mEventHandler(tWindow),
 mContainer(tWindow),
 mPlayButton(tWindow, &mResourceManager),
 mOptionsButton(tWindow, &mResourceManager),
@@ -72,7 +73,7 @@ void			MenuState::updateOptions()
 
 void				MenuState::handle_events()
 {
-	
+	mEventHandler.HandleEvents();
 }
 
 void				MenuState::render()

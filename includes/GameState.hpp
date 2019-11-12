@@ -3,6 +3,7 @@
 #include "ScreenState.hpp"
 #include "ResourceManager.hpp"
 #include "Terrain.hpp"
+#include "Player.hpp"
 #include "Camera.hpp"
 
 #include <math.h>
@@ -13,8 +14,10 @@ class GameState : public mf::ScreenState
 {
 private:
 	mf::ResourceManager		mResourceManager;
+	mf::EventHandler		mEventHandler;
 	mf::Camera				mCamera;
 	mf::Terrain				terrain;
+	mf::Player				mPlayer;
 
 public:
 	explicit GameState(mf::Window *tWindow);
