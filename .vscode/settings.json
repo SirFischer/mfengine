@@ -43,6 +43,9 @@
 		"streambuf": "cpp",
 		"cinttypes": "cpp",
 		"typeinfo": "cpp",
-		"cstring": "cpp"
+		"cstring": "cpp",
+		"functional": "cpp",
+		"numeric": "cpp",
+		"random": "cpp"
 	}
 }

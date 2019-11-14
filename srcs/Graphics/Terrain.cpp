@@ -70,11 +70,11 @@ void		Terrain::GenHeightMap(int seed)
 	plane.SetSourceModule(perlin);
 	plane.SetDestNoiseMap(map);
 	plane.SetDestSize(mWidth, mLength);
-	plane.SetBounds(2.0, 4.0, 1.0, 3.0);
+	plane.SetBounds(2.0, 8.0, 1.0, 9.0);
 	plane.Build();
 	while (i < mLength * mWidth * 3)
 	{
-		mVertices[i + 1] = map.GetValue(mVertices[i] + (mWidth / 2), mVertices[i + 2] + (mLength / 2)) * 10.0;
+		mVertices[i + 1] = map.GetValue(mVertices[i] + (mWidth / 2), mVertices[i + 2] + (mLength / 2)) * 50.0;
 		i += 3;
 	}
 	initMesh();

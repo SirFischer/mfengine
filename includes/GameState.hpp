@@ -5,6 +5,7 @@
 #include "Terrain.hpp"
 #include "Player.hpp"
 #include "Camera.hpp"
+#include "Terminal.hpp"
 
 #include <math.h>
 
@@ -18,6 +19,7 @@ private:
 	mf::Camera				mCamera;
 	mf::Terrain				terrain;
 	mf::Player				mPlayer;
+	mf::Terminal			mTerminal;
 
 public:
 	explicit GameState(mf::Window *tWindow);

@@ -2,7 +2,7 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-terrain(200, 200),
+terrain(1000, 1000),
 mPlayer(&mEventHandler)
 {
 	mWindow = tWindow;
@@ -10,16 +10,15 @@ mPlayer(&mEventHandler)
 	mCamera.SetEntityAnchor(&mPlayer);
 	terrain.GenHeightMap(time(0));
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
-
-	mEventHandler.BindKey(sf::Keyboard::W, mf::ACTION::MOVE_FORWARD);
-	mEventHandler.BindKey(sf::Keyboard::S, mf::ACTION::MOVE_BACKWARD);
+	mTerminal.mEventHandler = &mEventHandler;
+	mTerminal.ProcessCommand("bind w move_forward");
+	mTerminal.ProcessCommand("bind s move_backward");
 }
 
 GameState::~GameState()
 {
 
 }
-
 
 void				GameState::update()
 {
@@ -44,6 +43,9 @@ void				GameState::render()
 	if (shader)
 	{
 		shader->Bind();
+		glm::mat4	scale = glm::mat4(1.0);
+		scale = glm::scale(scale, glm::vec3(5, 1, 5));
+		shader->SetMat4("transform", scale);
 		shader->SetMat4("view", mCamera.GetViewMatrix());
 		shader->SetMat4("projection", mCamera.GetProjectionMatrix());
 	}

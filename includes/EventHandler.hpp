@@ -7,7 +7,6 @@
 
 namespace mf
 {
-
 class EventHandler
 {
 private:

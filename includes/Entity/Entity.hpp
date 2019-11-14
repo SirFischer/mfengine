@@ -9,7 +9,7 @@ namespace mf
 class Entity
 {
 protected:
-	glm::vec3		mPos = glm::vec3(0, 0, 0);
+	glm::vec3		mPos = glm::vec3(0, 50, 0);
 	glm::vec3		mDir = glm::vec3(0, 0, 1);
 	glm::vec3		mVelocity;
 	double			mMaxSpeed;
