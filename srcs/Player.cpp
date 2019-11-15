@@ -20,13 +20,13 @@ void		Player::Update()
 void		Player::HandleEvents()
 {
 	if (mEventHandler->GetActionState(ACTION::MOVE_FORWARD))
-	{
-		mPos -= mDir; // * speed
-	}
+		MoveForward();
+	if (mEventHandler->GetActionState(ACTION::MOVE_RIGHT))
+		MoveRight();
+	if (mEventHandler->GetActionState(ACTION::MOVE_LEFT))
+		MoveLeft();
 	if (mEventHandler->GetActionState(ACTION::MOVE_BACKWARD))
-	{
-		mPos += mDir; // * speed
-	}
+		MoveBackward();
 }
 
 } // namespace mf

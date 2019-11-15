@@ -5,6 +5,7 @@
 #include <map>
 #include <functional>
 #include <iostream>
+#include <fstream>
 
 #include "EventHandler.hpp"
 
@@ -19,7 +20,8 @@ public:
 		SUCCESS,
 		BAD_COMMAND,
 		BAD_CONTEXT,
-		BAD_ARGUMENTS
+		BAD_ARGUMENTS,
+		EMPTY_COMMAND
 	};
 	
 	EventHandler						*mEventHandler = NULL;
@@ -36,6 +38,7 @@ public:
 	~Terminal();
 
 	TERMINAL_ERROR_CODE					ProcessCommand(std::string line);
+	TERMINAL_ERROR_CODE					ReadFromFile(std::string path);
 
 };
 

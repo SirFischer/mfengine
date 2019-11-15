@@ -22,7 +22,7 @@ private:
 	float		mFOV = 70;
 	float		mRatio = 16.0f/9.0f;
 	float		mNear = 0.1f;
-	float		mFar = 1000.0f;
+	float		mFar = 10000.0f;
 
 	void		GenViewMatrix();
 	void		GenProjectionMatrix();
