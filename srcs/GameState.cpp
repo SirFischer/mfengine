@@ -2,7 +2,7 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-terrain(1000, 1000),
+terrain(500, 500),
 mPlayer(&mEventHandler)
 {
 	mWindow = tWindow;
@@ -46,7 +46,7 @@ void				GameState::render()
 	{
 		shader->Bind();
 		glm::mat4	scale = glm::mat4(1.0);
-		scale = glm::scale(scale, glm::vec3(3, 1, 3));
+		scale = glm::scale(scale, glm::vec3(30, 3, 30));
 		shader->SetMat4("transform", scale);
 		shader->SetMat4("view", mCamera.GetViewMatrix());
 		shader->SetMat4("projection", mCamera.GetProjectionMatrix());
