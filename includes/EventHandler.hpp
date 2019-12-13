@@ -14,7 +14,6 @@ private:
 	std::map<int, ACTION>			mKeyMap;
 	std::map<ACTION, bool>			mActionMap;
 
-
 public:
 	EventHandler(Window *tWindow);
 	~EventHandler();
