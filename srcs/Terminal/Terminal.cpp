@@ -3,6 +3,13 @@
 namespace mf
 {
 
+Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params)
+{
+	(void)params;
+	term->mEventHandler->UnbindAllKeys();
+	return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+}
+
 Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> params)
 {
 	if (!term->mEventHandler)
@@ -30,6 +37,7 @@ Terminal::~Terminal()
 void				Terminal::LoadCommands()
 {
 	mCommands.emplace("bind", &Bind);
+	mCommands.emplace("unbindallkeys", &UnbindAll);
 }
 
 void				Terminal::LoadActions()

@@ -42,5 +42,10 @@ void		EventHandler::BindKey(int key, ACTION action)
 	mKeyMap[key] = action;
 }
 
+void		EventHandler::UnbindAllKeys()
+{
+	mKeyMap.clear();
+}
+
 
 } // namespace mf

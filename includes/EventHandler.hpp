@@ -23,6 +23,7 @@ public:
 
 	bool		GetActionState(ACTION action);
 	void		BindKey(int key, ACTION action);
+	void		UnbindAllKeys();
 
 };
 
