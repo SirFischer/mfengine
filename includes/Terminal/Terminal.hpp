@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <map>
+#include <iterator>
 #include <functional>
 #include <iostream>
 #include <fstream>
@@ -15,6 +16,8 @@ namespace mf
 class Terminal
 {
 public:
+	
+
 	enum class	TERMINAL_ERROR_CODE
 	{
 		SUCCESS,
@@ -23,10 +26,17 @@ public:
 		BAD_ARGUMENTS,
 		EMPTY_COMMAND
 	};
-	
+
+	typedef struct	s_terminal_command
+	{
+		std::function<TERMINAL_ERROR_CODE(Terminal *,std::vector<std::string> params)> cmnd;
+		std::string help_short;
+		std::string help_long;
+	}				t_terminal_command;
+
 	EventHandler						*mEventHandler = NULL;
 
-	std::map<std::string, std::function<TERMINAL_ERROR_CODE(Terminal *,std::vector<std::string> params)>>		mCommands;
+	std::map<std::string, t_terminal_command>	mCommands;
 	std::map<std::string, ACTION>				mActions;
 	std::map<std::string, sf::Keyboard::Key>	mKeys;
 

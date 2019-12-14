@@ -3,6 +3,26 @@
 namespace mf
 {
 
+Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> params)
+{
+	std::map<std::string, int>::iterator it;
+
+	if (params.size() == 0)
+	{
+		for (auto const& [key, val] : term->mCommands)
+		{
+			std::cout << key << " : " << val.help_short << "..." << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << params.front() << " : " << term->mCommands[params.front()].help_long << std::endl;
+	}
+	
+	(void)params;
+	return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+}
+
 Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params)
 {
 	(void)params;
@@ -36,16 +56,17 @@ Terminal::~Terminal()
 
 void				Terminal::LoadCommands()
 {
-	mCommands.emplace("bind", &Bind);
-	mCommands.emplace("unbindallkeys", &UnbindAll);
+	mCommands.emplace("bind", (t_terminal_command){&Bind, "binds key to action", "..."});
+	mCommands.emplace("unbindall", (t_terminal_command){&UnbindAll, "unbind all keys", "..."});
+	mCommands.emplace("help", (t_terminal_command){&Help, "Show all commands", "..."});
 }
 
 void				Terminal::LoadActions()
 {
-	mActions["move_backward"] = ACTION::MOVE_BACKWARD;
-	mActions["move_forward"] = ACTION::MOVE_FORWARD;
-	mActions["move_left"] = ACTION::MOVE_LEFT;
-	mActions["move_right"] = ACTION::MOVE_RIGHT;
+	mActions["move_backward"]	=	ACTION::MOVE_BACKWARD;
+	mActions["move_forward"]	=	ACTION::MOVE_FORWARD;
+	mActions["move_left"]		=	ACTION::MOVE_LEFT;
+	mActions["move_right"]		=	ACTION::MOVE_RIGHT;
 }
 
 void				Terminal::LoadKeys()
@@ -77,7 +98,7 @@ Terminal::TERMINAL_ERROR_CODE		Terminal::ProcessCommand(std::string line)
 	}
 	free(tmp);
 	if (mCommands.count(func) > 0)
-		return (mCommands[func](this, params));
+		return (mCommands[func].cmnd(this, params));
 	return (TERMINAL_ERROR_CODE::SUCCESS);
 }
 
