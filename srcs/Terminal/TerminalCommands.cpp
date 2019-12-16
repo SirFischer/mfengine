@@ -24,6 +24,8 @@ Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> par
 Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params)
 {
     (void)params;
+    if (!term->mEventHandler)
+        return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
     term->mEventHandler->UnbindAllKeys();
     return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
 }
@@ -40,4 +42,28 @@ Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> par
         return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
     return(Terminal::TERMINAL_ERROR_CODE::SUCCESS);
 }
+
+Terminal::TERMINAL_ERROR_CODE		Toggle(Terminal *term, std::vector<std::string> params)
+{
+    if (!term->mEventHandler)
+        return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
+    if (params.size() == 1)
+    {
+        if (term->mActions.count(params.at(0)))
+            term->mEventHandler->ToggleAction(term->mActions[params[0]],
+                !(term->mEventHandler->GetActionState(term->mActions[params[0]])));
+        else
+            return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+        return(Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+    } else if (params.size() == 2)
+    {
+        if (term->mActions.count(params.at(0)))
+            term->mEventHandler->ToggleAction(term->mActions[params[0]], (params[1] == "0" || params[1] == "false") ? false : true);
+        else
+            return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+        return(Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+    }
+    return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+}
+
 }

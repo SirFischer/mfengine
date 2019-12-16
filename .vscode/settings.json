@@ -46,6 +46,10 @@
 		"cstring": "cpp",
 		"functional": "cpp",
 		"numeric": "cpp",
-		"random": "cpp"
+		"random": "cpp",
+		"bit": "cpp",
+		"chrono": "cpp",
+		"codecvt": "cpp",
+		"ratio": "cpp"
 	}
 }

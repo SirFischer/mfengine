@@ -19,6 +19,7 @@ void				Terminal::LoadCommands()
 	mCommands.emplace("bind", (t_terminal_command){&Bind, "binds key to action", "..."});
 	mCommands.emplace("unbindall", (t_terminal_command){&UnbindAll, "unbind all keys", "..."});
 	mCommands.emplace("help", (t_terminal_command){&Help, "Show all commands", "..."});
+	mCommands.emplace("toggle", (t_terminal_command){&Toggle, "Toggles an action on or off", "..."});
 }
 
 void				Terminal::LoadActions()

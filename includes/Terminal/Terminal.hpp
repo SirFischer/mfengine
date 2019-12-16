@@ -51,11 +51,11 @@ public:
 
 };
 
+// COMMANDS
+
 Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> params);
+Terminal::TERMINAL_ERROR_CODE		Toggle(Terminal *term, std::vector<std::string> params);
 
 } // namespace mf
-
-
-

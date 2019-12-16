@@ -47,5 +47,9 @@ void		EventHandler::UnbindAllKeys()
 	mKeyMap.clear();
 }
 
+void		EventHandler::ToggleAction(ACTION action, bool state)
+{
+	mActionMap[action] = state;
+}
 
 } // namespace mf
