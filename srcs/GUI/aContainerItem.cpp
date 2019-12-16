@@ -16,7 +16,7 @@ namespace mf
 		switch (mMouseState)
 		{
 		case MouseState::INSIDE:
-			mMouseState = (outside) ? MouseState::EXITED : (sf::Mouse::isButtonPressed(sf::Mouse::Left)) ? MouseState::CLICKED : MouseState::INSIDE;
+			mMouseState = (outside) ? MouseState::EXITED : (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mPrevLeftMouseButtonState) ? MouseState::CLICKED : MouseState::INSIDE;
 			break;
 		case MouseState::OUTSIDE:
 			mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::ENTERED;
@@ -28,6 +28,7 @@ namespace mf
 			mMouseState = (outside) ? MouseState::OUTSIDE : MouseState::INSIDE;
 			break;
 		}
+		mPrevLeftMouseButtonState = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 	
 	void		aContainerItem::SetPosition(sf::Vector2f position)

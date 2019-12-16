@@ -27,6 +27,7 @@ namespace mf
 		ContainerPlacement			mPlacement = ContainerPlacement::RELATIVE;
 		MouseState					mMouseState = MouseState::OUTSIDE;
 		void						UpdateState();
+		bool						mPrevLeftMouseButtonState = false;
 
 	public:
 		virtual 					~aContainerItem(){}
