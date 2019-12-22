@@ -13,6 +13,7 @@ private:
 	Window							*mWindow;
 	std::map<int, ACTION>			mKeyMap;
 	std::map<ACTION, bool>			mActionMap;
+	std::string						mTextInputString;
 
 public:
 	EventHandler(Window *tWindow);
@@ -24,6 +25,8 @@ public:
 	void		BindKey(int key, ACTION action);
 	void		ToggleAction(ACTION action, bool state);
 	void		UnbindAllKeys();
+
+	std::string	GetStringEntered() { return (mTextInputString);}
 
 };
 

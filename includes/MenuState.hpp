@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ScreenState.hpp"
-#include "Button.hpp"
+#include "GUI.hpp"
 
 #define MENUDELTATIME		1.f/64.f
 
@@ -24,6 +24,8 @@ private:
 	mf::Container			mContainerOptions;
 	mf::Button				mFullScreenButton;
 	mf::Button				mBackButton;
+
+	mf::TextBox				mTestText;
 
 	MENU_STATE				mState;
 

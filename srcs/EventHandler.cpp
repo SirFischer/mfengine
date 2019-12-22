@@ -17,8 +17,11 @@ void	EventHandler::HandleEvents()
 {
 	sf::Event	event;
 
+	mTextInputString = "";
 	while (mWindow->pollEvent(event))
 	{
+		if (event.type == event.TextEntered)
+			mTextInputString += event.text.unicode;
 		if ( event.type == sf::Event::KeyPressed)
 		{
 			if (mKeyMap.find(event.key.code) != mKeyMap.end())

@@ -8,7 +8,8 @@ mOptionsButton(tWindow, &mResourceManager),
 mQuitButton(tWindow, &mResourceManager),
 mContainerOptions(tWindow),
 mFullScreenButton(tWindow, &mResourceManager),
-mBackButton(tWindow, &mResourceManager)
+mBackButton(tWindow, &mResourceManager),
+mTestText(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
 	mState = MENU_STATE::MAIN;
@@ -31,6 +32,7 @@ void				MenuState::update()
 	{
 	case MENU_STATE::MAIN:
 		mContainer.Update();
+		mTestText.Update();
 		updateMain();
 		break;
 	case MENU_STATE::OPTIONS:
@@ -87,6 +89,7 @@ void				MenuState::render()
 	{
 	case MENU_STATE::MAIN:
 		mContainer.Draw();
+		mTestText.Draw();
 		break;
 	case MENU_STATE::OPTIONS:
 		mContainerOptions.Draw();

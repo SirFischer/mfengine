@@ -1,3 +1,4 @@
+#pragma once
 #include "Window.hpp"
 #include "aContainerItem.hpp"
 
