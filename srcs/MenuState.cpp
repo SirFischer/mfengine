@@ -17,6 +17,8 @@ mTestText(tWindow, &mResourceManager, &mEventHandler)
 	mRunning = true;
 	mDeltaTime = 1.f / 32.f;
 	initMenuButtons();
+
+	mTestText.SetSize(600, 300);
 }
 
 MenuState::~MenuState()

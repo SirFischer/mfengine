@@ -23,6 +23,7 @@ namespace mf
 		Window						*mWindow = NULL;
 		sf::Sprite					mSprite;
 		sf::Vector2f				mPosition = sf::Vector2f(0, 0);
+		sf::Vector2f       	 		mSize = sf::Vector2f(200, 100);
 		aContainerItem				*mParent = NULL;
 		ContainerPlacement			mPlacement = ContainerPlacement::RELATIVE;
 		MouseState					mMouseState = MouseState::OUTSIDE;
@@ -39,6 +40,8 @@ namespace mf
 
 		void						SetPosition(sf::Vector2f position);
 		void						SetScale(sf::Vector2f scale);
+		void						SetSize(sf::Vector2f size);
+		void						SetSize(float x, float y);
 		void						SetParent(aContainerItem *item);
 		void						SetPlacement(ContainerPlacement placement);
 	};

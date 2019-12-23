@@ -44,6 +44,16 @@ namespace mf
 		mSprite.setScale(scale);
 	}
 
+	void		aContainerItem::SetSize(sf::Vector2f size)
+	{
+		mSize = size;
+	}
+
+	void		aContainerItem::SetSize(float x, float y)
+	{
+		mSize = sf::Vector2f(x, y);
+	}
+
 	void		aContainerItem::SetParent(aContainerItem *item)
 	{
 		mParent = item;

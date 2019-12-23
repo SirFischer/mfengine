@@ -17,6 +17,8 @@ private:
     sf::Text            mText;
     bool                focus = false;
 
+    void                UpdateText();
+
 public:
     TextBox(Window *tWindow, mf::ResourceManager *tResourceManager, EventHandler *tEventHandler);
     ~TextBox();
