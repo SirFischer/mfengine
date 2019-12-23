@@ -55,4 +55,10 @@ void        TextBox::Draw()
     mWindow->draw(&mText);
 }
 
+void        TextBox::SetText(std::string str)
+{
+    mString = str;
+    UpdateText();
+}
+
 }

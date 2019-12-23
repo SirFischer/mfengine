@@ -8,8 +8,7 @@ mOptionsButton(tWindow, &mResourceManager),
 mQuitButton(tWindow, &mResourceManager),
 mContainerOptions(tWindow),
 mFullScreenButton(tWindow, &mResourceManager),
-mBackButton(tWindow, &mResourceManager),
-mTestText(tWindow, &mResourceManager, &mEventHandler)
+mBackButton(tWindow, &mResourceManager)
 {
 	mWindow = tWindow;
 	mState = MENU_STATE::MAIN;
@@ -17,8 +16,6 @@ mTestText(tWindow, &mResourceManager, &mEventHandler)
 	mRunning = true;
 	mDeltaTime = 1.f / 32.f;
 	initMenuButtons();
-
-	mTestText.SetSize(600, 300);
 }
 
 MenuState::~MenuState()
@@ -34,7 +31,6 @@ void				MenuState::update()
 	{
 	case MENU_STATE::MAIN:
 		mContainer.Update();
-		mTestText.Update();
 		updateMain();
 		break;
 	case MENU_STATE::OPTIONS:
@@ -91,7 +87,6 @@ void				MenuState::render()
 	{
 	case MENU_STATE::MAIN:
 		mContainer.Draw();
-		mTestText.Draw();
 		break;
 	case MENU_STATE::OPTIONS:
 		mContainerOptions.Draw();

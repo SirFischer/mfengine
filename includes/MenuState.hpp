@@ -25,8 +25,6 @@ private:
 	mf::Button				mFullScreenButton;
 	mf::Button				mBackButton;
 
-	mf::TextBox				mTestText;
-
 	MENU_STATE				mState;
 
 	void			initMenuButtons();

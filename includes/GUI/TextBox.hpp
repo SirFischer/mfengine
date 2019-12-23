@@ -25,6 +25,8 @@ public:
 
     void                Update();
     void                Draw();
+
+    void                SetText(std::string str);
 };
 
 }
