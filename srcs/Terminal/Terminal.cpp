@@ -28,6 +28,8 @@ void				Terminal::LoadActions()
 	mActions["move_forward"]	=	ACTION::MOVE_FORWARD;
 	mActions["move_left"]		=	ACTION::MOVE_LEFT;
 	mActions["move_right"]		=	ACTION::MOVE_RIGHT;
+	mActions["toggle_console"]	=	ACTION::TOGGLE_CONSOLE;
+	mActions["quit"]			=	ACTION::QUIT;
 }
 
 void				Terminal::LoadKeys()
@@ -36,6 +38,8 @@ void				Terminal::LoadKeys()
 	mKeys["d"] = sf::Keyboard::D;
 	mKeys["s"] = sf::Keyboard::S;
 	mKeys["w"] = sf::Keyboard::W;
+	mKeys["esc"] = sf::Keyboard::Escape;
+	mKeys["tilde"] = sf::Keyboard::Tilde;
 }
 
 Terminal::TERMINAL_ERROR_CODE		Terminal::ProcessCommand(std::string line)

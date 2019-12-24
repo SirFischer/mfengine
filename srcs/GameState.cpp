@@ -27,11 +27,14 @@ void				GameState::update()
 	mWindow->update();
 	mCamera.Update();
 	mPlayer.Update();
+
+	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
+		std::cout << "console toggled!" << std::endl;
 }
 
 void				GameState::handle_events()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	if (mEventHandler.GetActionState(mf::ACTION::QUIT))
 		mRunning = false;
 	mEventHandler.HandleEvents();
 	mPlayer.HandleEvents();

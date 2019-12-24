@@ -8,7 +8,9 @@ namespace mf
 		MOVE_FORWARD,
 		MOVE_BACKWARD,
 		MOVE_LEFT,
-		MOVE_RIGHT
+		MOVE_RIGHT,
+		TOGGLE_CONSOLE,
+		QUIT
 	};
 
 } // namespace mf

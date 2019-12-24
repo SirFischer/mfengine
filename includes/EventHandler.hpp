@@ -3,6 +3,7 @@
 #include "Window.hpp"
 #include "Actions.hpp"
 
+#include <iostream>
 #include <map>
 
 namespace mf
