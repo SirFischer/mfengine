@@ -26,10 +26,15 @@ void        TextBox::UpdateText()
         mText.setString(tmp);
         if (mText.getGlobalBounds().width + mText.getCharacterSize() > mSize.x)
         {
-            if (tmp.back() == ' ')
-                tmp.insert(tmp.find_last_not_of(' ') + 1, "\n");
+            if ((tmp.size() - tmp.find_last_of(' ')) * mText.getCharacterSize() > mSize.x)
+                tmp.insert(tmp.size() - 2, "-\n");
             else
-                tmp.insert(tmp.find_last_of(' ') + 1, "\n");
+            {
+                if (tmp.back() == ' ')
+                    tmp.insert(tmp.find_last_not_of(' ') + 1, "\n");
+                else
+                    tmp.insert(tmp.find_last_of(' ') + 1, "\n");
+            }
         }
         tmp += mString[i];
     }

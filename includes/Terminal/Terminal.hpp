@@ -9,6 +9,9 @@
 #include <fstream>
 
 #include "EventHandler.hpp"
+#include "ResourceManager.hpp"
+#include "Window.hpp"
+#include "GUI.hpp"
 
 namespace mf
 {
@@ -16,7 +19,6 @@ namespace mf
 class Terminal
 {
 public:
-
 	enum class	TERMINAL_ERROR_CODE
 	{
 		SUCCESS,
@@ -39,15 +41,32 @@ public:
 	std::map<std::string, ACTION>				mActions;
 	std::map<std::string, sf::Keyboard::Key>	mKeys;
 
-	void								LoadCommands();
-	void								LoadActions();
-	void								LoadKeys();
+	
 
-	Terminal(/* args */);
+	
+
+	Terminal();
 	~Terminal();
 
 	TERMINAL_ERROR_CODE					ProcessCommand(std::string line);
 	TERMINAL_ERROR_CODE					ReadFromFile(std::string path);
+
+	void								LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler);
+	void								UpdateGUI();
+	void								RenderGUI();
+
+private:
+	bool										mHasGUI = false;
+	Container									*mGUI = NULL;
+	TextBox										*mTextArea = NULL;
+	TextBox										*mTextInput = NULL;
+	Button										*mSubmitButton = NULL;
+
+	void								LoadCommands();
+	void								LoadActions();
+	void								LoadKeys();
+
+	
 
 };
 

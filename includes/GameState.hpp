@@ -21,6 +21,8 @@ private:
 	mf::Terrain				terrain;
 	mf::Player				mPlayer;
 	mf::Terminal			mTerminal;
+	bool					mTerminalActive = false;
+	bool					mTerminalToggleReset = true;
 
 public:
 	explicit GameState(mf::Window *tWindow);

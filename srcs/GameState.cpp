@@ -15,6 +15,7 @@ mPlayer(&mEventHandler)
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
+	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
 }
 
 GameState::~GameState()
@@ -29,7 +30,17 @@ void				GameState::update()
 	mPlayer.Update();
 
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
-		std::cout << "console toggled!" << std::endl;
+	{
+		if (mTerminalToggleReset)
+		{
+			mTerminalActive = !mTerminalActive;
+			mTerminalToggleReset = false;
+		}
+	}
+	else 
+		mTerminalToggleReset = true;
+	if (mTerminalActive)
+		mTerminal.UpdateGUI();
 }
 
 void				GameState::handle_events()
@@ -55,5 +66,15 @@ void				GameState::render()
 		shader->SetMat4("projection", mCamera.GetProjectionMatrix());
 	}
 	terrain.Draw(GL_TRIANGLES);
+
+	if (mTerminalActive)
+	{
+		mWindow->pushGLStates();
+		glBindBuffer(GL_ARRAY_BUFFER,0);
+    	glDisableVertexArrayAttribEXT(0,0);
+		mWindow->resetGLStates();
+		mTerminal.RenderGUI();
+		mWindow->popGLStates();
+	}
 	mWindow->display();
 }

@@ -25,14 +25,24 @@ void	EventHandler::HandleEvents()
 		if ( event.type == sf::Event::KeyPressed)
 		{
 			if (mKeyMap.find(event.key.code) != mKeyMap.end())
+			{
 				mActionMap[mKeyMap[event.key.code]] = true;
+			}
 		}
 		if ( event.type == sf::Event::KeyReleased)
 		{
 			if (mKeyMap.find(event.key.code) != mKeyMap.end())
+			{
 				mActionMap[mKeyMap[event.key.code]] = false;
+			}
+			
 		}
 	}
+}
+
+bool		EventHandler::GetSubActionState(ACTION action)
+{
+	return (mSubActionMap[action]);
 }
 
 bool		EventHandler::GetActionState(ACTION action)

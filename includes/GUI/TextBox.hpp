@@ -15,7 +15,8 @@ private:
     std::string         mString = "";
     sf::Font            mFont;
     sf::Text            mText;
-    bool                focus = false;
+    bool                mFocus = false;
+    bool                mAllowFocus = true;
 
     void                UpdateText();
 
