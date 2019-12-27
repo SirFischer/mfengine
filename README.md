@@ -6,7 +6,7 @@ My personal game engine attempt...
 * - Added more basic elements to the GUI collection
 * - Added camera and camera controls
 
-![](/README/terminal_preview.gif)
+![Alt Text](/README/terminal_preview1.gif)
 
 **Features so far:**
 * *Height map terrain generation.*
