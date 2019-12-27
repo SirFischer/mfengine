@@ -84,4 +84,19 @@ Terminal::TERMINAL_ERROR_CODE		Toggle(Terminal *term, std::vector<std::string> p
     return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
 }
 
+Terminal::TERMINAL_ERROR_CODE		Execute(Terminal *term, std::vector<std::string> params)
+{
+    if (params.size() == 1)
+    {
+        if (term->ReadFromFile(params.at(0)) == Terminal::TERMINAL_ERROR_CODE::SUCCESS)
+        {
+            term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "executed " + params.at(0) + "!\n");
+            return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+        }
+        term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "failed to execute " + params.at(0) + "...\n");
+        return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+    }
+    return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+}
+
 }

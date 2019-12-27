@@ -28,6 +28,7 @@ void				Terminal::LoadCommands()
 	mCommands.emplace("help", (t_terminal_command){&Help, "Show all commands", "..."});
 	mCommands.emplace("toggle", (t_terminal_command){&Toggle, "Toggles an action on or off", "..."});
 	mCommands.emplace("clear", (t_terminal_command){&Clear, "Clear terminal", "Clear the terminal output screen"});
+	mCommands.emplace("execute", (t_terminal_command){&Execute, "Execute cfg file", "Execute a cfg file"});
 }
 
 void				Terminal::LoadActions()
@@ -161,9 +162,11 @@ Terminal::TERMINAL_ERROR_CODE		Terminal::ReadFromFile(std::string path)
 	TERMINAL_ERROR_CODE		success = TERMINAL_ERROR_CODE::SUCCESS;
 	TERMINAL_ERROR_CODE		tmp;
 
+	if (!stream.is_open())
+		return (TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
 	while (std::getline(stream, line))
 	{
-		if ((tmp = ProcessCommand(line)) != TERMINAL_ERROR_CODE::SUCCESS)
+		if ((tmp = ProcessCommand(line)) != TERMINAL_ERROR_CODE::SUCCESS && tmp != TERMINAL_ERROR_CODE::EMPTY_COMMAND)
 			success = tmp;
 	}
 	return (success);
