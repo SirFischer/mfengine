@@ -149,7 +149,9 @@ Terminal::TERMINAL_ERROR_CODE		Terminal::ProcessCommand(std::string line)
 	free(tmp);
 	if (mCommands.count(func) > 0)
 		return (mCommands[func].cmnd(this, params));
-	return (TERMINAL_ERROR_CODE::SUCCESS);
+	if (mHasGUI)
+        UpdateOutputStringGUI(GetOutputStringGUI() + func + " is not a valid command...\n");
+	return (TERMINAL_ERROR_CODE::BAD_COMMAND);
 }
 
 Terminal::TERMINAL_ERROR_CODE		Terminal::ReadFromFile(std::string path)

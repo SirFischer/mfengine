@@ -32,6 +32,8 @@ Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string
         return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
     term->mEventHandler->UnbindAllKeys();
     term->mEventHandler->ToggleAction(ACTION::SUBMIT, false);
+    if (term->HasGUI())
+        term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "Unbinded all keys...\n");
     return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
 }
 
@@ -54,6 +56,8 @@ Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> par
         term->mEventHandler->BindKey(term->mKeys[params.at(0)], term->mActions[params.at(1)]);
     else
         return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+    if (term->HasGUI())
+        term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "bound " + params.at(0) + " to " + params.at(1) + "\n");
     return(Terminal::TERMINAL_ERROR_CODE::SUCCESS);
 }
 
