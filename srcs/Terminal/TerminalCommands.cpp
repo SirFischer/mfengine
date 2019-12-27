@@ -10,11 +10,15 @@ Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> par
     {
         for (auto const& [key, val] : term->mCommands)
         {
+            if (term->HasGUI())
+                term->UpdateOutputStringGUI(term->GetOutputStringGUI() + key + " : " + val.help_short + "...\n");
             std::cout << key << " : " << val.help_short << "..." << std::endl;
         }
     }
-    else
+    else if (term->mCommands.count(params.front()))
     {
+        if (term->HasGUI())
+                term->UpdateOutputStringGUI(term->GetOutputStringGUI() + params.front() + " : " + term->mCommands[params.front()].help_long + "\n");
         std::cout << params.front() << " : " << term->mCommands[params.front()].help_long << std::endl;
     }
     (void)params;
@@ -27,6 +31,16 @@ Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string
     if (!term->mEventHandler)
         return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
     term->mEventHandler->UnbindAllKeys();
+    term->mEventHandler->ToggleAction(ACTION::SUBMIT, false);
+    return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+}
+
+Terminal::TERMINAL_ERROR_CODE       Clear(Terminal *term, std::vector<std::string> params)
+{
+    (void)params;
+    if (!term->HasGUI())
+        return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
+    term->UpdateOutputStringGUI("");
     return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
 }
 

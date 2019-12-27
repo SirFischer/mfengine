@@ -45,15 +45,19 @@ void        TextBox::Update()
 {
     std::string tmp = mEventHandler->GetStringEntered();
 
-    if (tmp != "")
+    if (tmp != "" && mAllowFocus)
     {
         if (tmp[0] == (char)8)
              mString = mString.substr(0, mString.size() - 1);
-        else
+        else if (isprint(tmp[0]))
             mString += mEventHandler->GetStringEntered();
         UpdateText();
     }
+    mSprite.setPosition(mPosition);
+	mText.setPosition(mPosition + mTextPos);
 }
+
+
 
 void        TextBox::Draw()
 {
@@ -64,6 +68,17 @@ void        TextBox::SetText(std::string str)
 {
     mString = str;
     UpdateText();
+}
+
+void        TextBox::SetTextPosition(sf::Vector2f tPos)
+{
+    mTextPos = tPos;
+    mText.setPosition(mPosition + tPos);
+}
+
+void        TextBox::SetAllowFocus(bool tFocus)
+{
+    mAllowFocus = tFocus;
 }
 
 }

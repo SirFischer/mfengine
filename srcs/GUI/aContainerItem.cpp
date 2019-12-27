@@ -37,6 +37,7 @@ namespace mf
 			mPosition = position;
 		else
 			mPosition = mParent->GetPosition() + position;
+		mSprite.setPosition(mPosition);
 	}
 
 	void		aContainerItem::SetScale(sf::Vector2f scale)
@@ -63,5 +64,16 @@ namespace mf
 	{
 		mPlacement = placement;
 		SetPosition(mPosition);
+	}
+
+	void		aContainerItem::SetFontSize(int tSize)
+	{
+		mText.setCharacterSize(tSize);
+	}
+
+	void		aContainerItem::SetFont(sf::Font tFont)
+	{
+		mFont = tFont;
+		mText.setFont(mFont);
 	}
 }

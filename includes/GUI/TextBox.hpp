@@ -13,13 +13,12 @@ private:
     ResourceManager     *mResourceManager;
     EventHandler        *mEventHandler;
     std::string         mString = "";
-    sf::Font            mFont;
-    sf::Text            mText;
+    sf::Vector2f		mTextPos = sf::Vector2f(5, 5);
     bool                mFocus = false;
     bool                mAllowFocus = true;
 
     void                UpdateText();
-
+   
 public:
     TextBox(Window *tWindow, mf::ResourceManager *tResourceManager, EventHandler *tEventHandler);
     ~TextBox();
@@ -27,7 +26,11 @@ public:
     void                Update();
     void                Draw();
 
+    std::string         GetText() {return (mString);}
+
     void                SetText(std::string str);
+    void                SetTextPosition(sf::Vector2f tPos);
+    void                SetAllowFocus(bool tFocus);
 };
 
 }

@@ -14,8 +14,6 @@ namespace mf
 		sf::Texture				mDefaultTexture;
 		sf::Texture				mOnClickTexture;
 		sf::Texture				mOnHoverTexture;
-		sf::Font				mFont;
-		sf::Text				mText;
 		sf::Vector2f			mTextPos;
 
 		mf::ResourceManager		*mResourceManager;

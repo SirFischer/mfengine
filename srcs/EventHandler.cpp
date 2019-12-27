@@ -26,6 +26,7 @@ void	EventHandler::HandleEvents()
 		{
 			if (mKeyMap.find(event.key.code) != mKeyMap.end())
 			{
+				mKeyStateMap[event.key.code] = true;
 				mActionMap[mKeyMap[event.key.code]] = true;
 			}
 		}
@@ -33,11 +34,17 @@ void	EventHandler::HandleEvents()
 		{
 			if (mKeyMap.find(event.key.code) != mKeyMap.end())
 			{
+				mKeyStateMap[event.key.code] = false;
 				mActionMap[mKeyMap[event.key.code]] = false;
 			}
 			
 		}
 	}
+}
+
+bool		EventHandler::GetKeyState(int key)
+{
+	return (mKeyStateMap[key]);
 }
 
 bool		EventHandler::GetSubActionState(ACTION action)

@@ -10,7 +10,8 @@ namespace mf
 		MOVE_LEFT,
 		MOVE_RIGHT,
 		TOGGLE_CONSOLE,
-		QUIT
+		QUIT,
+		SUBMIT
 	};
 
 } // namespace mf

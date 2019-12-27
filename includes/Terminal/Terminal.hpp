@@ -35,36 +35,38 @@ public:
 		std::string help_long;
 	}				t_terminal_command;
 
-	EventHandler						*mEventHandler = NULL;
+	EventHandler								*mEventHandler = NULL;
 
 	std::map<std::string, t_terminal_command>	mCommands;
 	std::map<std::string, ACTION>				mActions;
 	std::map<std::string, sf::Keyboard::Key>	mKeys;
 
-	
-
-	
-
 	Terminal();
 	~Terminal();
 
-	TERMINAL_ERROR_CODE					ProcessCommand(std::string line);
-	TERMINAL_ERROR_CODE					ReadFromFile(std::string path);
+	TERMINAL_ERROR_CODE							ProcessCommand(std::string line);
+	TERMINAL_ERROR_CODE							ReadFromFile(std::string path);
 
-	void								LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler);
-	void								UpdateGUI();
-	void								RenderGUI();
+	void										LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler);
+	void										UpdateGUI();
+	void										RenderGUI();
+
+	void										ClearInputGUI();
+	void										UpdateOutputStringGUI(std::string tStr);
+	std::string									GetOutputStringGUI() {return (mTextArea->GetText());}
+	bool										HasGUI() {return (mHasGUI);}
 
 private:
 	bool										mHasGUI = false;
+	bool										mSubmitReset = true;
 	Container									*mGUI = NULL;
 	TextBox										*mTextArea = NULL;
 	TextBox										*mTextInput = NULL;
 	Button										*mSubmitButton = NULL;
 
-	void								LoadCommands();
-	void								LoadActions();
-	void								LoadKeys();
+	void										LoadCommands();
+	void										LoadActions();
+	void										LoadKeys();
 
 	
 
@@ -76,5 +78,6 @@ Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> par
 Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Toggle(Terminal *term, std::vector<std::string> params);
+Terminal::TERMINAL_ERROR_CODE       Clear(Terminal *term, std::vector<std::string> params);
 
 } // namespace mf

@@ -25,22 +25,23 @@ GameState::~GameState()
 
 void				GameState::update()
 {
+	if (mTerminalActive)
+		mTerminal.UpdateGUI();
 	mWindow->update();
 	mCamera.Update();
 	mPlayer.Update();
-
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
 	{
 		if (mTerminalToggleReset)
 		{
+			mTerminal.ClearInputGUI();
 			mTerminalActive = !mTerminalActive;
 			mTerminalToggleReset = false;
 		}
 	}
-	else 
+	else
 		mTerminalToggleReset = true;
-	if (mTerminalActive)
-		mTerminal.UpdateGUI();
+	
 }
 
 void				GameState::handle_events()

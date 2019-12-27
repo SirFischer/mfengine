@@ -22,6 +22,9 @@ namespace mf
 	protected:
 		Window						*mWindow = NULL;
 		sf::Sprite					mSprite;
+		sf::Texture					mTexture;
+		sf::Font            		mFont;
+    	sf::Text            		mText;
 		sf::Vector2f				mPosition = sf::Vector2f(0, 0);
 		sf::Vector2f       	 		mSize = sf::Vector2f(200, 100);
 		aContainerItem				*mParent = NULL;
@@ -44,5 +47,7 @@ namespace mf
 		void						SetSize(float x, float y);
 		void						SetParent(aContainerItem *item);
 		void						SetPlacement(ContainerPlacement placement);
+		void						SetFontSize(int tSize);
+		void						SetFont(sf::Font tFont);
 	};
 }
