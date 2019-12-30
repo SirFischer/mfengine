@@ -20,9 +20,5 @@ namespace mf
 		void							Draw();
 
 		void							AddItem(aContainerItem *tItem);
-
-		void							SetColorBackground(int tWidth, int tHeight, sf::Color tColor);
-		void							SetColorBackground(sf::Vector2f tSize, sf::Color tColor);
-		void							SetColorBackground();
 	};
 }

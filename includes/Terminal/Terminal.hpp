@@ -68,8 +68,6 @@ private:
 	void										LoadActions();
 	void										LoadKeys();
 
-	
-
 };
 
 // COMMANDS

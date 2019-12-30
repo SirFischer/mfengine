@@ -61,6 +61,7 @@ void        TextBox::Update()
 
 void        TextBox::Draw()
 {
+    mWindow->draw(&mSprite);
     mWindow->draw(&mText);
 }
 

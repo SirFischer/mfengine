@@ -34,6 +34,7 @@ namespace mf
 		bool						mPrevLeftMouseButtonState = false;
 
 	public:
+									aContainerItem();
 		virtual 					~aContainerItem(){}
 		virtual void				Draw() = 0;
 		virtual void				Update() = 0;
@@ -49,5 +50,10 @@ namespace mf
 		void						SetPlacement(ContainerPlacement placement);
 		void						SetFontSize(int tSize);
 		void						SetFont(sf::Font tFont);
+		void						SetColor(sf::Color tColor);
+		void						SetBackground(int tWidth, int tHeight, sf::Color tColor);
+		void						SetBackground(sf::Vector2f tSize, sf::Color tColor);
+		void						SetBackground(sf::Color tColor);
+		void						SetBackground();
 	};
 }

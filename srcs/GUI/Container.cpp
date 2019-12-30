@@ -43,22 +43,6 @@ namespace mf
 			mContainerItems.push_back(tItem);
 		}
 	}
-
-	void	Container::SetColorBackground(int tWidth, int tHeight, sf::Color tColor)
-	{
-		sf::Image	img;
-		img.create(tWidth, tHeight, tColor);
-		mTexture.loadFromImage(img);
-		mSprite.setTexture(mTexture);
-	}
-	void	Container::SetColorBackground(sf::Vector2f tSize, sf::Color tColor)
-	{
-		SetColorBackground(tSize.x, tSize.y, tColor);
-	}
-	void	Container::SetColorBackground()
-	{
-		SetColorBackground(200, 200, sf::Color::White);
-	}
 }
 
 

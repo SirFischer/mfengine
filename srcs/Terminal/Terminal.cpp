@@ -64,25 +64,30 @@ void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, Ev
 	mGUI->AddItem(mTextArea);
 	mGUI->AddItem(mTextInput);
 	mGUI->AddItem(mSubmitButton);
-	mGUI->SetColorBackground(800, 500, sf::Color(50, 50, 50, 150));
+	mGUI->SetBackground(800, 500, sf::Color(50, 50, 50, 150));
 	mGUI->SetPosition(sf::Vector2f(200, 200));
 
 	mSubmitButton->SetPlacement(mf::ContainerPlacement::RELATIVE);
-	mSubmitButton->SetPosition(sf::Vector2f(700, 450));
+	mSubmitButton->SetPosition(sf::Vector2f(695, 445));
+	mSubmitButton->SetFont("assets/fonts/firacode.otf");
+	mSubmitButton->SetText("Submit!");
+	mSubmitButton->SetFontSize(20);
 	mSubmitButton->SetScale(sf::Vector2f(4, 3));
+	mSubmitButton->SetColor(sf::Color::Red);
 
 	mTextArea->SetPlacement(mf::ContainerPlacement::RELATIVE);
 	mTextArea->SetPosition(sf::Vector2f(5, 5));
-	mTextArea->SetSize(sf::Vector2f(790, 350));
+	mTextArea->SetSize(sf::Vector2f(790, 435));
+	mTextArea->SetBackground(sf::Color(30, 30, 30, 100));
 	mTextArea->SetFontSize(15);
 	mTextArea->SetAllowFocus(false);
-	tResourceManager->verbose = true;
 	mTextArea->SetFont(tResourceManager->LoadFont("assets/fonts/firacode.otf"));
 
 	mTextInput->SetPlacement(mf::ContainerPlacement::RELATIVE);
-	mTextInput->SetPosition(sf::Vector2f(5, 470));
-	mTextInput->SetSize(sf::Vector2f(690, 50));
+	mTextInput->SetPosition(sf::Vector2f(5, 460));
+	mTextInput->SetSize(sf::Vector2f(680, 30));
 	mTextInput->SetFontSize(15);
+	mTextInput->SetBackground(sf::Color(30, 30, 30, 150));
 	mTextInput->SetFont(tResourceManager->LoadFont("assets/fonts/firacode.otf"));
 }
 
@@ -92,7 +97,7 @@ void				Terminal::UpdateGUI()
 		return ;
 	if (mEventHandler->GetActionState(ACTION::SUBMIT) || mSubmitButton->GetState() == mf::MouseState::CLICKED)
 	{
-		if (mSubmitReset)
+		if (mSubmitReset && mTextInput->GetText() != "")
 		{
 			ProcessCommand(mTextInput->GetText());
 			mTextInput->SetText("");

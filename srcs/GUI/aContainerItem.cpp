@@ -2,6 +2,12 @@
 
 namespace mf
 {
+
+	aContainerItem::aContainerItem()
+	{
+
+	}
+
 	void		aContainerItem::UpdateState()
 	{
 		bool			outside;
@@ -75,5 +81,30 @@ namespace mf
 	{
 		mFont = tFont;
 		mText.setFont(mFont);
+	}
+
+	void		aContainerItem::SetColor(sf::Color tColor)
+	{
+		mSprite.setColor(tColor);
+	}
+
+	void	aContainerItem::SetBackground(int tWidth, int tHeight, sf::Color tColor)
+	{
+		sf::Image	img;
+		img.create(tWidth, tHeight, tColor);
+		mTexture.loadFromImage(img);
+		mSprite.setTexture(mTexture);
+	}
+	void	aContainerItem::SetBackground(sf::Vector2f tSize, sf::Color tColor)
+	{
+		SetBackground(tSize.x, tSize.y, tColor);
+	}
+	void	aContainerItem::SetBackground(sf::Color tColor)
+	{
+		SetBackground(mSize.x, mSize.y, tColor);
+	}
+	void	aContainerItem::SetBackground()
+	{
+		SetBackground(mSize.x, mSize.y, sf::Color::White);
 	}
 }
