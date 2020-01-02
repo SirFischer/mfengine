@@ -64,6 +64,7 @@ void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, Ev
 	mGUI->AddItem(mTextArea);
 	mGUI->AddItem(mTextInput);
 	mGUI->AddItem(mSubmitButton);
+	mGUI->SetSize(800, 500);
 	mGUI->SetBackground(800, 500, sf::Color(50, 50, 50, 150));
 	mGUI->SetPosition(sf::Vector2f(200, 200));
 

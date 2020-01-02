@@ -3,7 +3,8 @@
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
 terrain(500, 500),
-mPlayer(&mEventHandler)
+mPlayer(&mEventHandler),
+mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
 	//terrain.Randomize(0, -10, 10);
@@ -16,6 +17,7 @@ mPlayer(&mEventHandler)
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
 	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
+	
 }
 
 GameState::~GameState()
@@ -30,6 +32,7 @@ void				GameState::update()
 	mWindow->update();
 	mCamera.Update();
 	mPlayer.Update();
+	mFPSDisplay.SetText(std::to_string(mFPS) + " FPS");
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
 	{
 		if (mTerminalToggleReset)
@@ -68,14 +71,13 @@ void				GameState::render()
 	}
 	terrain.Draw(GL_TRIANGLES);
 
+	mWindow->pushGLStates();
+	glBindBuffer(GL_ARRAY_BUFFER,0);
+    glDisableVertexArrayAttribEXT(0,0);
+	mWindow->resetGLStates();
 	if (mTerminalActive)
-	{
-		mWindow->pushGLStates();
-		glBindBuffer(GL_ARRAY_BUFFER,0);
-    	glDisableVertexArrayAttribEXT(0,0);
-		mWindow->resetGLStates();
 		mTerminal.RenderGUI();
-		mWindow->popGLStates();
-	}
+	mFPSDisplay.Draw();
+	mWindow->popGLStates();
 	mWindow->display();
 }

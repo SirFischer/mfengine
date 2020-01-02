@@ -92,6 +92,8 @@ namespace mf
 	{
 		sf::Image	img;
 		img.create(tWidth, tHeight, tColor);
+		mSize.x = tWidth;
+		mSize.y = tHeight;
 		mTexture.loadFromImage(img);
 		mSprite.setTexture(mTexture);
 	}
@@ -106,5 +108,23 @@ namespace mf
 	void	aContainerItem::SetBackground()
 	{
 		SetBackground(mSize.x, mSize.y, sf::Color::White);
+	}
+
+	void	aContainerItem::SetView()
+	{
+		mLastView = mWindow->getView();
+		mView.reset(sf::FloatRect(mPosition.x, mPosition.y, mSize.x, mSize.y));
+		mView.setViewport(sf::FloatRect(mPosition.x / mWindow->getSize().x, mPosition.y / mWindow->getSize().y, mSize.x / mWindow->getSize().x, mSize.y / mWindow->getSize().y));
+		mWindow->setView(mView);
+	}
+	
+	void	aContainerItem::ResetView()
+	{
+		mWindow->setView(mLastView);
+	}
+
+	void	aContainerItem::SetOverflowMode(OverflowMode tMode)
+	{
+		mOverFlowMode = tMode;
 	}
 }

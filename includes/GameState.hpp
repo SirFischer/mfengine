@@ -23,6 +23,7 @@ private:
 	mf::Terminal			mTerminal;
 	bool					mTerminalActive = false;
 	bool					mTerminalToggleReset = true;
+	mf::TextBox				mFPSDisplay;
 
 public:
 	explicit GameState(mf::Window *tWindow);

@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <iostream>
 
 namespace mf
 {
@@ -17,11 +18,20 @@ namespace mf
 		RELATIVE
 	};
 
+	enum class OverflowMode
+    {
+        HORIZONTAL_SCROLL,
+        VERTICAL_SCROLL,
+        HIDDEN
+    };
+
 	class aContainerItem
 	{
 	protected:
 		Window						*mWindow = NULL;
 		sf::Sprite					mSprite;
+		sf::View					mView;
+		sf::View					mLastView;
 		sf::Texture					mTexture;
 		sf::Font            		mFont;
     	sf::Text            		mText;
@@ -30,6 +40,7 @@ namespace mf
 		aContainerItem				*mParent = NULL;
 		ContainerPlacement			mPlacement = ContainerPlacement::RELATIVE;
 		MouseState					mMouseState = MouseState::OUTSIDE;
+		OverflowMode       			mOverFlowMode = OverflowMode::HIDDEN;
 		void						UpdateState();
 		bool						mPrevLeftMouseButtonState = false;
 
@@ -55,5 +66,8 @@ namespace mf
 		void						SetBackground(sf::Vector2f tSize, sf::Color tColor);
 		void						SetBackground(sf::Color tColor);
 		void						SetBackground();
+		void						SetOverflowMode(OverflowMode tMode);
+		void						SetView();
+		void						ResetView();
 	};
 }

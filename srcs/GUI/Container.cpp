@@ -31,8 +31,10 @@ namespace mf
 
 	void	Container::Draw()
 	{
+		SetView();
 		mWindow->draw(&mSprite);
 		DrawItems();
+		ResetView();
 	}
 
 	void	Container::AddItem(aContainerItem *tItem)

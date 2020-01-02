@@ -9,6 +9,8 @@ namespace mf
 	private:
 		std::vector<aContainerItem *>	mContainerItems;
 		bool							mIsExpandable = true;
+
+
 		void							UpdateItems();
 		void							DrawItems();
 

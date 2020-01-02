@@ -23,14 +23,14 @@ public:
 	virtual void		render() = 0;
 	
 protected:
-	sf::Clock		mGameLoop;
-	sf::Time		mElapsedTime;
-	Window			*mWindow;
-	float			mDeltaTime = 1.f/64.f;
-	int				mFPS;
-	float			mFrameTime;
-	bool			mRunning = true;
-	ReturnCtrl		mReturn = ReturnCtrl::END;
+	sf::Clock			mGameLoop;
+	sf::Time			mElapsedTime;
+	Window				*mWindow;
+	float				mDeltaTime = 1.f/64.f;
+	int					mFPS;
+	float				mFrameTime;
+	bool				mRunning = true;
+	ReturnCtrl			mReturn = ReturnCtrl::END;
 
 	void				calculateFPS(sf::Time timeDiff);
 	void				setDeltaTime(float deltatime);

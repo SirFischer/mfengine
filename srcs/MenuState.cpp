@@ -101,6 +101,7 @@ void				MenuState::initMenuButtons()
 	//MAIN
 	mContainer.AddItem(&mPlayButton);
 	mContainer.SetPosition(sf::Vector2f(850, 400));
+	mContainer.SetSize(sf::Vector2f(500, 800));
 	mPlayButton.SetPosition(sf::Vector2f(0, 0));
 	mPlayButton.SetScale(sf::Vector2f(8, 5));
 	mPlayButton.SetFont("assets/fonts/pdark.ttf");
@@ -121,6 +122,7 @@ void				MenuState::initMenuButtons()
 
 	//OPTIONS
 	mContainerOptions.AddItem(&mFullScreenButton);
+	mContainerOptions.SetSize(sf::Vector2f(1920, 1080));
 	mFullScreenButton.SetPosition(sf::Vector2f(850, 400));
 	mFullScreenButton.SetScale(sf::Vector2f(8, 5));
 	mFullScreenButton.SetFont("assets/fonts/pdark.ttf");

@@ -16,6 +16,7 @@ TextBox::~TextBox()
 {
 }
 
+//TODO OPTIMIZE TEXT FITTING ALGORITHM
 void        TextBox::UpdateText()
 {
     int             i = -1;
@@ -59,13 +60,15 @@ void        TextBox::Update()
 
 
 
-void        TextBox::Draw()
+void		TextBox::Draw()
 {
-    mWindow->draw(&mSprite);
-    mWindow->draw(&mText);
+	SetView();
+	mWindow->draw(&mSprite);
+	mWindow->draw(&mText);
+	ResetView();
 }
 
-void        TextBox::SetText(std::string str)
+void		TextBox::SetText(std::string str)
 {
     mString = str;
     UpdateText();

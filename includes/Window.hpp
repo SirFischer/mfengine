@@ -35,6 +35,9 @@ namespace mf
 		void				draw(sf::Drawable *tDrawable);
 		void				display();
 
+		void				setView(sf::View tView);
+		void				resetView();
+
 		void				resetGLStates();
 		void				pushGLStates();
 		void				popGLStates();
@@ -43,5 +46,7 @@ namespace mf
 		bool				isFullscreen(){return (mIsFullscreen);}
 
 		sf::Vector2i		getRelMousePos(){return (sf::Mouse::getPosition(mWindow));}
+		sf::Vector2u		getSize(){return (mWindow.getSize());}
+		sf::View			getView(){return (mWindow.getView());}
 	};
 }

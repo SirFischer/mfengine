@@ -113,6 +113,16 @@ void	Window::display()
 	mWindow.display();
 }
 
+void	Window::setView(sf::View tView)
+{
+	mWindow.setView(tView);
+}
+
+void	Window::resetView()
+{
+	mWindow.setView(mWindow.getDefaultView());
+}
+
 void	Window::resetGLStates()
 {
 	mWindow.resetGLStates();
