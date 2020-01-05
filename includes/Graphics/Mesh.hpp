@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <string.h>
 #include <iostream>
+#include <memory>
 #include <GL/glew.h>
 
 
@@ -12,11 +13,11 @@ namespace mf
 class Mesh
 {
 protected:
-	float			*mVertices = NULL;
-	unsigned int	*mIndices = NULL;
-	GLuint			mVerticeSize;
-	GLuint			mIndiceSize;
-	GLuint			mVAO, mVBO, mEBO;
+	std::shared_ptr<float>			mVertices;
+	std::shared_ptr<unsigned int>	mIndices;
+	GLuint							mVerticeSize;
+	GLuint							mIndiceSize;
+	GLuint							mVAO, mVBO, mEBO;
 
 void				initMesh();
 

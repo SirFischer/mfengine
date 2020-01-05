@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
+#include <memory>
+#include <iostream>
 
 namespace mf
 {
@@ -10,7 +12,8 @@ namespace mf
 class Shader
 {
 private:
-	sf::Shader *mShader;
+	std::shared_ptr<sf::Shader> mShader;
+
 public:
 	Shader();
 	~Shader();

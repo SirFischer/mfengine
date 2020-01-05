@@ -49,12 +49,18 @@ void				Terminal::LoadKeys()
 
 void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler)
 {
+	try
+	{
+		mGUI = std::unique_ptr<Container>(new Container(tWindow));
+		mTextArea = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
+		mTextInput = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
+		mSubmitButton = std::unique_ptr<Button>(new Button(tWindow, tResourceManager));
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	mHasGUI = true;
-	mGUI = std::unique_ptr<Container>(new Container(tWindow));
-	mTextArea = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
-	mTextInput = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
-	mSubmitButton = std::unique_ptr<Button>(new Button(tWindow, tResourceManager));
-
 	mGUI->AddItem(mTextArea.get());
 	mGUI->AddItem(mTextInput.get());
 	mGUI->AddItem(mSubmitButton.get());

@@ -3,10 +3,10 @@
 namespace mf
 {
 
-Mesh::Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize)
+Mesh::Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize) :
+mVertices(vertices),
+mIndices(indices)
 {
-	mVertices = vertices;
-	mIndices = indices;
 	mVerticeSize = verticesize;
 	mIndiceSize = indicesize;
 	initMesh();
@@ -26,12 +26,12 @@ void		Mesh::initMesh()
 	glGenBuffers(1, &mVBO);
 	glBindVertexArray(mVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-	glBufferData(GL_ARRAY_BUFFER, mVerticeSize, mVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, mVerticeSize, mVertices.get(), GL_STATIC_DRAW);
 	if (mIndices)
 	{
 		glGenBuffers(1, &mEBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndiceSize, mIndices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndiceSize, mIndices.get(), GL_STATIC_DRAW);
 	}
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);

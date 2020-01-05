@@ -3,9 +3,14 @@
 namespace mf
 {
 
-Shader::Shader()
+Shader::Shader() try :
+mShader(new sf::Shader())
 {
-	mShader = new sf::Shader();
+
+}
+catch (std::exception &e)
+{
+	std::cerr << e.what() << std::endl;
 }
 
 Shader::~Shader()
@@ -15,7 +20,7 @@ Shader::~Shader()
 
 void		Shader::Bind()
 {
-	sf::Shader::bind(mShader);
+	sf::Shader::bind(mShader.get());
 }
 
 bool		Shader::LoadFromFile(std::string vertex, std::string fragment)
