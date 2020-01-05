@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <map>
+#include <memory>
 #include <iterator>
 #include <functional>
 #include <iostream>
@@ -53,16 +54,16 @@ public:
 
 	void										ClearInputGUI();
 	void										UpdateOutputStringGUI(std::string tStr);
-	std::string									GetOutputStringGUI() {return (mTextArea->GetText());}
+	std::string									GetOutputStringGUI() {return (mTextArea.get()->GetText());}
 	bool										HasGUI() {return (mHasGUI);}
 
 private:
 	bool										mHasGUI = false;
 	bool										mSubmitReset = true;
-	Container									*mGUI = NULL;
-	TextBox										*mTextArea = NULL;
-	TextBox										*mTextInput = NULL;
-	Button										*mSubmitButton = NULL;
+	std::unique_ptr<Container>					mGUI;
+	std::unique_ptr<TextBox>					mTextArea;
+	std::unique_ptr<TextBox>					mTextInput;
+	std::unique_ptr<Button>						mSubmitButton;
 
 	void										LoadCommands();
 	void										LoadActions();

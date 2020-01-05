@@ -12,13 +12,7 @@ Terminal::Terminal()
 
 Terminal::~Terminal()
 {
-	if (mHasGUI)
-	{
-		delete mTextArea;
-		delete mTextInput;
-		delete mSubmitButton;
-		delete mGUI;
-	}
+	
 }
 
 void				Terminal::LoadCommands()
@@ -56,14 +50,14 @@ void				Terminal::LoadKeys()
 void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler)
 {
 	mHasGUI = true;
-	mGUI = new Container(tWindow);
-	mTextArea = new TextBox(tWindow, tResourceManager, tEventHandler);
-	mTextInput = new TextBox(tWindow, tResourceManager, tEventHandler);
-	mSubmitButton = new Button(tWindow, tResourceManager);
+	mGUI = std::unique_ptr<Container>(new Container(tWindow));
+	mTextArea = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
+	mTextInput = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
+	mSubmitButton = std::unique_ptr<Button>(new Button(tWindow, tResourceManager));
 
-	mGUI->AddItem(mTextArea);
-	mGUI->AddItem(mTextInput);
-	mGUI->AddItem(mSubmitButton);
+	mGUI->AddItem(mTextArea.get());
+	mGUI->AddItem(mTextInput.get());
+	mGUI->AddItem(mSubmitButton.get());
 	mGUI->SetSize(800, 500);
 	mGUI->SetBackground(800, 500, sf::Color(50, 50, 50, 150));
 	mGUI->SetPosition(sf::Vector2f(200, 200));
