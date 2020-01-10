@@ -18,6 +18,7 @@ void		Player::Update()
 	if (mCamera)
 	{
 		mCamera->UpdateFront(mEventHandler);
+		mDir = mCamera->GetDir();
 		mCamera->SetPos(mPos);
 	}
 }

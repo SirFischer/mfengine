@@ -42,7 +42,7 @@ void		Camera::UpdateFront(EventHandler *tEventHandler)
 	sf::Vector2f	offset = sf::Vector2f(tEventHandler->GetMousePosOffset()) * mMouseSensitivity;
 	mYaw += offset.x;
 	mPitch += offset.y;
-	std::clamp(mPitch, 89.f, -89.f);
+	mPitch = std::clamp(mPitch, -89.f, 89.f);
 	mFront.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
 	mFront.y = sin(glm::radians(mPitch));
 	mFront.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));

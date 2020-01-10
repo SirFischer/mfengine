@@ -17,7 +17,7 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
 	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
-	
+	mWindow->setMouseCursorVisible(false);
 }
 
 GameState::~GameState()
@@ -39,6 +39,8 @@ void				GameState::update()
 		{
 			mTerminal.ClearInputGUI();
 			mTerminalActive = !mTerminalActive;
+			mEventHandler.SetCursorLock(!mTerminalActive);
+			mWindow->setMouseCursorVisible(mTerminalActive);
 			mTerminalToggleReset = false;
 		}
 	}
@@ -50,7 +52,10 @@ void				GameState::update()
 void				GameState::handle_events()
 {
 	if (mEventHandler.GetActionState(mf::ACTION::QUIT))
+	{
 		mRunning = false;
+		mWindow->setMouseCursorVisible(true);
+	}
 	mEventHandler.HandleEvents();
 	mPlayer.HandleEvents();
 }

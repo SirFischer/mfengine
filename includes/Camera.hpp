@@ -49,6 +49,7 @@ public:
 
 	glm::mat4		GetViewMatrix() {return mViewMatrix;}
 	glm::mat4		GetProjectionMatrix() {return mProjectionMatrix;}
+	glm::vec3		GetDir() {return mDir;}
 };
 
 }

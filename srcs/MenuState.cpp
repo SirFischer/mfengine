@@ -15,6 +15,7 @@ mBackButton(tWindow, &mResourceManager)
 	mReturn = ReturnCtrl::END;
 	mRunning = true;
 	mDeltaTime = 1.f / 32.f;
+	mWindow->setMouseCursorVisible(true);
 	initMenuButtons();
 }
 

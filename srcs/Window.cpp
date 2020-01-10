@@ -37,7 +37,6 @@ bool	Window::create()
 	mWindow.create(mode, mTitle,
 		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close, Settings);
 	initOpengl();
-	mWindow.setMouseCursorGrabbed(true);
 	return (true);
 }
 

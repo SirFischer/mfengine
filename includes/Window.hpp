@@ -50,5 +50,6 @@ namespace mf
 		sf::View			getView(){return (mWindow.getView());}
 
 		void				setRelMousePos(sf::Vector2i	tPos) {sf::Mouse::setPosition(tPos, mWindow);}
+		void				setMouseCursorVisible(bool tVisible) {mWindow.setMouseCursorVisible(tVisible);}
 	};
 }
