@@ -48,5 +48,7 @@ namespace mf
 		sf::Vector2i		getRelMousePos(){return (sf::Mouse::getPosition(mWindow));}
 		sf::Vector2u		getSize(){return (mWindow.getSize());}
 		sf::View			getView(){return (mWindow.getView());}
+
+		void				setRelMousePos(sf::Vector2i	tPos) {sf::Mouse::setPosition(tPos, mWindow);}
 	};
 }

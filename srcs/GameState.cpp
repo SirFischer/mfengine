@@ -7,9 +7,9 @@ mPlayer(&mEventHandler),
 mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
-	//terrain.Randomize(0, -10, 10);
-	mCamera.SetEntityAnchor(&mPlayer);
+	mPlayer.SetCamera(&mCamera);
 	terrain.GenHeightMap(time(0));
+	mEventHandler.SetCursorLock(true);
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 	mTerminal.mEventHandler = &mEventHandler;
 	if (std::experimental::filesystem::exists("assets/cfg/controls.cfg"))

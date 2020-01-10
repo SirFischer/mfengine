@@ -15,10 +15,16 @@ Player::~Player()
 void		Player::Update()
 {
 	mPos += mVelocity;
+	if (mCamera)
+	{
+		mCamera->UpdateFront(mEventHandler);
+		mCamera->SetPos(mPos);
+	}
 }
 
 void		Player::HandleEvents()
 {
+	std::clamp(mDir.y, -1.f, 1.f);
 	if (mEventHandler->GetActionState(ACTION::MOVE_FORWARD))
 		MoveForward();
 	if (mEventHandler->GetActionState(ACTION::MOVE_RIGHT))

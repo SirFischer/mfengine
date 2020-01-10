@@ -10,6 +10,7 @@ class Player : public Entity
 {
 private:
 	EventHandler	*mEventHandler;
+	
 
 public:
 	Player(EventHandler *tEventHandler);

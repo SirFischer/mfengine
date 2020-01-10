@@ -40,6 +40,11 @@ void	EventHandler::HandleEvents()
 			
 		}
 	}
+	
+	mMousePosOffset = sf::Mouse::getPosition() - mLastMousePos;
+	if (mCursorIsGrabbed)
+		mWindow->setRelMousePos(sf::Vector2i(mWindow->getSize().x / 2, mWindow->getSize().y / 2));
+	mLastMousePos = sf::Mouse::getPosition();
 }
 
 bool		EventHandler::GetKeyState(int key)

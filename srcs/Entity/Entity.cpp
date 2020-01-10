@@ -41,4 +41,9 @@ void		Entity::MoveBackward()
 	mVelocity += dir;
 }
 
+void		Entity::SetCamera(Camera *tCamera)
+{
+	mCamera = (tCamera);
+}
+
 } // namespace mf
