@@ -82,14 +82,26 @@ void		Terrain::GenHeightMap(int seed)
 	plane.SetSourceModule(perlin);
 	plane.SetDestNoiseMap(map);
 	plane.SetDestSize(mWidth, mLength);
-	plane.SetBounds(2.0, 8.0, 1.0, 9.0);
+	plane.SetBounds(-2.0, 13.0, -1.0, 12.0);
 	plane.Build();
 	while (i < mLength * mWidth * 3)
 	{
-		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2)) * 50.0;
+		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2)) * 80;
 		i += 3;
 	}
 	initMesh();
+}
+
+float		Terrain::GetHeightAt(int x, int z)
+{
+	
+	x += (mWidth / 2) * 30;
+	z += (mLength / 2) * 30;
+	x /= 30.0;
+	z /= 30.0;
+	x = std::clamp(x, 0, mWidth - 1);
+	z = std::clamp(z, 0, mLength - 1);
+	return mVertices.get()[((z * mWidth * 3) + (x * 3) ) + 1];
 }
 
 } // namespace mf

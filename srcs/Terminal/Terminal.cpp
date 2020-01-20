@@ -31,6 +31,8 @@ void				Terminal::LoadActions()
 	mActions["move_forward"]	=	ACTION::MOVE_FORWARD;
 	mActions["move_left"]		=	ACTION::MOVE_LEFT;
 	mActions["move_right"]		=	ACTION::MOVE_RIGHT;
+	mActions["move_up"]			=	ACTION::MOVE_UP;
+	mActions["move_down"]		=	ACTION::MOVE_DOWN;
 	mActions["toggle_console"]	=	ACTION::TOGGLE_CONSOLE;
 	mActions["quit"]			=	ACTION::QUIT;
 	mActions["submit"]			=	ACTION::SUBMIT;
@@ -42,6 +44,8 @@ void				Terminal::LoadKeys()
 	mKeys["d"]					=	sf::Keyboard::D;
 	mKeys["s"]					=	sf::Keyboard::S;
 	mKeys["w"]					=	sf::Keyboard::W;
+	mKeys["space"]				=	sf::Keyboard::Space;
+	mKeys["lctrl"]				=	sf::Keyboard::LControl;
 	mKeys["esc"]				=	sf::Keyboard::Escape;
 	mKeys["tilde"]				=	sf::Keyboard::Tilde;
 	mKeys["enter"]				=	sf::Keyboard::Enter;
@@ -139,7 +143,7 @@ Terminal::TERMINAL_ERROR_CODE		Terminal::ProcessCommand(std::string line)
 	char						*tmp;
 	std::string					func;
 	std::vector<std::string>	params;
-	
+	std::replace(line.begin(), line.end(), '\t', ' ');
 	if (line.find("//") != std::string::npos)
 		return (TERMINAL_ERROR_CODE::EMPTY_COMMAND);
 	if (!(tmp = strdup(line.c_str())))

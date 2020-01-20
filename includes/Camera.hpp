@@ -13,7 +13,7 @@ namespace mf
 class Camera
 {
 private:
-	glm::vec3		mPos = glm::vec3(0.f, 60.f, 80.f);
+	glm::vec3		mPos = glm::vec3(0.f, 5.f, 80.f);
 	glm::vec3		mDir = glm::vec3(0.f, 0.7f, 1.f);
 	glm::vec3		mUp = glm::vec3(0.f, 1.f, 0.f);
 	glm::vec3		mFront = glm::vec3(0.f, 0.f, 1.f);

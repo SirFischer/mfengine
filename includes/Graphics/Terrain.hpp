@@ -24,6 +24,8 @@ public:
 
 	void		Randomize(int seed, float lower, float higher);
 	void		GenHeightMap(int seed);
+
+	float		GetHeightAt(int x, int z);
 };
 
 }

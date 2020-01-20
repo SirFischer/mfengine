@@ -18,6 +18,10 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
 	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
 	mWindow->setMouseCursorVisible(false);
+	terrain.SetShaderProgram(mResourceManager.GetShader("helloworld"));
+	terrain.SetProjectionMatrix(mCamera.GetProjectionMatrix());
+	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(5.0, 1.0, 5.0));
+	terrain.SetTransformMatrix(scale);
 }
 
 GameState::~GameState()
@@ -29,9 +33,10 @@ void				GameState::update()
 {
 	if (mTerminalActive)
 		mTerminal.UpdateGUI();
+	else
+		mPlayer.Update();
 	mWindow->update();
 	mCamera.Update();
-	mPlayer.Update();
 	mFPSDisplay.SetText(std::to_string(mFPS) + " FPS");
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
 	{
@@ -46,7 +51,6 @@ void				GameState::update()
 	}
 	else
 		mTerminalToggleReset = true;
-	
 }
 
 void				GameState::handle_events()
@@ -64,18 +68,8 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	mf::Shader *shader = mResourceManager.GetShader("helloworld");
-	if (shader)
-	{
-		shader->Bind();
-		glm::mat4	scale = glm::mat4(1.0);
-		scale = glm::scale(scale, glm::vec3(30, 3, 30));
-		shader->SetMat4("transform", scale);
-		shader->SetMat4("view", mCamera.GetViewMatrix());
-		shader->SetMat4("projection", mCamera.GetProjectionMatrix());
-	}
+	terrain.SetViewMatrix(mCamera.GetViewMatrix());
 	terrain.Draw(GL_TRIANGLES);
-
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

@@ -9,6 +9,8 @@ namespace mf
 		MOVE_BACKWARD,
 		MOVE_LEFT,
 		MOVE_RIGHT,
+		MOVE_UP,
+		MOVE_DOWN,
 		TOGGLE_CONSOLE,
 		QUIT,
 		SUBMIT

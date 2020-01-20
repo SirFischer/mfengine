@@ -31,8 +31,8 @@ bool	Window::create()
 	sf::ContextSettings Settings;
 	Settings.majorVersion = 4;
 	Settings.minorVersion = 6;
-	Settings.depthBits = 24;
-	Settings.stencilBits = 8;
+	Settings.depthBits = 32;
+	Settings.stencilBits = 32;
 	Settings.antialiasingLevel = 4;
 	mWindow.create(mode, mTitle,
 		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close, Settings);

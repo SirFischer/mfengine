@@ -49,6 +49,13 @@ void		Mesh::Draw()
 
 void		Mesh::Draw(GLenum mode)
 {
+	if (mShader)
+	{
+		mShader->Bind();
+		mShader->SetMat4("transform", mTransform);
+		mShader->SetMat4("view", mView);
+		mShader->SetMat4("projection", mProjection);
+	}
 	glBindVertexArray(mVAO);
 	if (mIndices)
 		glDrawElements(mode, mIndiceSize, GL_UNSIGNED_INT, 0);
@@ -56,5 +63,26 @@ void		Mesh::Draw(GLenum mode)
 		glDrawArrays(mode, 0, mVerticeSize / 3);
 	glBindVertexArray(0);
 }
+
+void		Mesh::SetTransformMatrix(glm::mat4 mat)
+{
+	mTransform = mat;
+}
+
+void		Mesh::SetViewMatrix(glm::mat4 mat)
+{
+	mView = mat;
+}
+
+void		Mesh::SetProjectionMatrix(glm::mat4 mat)
+{
+	mProjection = mat;
+}
+
+void		Mesh::SetShaderProgram(mf::Shader *shader)
+{
+	mShader = shader;
+}
+
 
 }
