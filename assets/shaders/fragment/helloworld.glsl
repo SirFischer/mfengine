@@ -7,9 +7,9 @@ in float zpos;
 void main()
 {
 	FragColor = vertexColor;
-	if (zpos < 6)
+	if (zpos < 0.7)
 		FragColor = vec4(0, 1, 0, 1.0);
-	if (zpos < 1)
+	if (zpos < 0.2)
 		FragColor = vec4(1, 1, 0, 1.0);
 	if (zpos < 0)
 		FragColor = vec4(0, 0, 1, 1.0);

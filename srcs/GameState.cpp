@@ -8,7 +8,8 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
 	mPlayer.SetCamera(&mCamera);
-	terrain.GenHeightMap(time(0));
+	int seed = time(0);
+	terrain.GenHeightMap(seed, 0, 5, 0, 5);
 	mEventHandler.SetCursorLock(true);
 	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 	mTerminal.mEventHandler = &mEventHandler;
@@ -20,7 +21,7 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 	mWindow->setMouseCursorVisible(false);
 	terrain.SetShaderProgram(mResourceManager.GetShader("helloworld"));
 	terrain.SetProjectionMatrix(mCamera.GetProjectionMatrix());
-	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(5.0, 1.0, 5.0));
+	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0, 20.0, 1.0));
 	terrain.SetTransformMatrix(scale);
 }
 

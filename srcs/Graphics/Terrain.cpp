@@ -66,7 +66,7 @@ void		Terrain::Randomize(int seed, float lower, float higher)
 	initMesh();
 }
 
-void		Terrain::GenHeightMap(int seed)
+void		Terrain::GenHeightMap(int seed, double xLow, double xHigh, double zLow, double zHigh)
 {
 	if (!mVertices || !mIndices)
 	{
@@ -82,11 +82,11 @@ void		Terrain::GenHeightMap(int seed)
 	plane.SetSourceModule(perlin);
 	plane.SetDestNoiseMap(map);
 	plane.SetDestSize(mWidth, mLength);
-	plane.SetBounds(-2.0, 13.0, -1.0, 12.0);
+	plane.SetBounds(xLow, xHigh, zLow, zHigh);
 	plane.Build();
 	while (i < mLength * mWidth * 3)
 	{
-		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2)) * 80;
+		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2));
 		i += 3;
 	}
 	initMesh();
@@ -94,11 +94,8 @@ void		Terrain::GenHeightMap(int seed)
 
 float		Terrain::GetHeightAt(int x, int z)
 {
-	
-	x += (mWidth / 2) * 30;
-	z += (mLength / 2) * 30;
-	x /= 30.0;
-	z /= 30.0;
+	x += (mWidth / 2);
+	z += (mLength / 2);
 	x = std::clamp(x, 0, mWidth - 1);
 	z = std::clamp(z, 0, mLength - 1);
 	return mVertices.get()[((z * mWidth * 3) + (x * 3) ) + 1];

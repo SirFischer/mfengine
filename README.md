@@ -1,6 +1,8 @@
 # mfengine
 My personal game engine attempt...
 
+https://trello.com/b/BmizwhuA/mfengine
+
 **UPDATE #2**
 * - Added Camera movement
 * - Made movement follow camera direction
