@@ -15,7 +15,7 @@ catch (std::exception &e)
 
 Shader::~Shader()
 {
-
+	
 }
 
 void		Shader::Bind()
@@ -32,6 +32,11 @@ void		Shader::SetMat4(std::string name, glm::mat4 mat)
 {
 	glUniformMatrix4fv(glGetUniformLocation(mShader->getNativeHandle(), name.c_str()),
 	1, GL_FALSE, &mat[0][0]);
+}
+
+void		Shader::SetInt(std::string name, int var)
+{
+	glUniform1i(glGetUniformLocation(mShader->getNativeHandle(), name.c_str()), var);
 }
 
 } // namespace mf

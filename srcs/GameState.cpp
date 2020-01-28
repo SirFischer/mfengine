@@ -10,8 +10,9 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 	mPlayer.SetCamera(&mCamera);
 	int seed = time(0);
 	terrain.GenHeightMap(seed, 0, 5, 0, 5);
+	
 	mEventHandler.SetCursorLock(true);
-	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
+	mResourceManager.LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mTerminal.mEventHandler = &mEventHandler;
 	if (std::experimental::filesystem::exists("assets/cfg/controls.cfg"))
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
@@ -19,8 +20,9 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
 	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
 	mWindow->setMouseCursorVisible(false);
-	terrain.SetShaderProgram(mResourceManager.GetShader("helloworld"));
+	terrain.SetShaderProgram(mResourceManager.GetShader("terrain"));
 	terrain.SetProjectionMatrix(mCamera.GetProjectionMatrix());
+	terrain.SetTexture(mResourceManager.LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
 	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0, 20.0, 1.0));
 	terrain.SetTransformMatrix(scale);
 }

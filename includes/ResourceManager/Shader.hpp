@@ -23,6 +23,7 @@ public:
 	bool		LoadFromFile(std::string vertex, std::string fragment);
 
 	void		SetMat4(std::string name, glm::mat4 mat);
+	void		SetInt(std::string name, int var);
 };
 
 } // namespace mf

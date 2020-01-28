@@ -8,6 +8,7 @@ Terrain::Terrain(int width, int length)
 	try
 	{
 		mVertices = std::shared_ptr<float>( new float[width * length * 3]);
+		mTextureCoords = std::shared_ptr<float>( new float[width * length * 2]);
 		mIndices = std::shared_ptr<unsigned int>(new unsigned int[(width - 1) * 2 * (length - 1) * 3]);
 	}
 	catch(const std::exception& e)
@@ -15,6 +16,7 @@ Terrain::Terrain(int width, int length)
 		std::cout << e.what() << '\n';
 	}
 	mVerticeSize = sizeof(float) * width * length * 3;
+	mTextureCoordsSize = sizeof(float) * width * length * 2;
 	mIndiceSize = sizeof(unsigned int) * (width - 1) * 2 * (length - 1) * 3;
 	mWidth = width;
 	mLength = length;
@@ -29,7 +31,6 @@ Terrain::~Terrain()
 void		Terrain::InitTerrain()
 {
 	int i = 0, j = 0;
-
 	while (i < mLength * mWidth * 3)
 	{
 		mVertices.get()[i] = ((i / 3) % (mWidth)) - (mWidth / 2);
@@ -38,7 +39,6 @@ void		Terrain::InitTerrain()
 		i += 3;
 	}
 	i = 0;
-	j = 0;
 	while (i < (mWidth - 1) * 2 * (mLength - 1) * 3)
 	{
 		mIndices.get()[i] = j;
@@ -51,6 +51,13 @@ void		Terrain::InitTerrain()
 		j += 1;
 		if (!((i / 6) % (mWidth - 1)))
 			j++;
+	}
+	i = 0;
+	while (i < mLength * mWidth * 2)
+	{
+		mTextureCoords.get()[i] = ((float)((i / 2) % mWidth) / (float)(mWidth)) * 10;
+		mTextureCoords.get()[i + 1] = ((float)(i / (mWidth * 2)) / (float)(mLength)) * 10;
+		i += 2;
 	}
 }
 

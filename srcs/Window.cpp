@@ -31,14 +31,36 @@ bool	Window::create()
 	sf::ContextSettings Settings;
 	Settings.majorVersion = 4;
 	Settings.minorVersion = 6;
-	Settings.depthBits = 32;
-	Settings.stencilBits = 32;
+	Settings.depthBits = 24;
+	Settings.stencilBits = 8;
 	Settings.antialiasingLevel = 4;
 	mWindow.create(mode, mTitle,
 		(mIsFullscreen) ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close, Settings);
 	initOpengl();
 	return (true);
 }
+
+
+void GLAPIENTRY
+MessageCallback( GLenum source,
+                 GLenum type,
+                 GLuint id,
+                 GLenum severity,
+                 GLsizei length,
+                 const GLchar* message,
+                 const void* userParam )
+{
+	(void)source;
+	(void)id;
+	(void)length;
+	(void)userParam;
+  fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+           ( type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "" ),
+            type, severity, message );
+}
+
+// During init, enable debug output
+
 
 void	Window::initOpengl()
 {
@@ -47,6 +69,8 @@ void	Window::initOpengl()
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glEnable              ( GL_DEBUG_OUTPUT );
+	glDebugMessageCallback( MessageCallback, 0 );
 }
 
 void	Window::destroy()

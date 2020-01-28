@@ -17,10 +17,13 @@ class Mesh
 {
 protected:
 	std::shared_ptr<float>			mVertices;
+	std::shared_ptr<float>			mTextureCoords;
 	std::shared_ptr<unsigned int>	mIndices;
 	GLuint							mVerticeSize;
+	GLuint							mTexture;
+	GLuint							mTextureCoordsSize;
 	GLuint							mIndiceSize;
-	GLuint							mVAO, mVBO, mEBO;
+	GLuint							mVAO, mVBO, mTBO, mEBO;
 
 	mf::Shader						*mShader = NULL;
 	glm::mat4						mTransform = glm::mat4(1.0);
@@ -43,6 +46,8 @@ public:
 	void			SetViewMatrix(glm::mat4 mat);
 	void			SetProjectionMatrix(glm::mat4 mat);
 	void			SetShaderProgram(mf::Shader *shader);
+
+	void			SetTexture(sf::Image tImage);
 };
 
 }
