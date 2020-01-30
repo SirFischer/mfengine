@@ -35,6 +35,14 @@ void		Mesh::initMesh()
 	}
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	if (mNormals)
+	{
+		glGenBuffers(1, &mNBO);
+		glBindBuffer(GL_ARRAY_BUFFER, mNBO);
+		glBufferData(GL_ARRAY_BUFFER, mVerticeSize, mNormals.get(), GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	}
 	if (mTextureCoords)
 	{
 		glGenBuffers(1, &mTBO);

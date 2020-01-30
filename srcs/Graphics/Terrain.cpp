@@ -8,6 +8,7 @@ Terrain::Terrain(int width, int length)
 	try
 	{
 		mVertices = std::shared_ptr<float>( new float[width * length * 3]);
+		mNormals = std::shared_ptr<float>( new float[width * length * 3]);
 		mTextureCoords = std::shared_ptr<float>( new float[width * length * 2]);
 		mIndices = std::shared_ptr<unsigned int>(new unsigned int[(width - 1) * 2 * (length - 1) * 3]);
 	}
@@ -36,6 +37,9 @@ void		Terrain::InitTerrain()
 		mVertices.get()[i] = ((i / 3) % (mWidth)) - (mWidth / 2);
 		mVertices.get()[i + 2] = ((i / 3) / mWidth) - (mLength / 2);
 		mVertices.get()[i + 1] = 0.0f;
+		mNormals.get()[i] = 0.0;
+		mNormals.get()[i + 1] = 1.0;
+		mNormals.get()[i + 2] = 0.0;
 		i += 3;
 	}
 	i = 0;

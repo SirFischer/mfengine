@@ -2,17 +2,13 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-terrain(500, 500),
+mWorld(&mResourceManager, mCamera.GetProjectionMatrix()),
 mPlayer(&mEventHandler),
 mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
 	mPlayer.SetCamera(&mCamera);
-	int seed = time(0);
-	terrain.GenHeightMap(seed, 0, 5, 0, 5);
-	
 	mEventHandler.SetCursorLock(true);
-	mResourceManager.LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mTerminal.mEventHandler = &mEventHandler;
 	if (std::experimental::filesystem::exists("assets/cfg/controls.cfg"))
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
@@ -20,11 +16,6 @@ mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
 	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
 	mWindow->setMouseCursorVisible(false);
-	terrain.SetShaderProgram(mResourceManager.GetShader("terrain"));
-	terrain.SetProjectionMatrix(mCamera.GetProjectionMatrix());
-	terrain.SetTexture(mResourceManager.LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
-	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1.0, 20.0, 1.0));
-	terrain.SetTransformMatrix(scale);
 }
 
 GameState::~GameState()
@@ -40,6 +31,7 @@ void				GameState::update()
 		mPlayer.Update();
 	mWindow->update();
 	mCamera.Update();
+	mWorld.Update(mCamera.GetViewMatrix());
 	mFPSDisplay.SetText(std::to_string(mFPS) + " FPS");
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
 	{
@@ -71,8 +63,7 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	terrain.SetViewMatrix(mCamera.GetViewMatrix());
-	terrain.Draw(GL_TRIANGLES);
+	mWorld.Draw();
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

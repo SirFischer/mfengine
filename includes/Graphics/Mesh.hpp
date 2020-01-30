@@ -17,18 +17,27 @@ class Mesh
 {
 protected:
 	std::shared_ptr<float>			mVertices;
+	std::shared_ptr<float>			mNormals;
 	std::shared_ptr<float>			mTextureCoords;
 	std::shared_ptr<unsigned int>	mIndices;
 	GLuint							mVerticeSize;
 	GLuint							mTexture;
 	GLuint							mTextureCoordsSize;
 	GLuint							mIndiceSize;
-	GLuint							mVAO, mVBO, mTBO, mEBO;
+	GLuint							mVAO, mVBO, mTBO, mNBO, mEBO;
 
 	mf::Shader						*mShader = NULL;
 	glm::mat4						mTransform = glm::mat4(1.0);
 	glm::mat4						mView = glm::mat4(1.0);
 	glm::mat4						mProjection = glm::mat4(1.0);
+
+	struct							s_material
+	{
+		glm::vec3					ambient = glm::vec3(0, 0, 0);
+		glm::vec3					diffuse = glm::vec3(0.1, 0.1, 0.1);
+		glm::vec3					specular = glm::vec3(0.5, 0.5, 0.5);
+		float						shininess = 0.25;
+	}								mMaterial;
 
 void				initMesh();
 
