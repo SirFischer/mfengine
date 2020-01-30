@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "Camera.hpp"
 #include "Terminal.hpp"
+#include "World.hpp"
 
 #include <math.h>
 #include <experimental/filesystem>
@@ -18,7 +19,7 @@ private:
 	mf::ResourceManager		mResourceManager;
 	mf::EventHandler		mEventHandler;
 	mf::Camera				mCamera;
-	mf::Terrain				terrain;
+	World					mWorld;
 	mf::Player				mPlayer;
 	mf::Terminal			mTerminal;
 	bool					mTerminalActive = false;

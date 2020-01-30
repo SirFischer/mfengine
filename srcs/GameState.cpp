@@ -2,15 +2,13 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-terrain(500, 500),
+mWorld(&mResourceManager, mCamera.GetProjectionMatrix()),
 mPlayer(&mEventHandler),
 mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
 	mWindow = tWindow;
 	mPlayer.SetCamera(&mCamera);
-	terrain.GenHeightMap(time(0));
 	mEventHandler.SetCursorLock(true);
-	mResourceManager.LoadShader("helloworld", "assets/shaders/vertex/helloworld.glsl", "assets/shaders/fragment/helloworld.glsl");
 	mTerminal.mEventHandler = &mEventHandler;
 	if (std::experimental::filesystem::exists("assets/cfg/controls.cfg"))
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
@@ -29,9 +27,11 @@ void				GameState::update()
 {
 	if (mTerminalActive)
 		mTerminal.UpdateGUI();
+	else
+		mPlayer.Update();
 	mWindow->update();
 	mCamera.Update();
-	mPlayer.Update();
+	mWorld.Update(mCamera.GetViewMatrix());
 	mFPSDisplay.SetText(std::to_string(mFPS) + " FPS");
 	if (mEventHandler.GetActionState(mf::ACTION::TOGGLE_CONSOLE))
 	{
@@ -46,7 +46,6 @@ void				GameState::update()
 	}
 	else
 		mTerminalToggleReset = true;
-	
 }
 
 void				GameState::handle_events()
@@ -64,18 +63,7 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	mf::Shader *shader = mResourceManager.GetShader("helloworld");
-	if (shader)
-	{
-		shader->Bind();
-		glm::mat4	scale = glm::mat4(1.0);
-		scale = glm::scale(scale, glm::vec3(30, 3, 30));
-		shader->SetMat4("transform", scale);
-		shader->SetMat4("view", mCamera.GetViewMatrix());
-		shader->SetMat4("projection", mCamera.GetProjectionMatrix());
-	}
-	terrain.Draw(GL_TRIANGLES);
-
+	mWorld.Draw();
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

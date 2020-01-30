@@ -1,6 +1,17 @@
 # mfengine
 My personal game engine attempt...
 
+Check this out if you would like to join in on the madness!
+https://trello.com/b/BmizwhuA/mfengine
+
+**UPDATE #3**
+* - Added better terrain generation control
+* - Added basic texture capability to meshes
+* - Added simple lighting with no material yet
+* - Reworked certain architectures
+
+![Alt Text](/README/Light Update.png)
+
 **UPDATE #2**
 * - Added Camera movement
 * - Made movement follow camera direction

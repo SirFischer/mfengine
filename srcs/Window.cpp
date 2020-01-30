@@ -40,6 +40,7 @@ bool	Window::create()
 	return (true);
 }
 
+
 void	Window::initOpengl()
 {
 	glewExperimental = GL_TRUE; 

@@ -41,6 +41,16 @@ void		Entity::MoveBackward()
 	mVelocity += dir;
 }
 
+void		Entity::MoveUp()
+{
+	mVelocity.y += mAcceleration;
+}
+
+void		Entity::MoveDown()
+{
+	mVelocity.y -= mAcceleration;
+}
+
 void		Entity::SetCamera(Camera *tCamera)
 {
 	mCamera = (tCamera);
