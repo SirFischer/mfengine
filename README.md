@@ -10,7 +10,7 @@ https://trello.com/b/BmizwhuA/mfengine
 * - Added simple lighting with no material yet
 * - Reworked certain architectures
 
-![Alt Text](/README/Light Update.png)
+![Alt Text](/README/Light_Update.png)
 
 **UPDATE #2**
 * Added Camera movement
