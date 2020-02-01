@@ -20,10 +20,10 @@ protected:
 	std::shared_ptr<float>			mNormals;
 	std::shared_ptr<float>			mTextureCoords;
 	std::shared_ptr<unsigned int>	mIndices;
-	GLuint							mVerticeSize;
+	GLuint							mVerticeSize = 0;
 	GLuint							mTexture;
-	GLuint							mTextureCoordsSize;
-	GLuint							mIndiceSize;
+	GLuint							mTextureCoordsSize = 0;
+	GLuint							mIndiceSize = 0;
 	GLuint							mVAO, mVBO, mTBO, mNBO, mEBO;
 
 	mf::Shader						*mShader = NULL;

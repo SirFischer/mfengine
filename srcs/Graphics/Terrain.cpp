@@ -100,13 +100,29 @@ void		Terrain::GenHeightMap(int seed, double xLow, double xHigh, double zLow, do
 		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2));
 		i += 3;
 	}
+	i = 0;
+	while (i < mLength * mWidth)
+	{
+		int x = i % mWidth;
+		int y = i / mWidth;
+		float hL = GetHeightAt(x - 1, y);
+		float hR = GetHeightAt(x + 1, y);
+		float hD = GetHeightAt(x, y + 1);
+		float hU = GetHeightAt(x, y - 1);
+		glm::vec3 N = glm::vec3(hL - hR, hD - hU, 2.0);
+		glm::normalize(N);
+		mNormals.get()[i * 3] = N.x;
+		mNormals.get()[(i * 3) + 1] = N.y;
+		mNormals.get()[(i * 3) + 2] = N.z;
+		i++;
+	}
+
 	initMesh();
 }
 
 float		Terrain::GetHeightAt(int x, int z)
 {
-	x += (mWidth / 2);
-	z += (mLength / 2);
+	
 	x = std::clamp(x, 0, mWidth - 1);
 	z = std::clamp(z, 0, mLength - 1);
 	return mVertices.get()[((z * mWidth * 3) + (x * 3) ) + 1];

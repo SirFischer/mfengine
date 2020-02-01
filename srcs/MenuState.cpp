@@ -6,6 +6,7 @@ mContainer(tWindow),
 mPlayButton(tWindow, &mResourceManager),
 mOptionsButton(tWindow, &mResourceManager),
 mQuitButton(tWindow, &mResourceManager),
+mTitle(tWindow, &mResourceManager, &mEventHandler),
 mContainerOptions(tWindow),
 mFullScreenButton(tWindow, &mResourceManager),
 mBackButton(tWindow, &mResourceManager)
@@ -16,6 +17,17 @@ mBackButton(tWindow, &mResourceManager)
 	mRunning = true;
 	mDeltaTime = 1.f / 32.f;
 	mWindow->setMouseCursorVisible(true);
+
+	mContainer.AddItem(&mTitle);
+	mTitle.SetPosition(sf::Vector2f(520, 150));
+	mTitle.SetSize(880, 100);
+	mTitle.SetFontSize(70);
+	mTitle.SetAllowFocus(false);
+	mTitle.SetText("An MFENGINE demo");
+	mTitle.SetFontColor(sf::Color::Red);
+	mTitle.SetTextPosition(sf::Vector2f(15, 5));
+	mTitle.SetBackground(sf::Color(0x351f1fff));
+
 	initMenuButtons();
 }
 
@@ -79,7 +91,7 @@ void				MenuState::handle_events()
 
 void				MenuState::render()
 {
-	mWindow->clear(sf::Color::Green);
+	mWindow->clear(sf::Color(50, 100, 0, 50));
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

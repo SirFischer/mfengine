@@ -20,6 +20,7 @@ private:
 	mf::Button				mPlayButton;
 	mf::Button				mOptionsButton;
 	mf::Button				mQuitButton;
+	mf::TextBox				mTitle;
 
 	mf::Container			mContainerOptions;
 	mf::Button				mFullScreenButton;

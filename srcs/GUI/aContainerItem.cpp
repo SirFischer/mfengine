@@ -77,6 +77,11 @@ namespace mf
 		mText.setCharacterSize(tSize);
 	}
 
+	void		aContainerItem::SetFontColor(sf::Color tColor)
+	{
+		mText.setFillColor(tColor);
+	}
+
 	void		aContainerItem::SetFont(sf::Font tFont)
 	{
 		mFont = tFont;

@@ -60,6 +60,7 @@ namespace mf
 		void						SetParent(aContainerItem *item);
 		void						SetPlacement(ContainerPlacement placement);
 		void						SetFontSize(int tSize);
+		void						SetFontColor(sf::Color tColor);
 		void						SetFont(sf::Font tFont);
 		void						SetColor(sf::Color tColor);
 		void						SetBackground(int tWidth, int tHeight, sf::Color tColor);
