@@ -16,7 +16,7 @@ World::World(mf::ResourceManager *tResourceManager, glm::mat4 tProjectionMatrix)
 	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
 	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
 	mSkybox.SetProjectionMatrix(tProjectionMatrix);
-	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(100, 100, 100)));
+	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(300, 300, 300)));
 }
 
 World::~World()
