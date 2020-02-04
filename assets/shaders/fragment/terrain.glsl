@@ -35,7 +35,7 @@ vec3		CalcLight(Light light, vec3 normal, vec3 fragpos)
 	vec3 viewDir = normalize(viewPos - fragpos);
 	vec3 reflectDir = reflect(-lightdir, norm);
 	float flec = pow(max(dot(viewDir, reflectDir), 0.0), light.specular_pow);
-	vec3 spec = flec * light.specular * light.specular_strength;
+	vec3 spec = (flec * light.specular * light.specular_strength);  /// length(fragpos - viewPos);
 	return (light.ambient + diffuse + spec);
 }
 

@@ -135,7 +135,10 @@ float		Terrain::GetHeightAt(int x, int z)
 	
 	x = std::clamp(x, 0, mWidth - 1);
 	z = std::clamp(z, 0, mLength - 1);
-	return mVertices.get()[(((z * mWidth) + (x)) * 3) + 1];
+	glm::vec4 tmp = glm::vec4(mVertices.get()[(((z * mWidth) + (x)) * 3)], mVertices.get()[(((z * mWidth) + (x)) * 3) + 1], mVertices.get()[(((z * mWidth) + (x)) * 3) + 2], 1.0);
+	tmp = mTransform * tmp;
+	//return mVertices.get()[(((z * mWidth) + (x)) * 3) + 1];
+	return (tmp.y);
 }
 
 } // namespace mf
