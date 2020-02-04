@@ -16,6 +16,7 @@ private:
 	mf::Skybox				mSkybox;
 
 	mf::Light				mLight;
+	mf::Light				mLight2;
 
 public:
 			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera);

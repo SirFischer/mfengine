@@ -16,6 +16,7 @@ private:
 	int			mWidth;
 	int			mLength;
 
+	void		CalculateNormals();
 	void		InitTerrain();
 
 public:

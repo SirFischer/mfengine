@@ -100,24 +100,34 @@ void		Terrain::GenHeightMap(int seed, double xLow, double xHigh, double zLow, do
 		mVertices.get()[i + 1] = map.GetValue(mVertices.get()[i] + (mWidth / 2), mVertices.get()[i + 2] + (mLength / 2));
 		i += 3;
 	}
-	i = 0;
+	CalculateNormals();
+	initMesh();
+}
+
+void		Terrain::CalculateNormals()
+{
+	int i = 0;
+
 	while (i < mLength * mWidth)
 	{
-		int x = i % mWidth;
-		int y = i / mWidth;
-		float hL = GetHeightAt(x - 1, y);
-		float hR = GetHeightAt(x + 1, y);
-		float hD = GetHeightAt(x, y + 1);
-		float hU = GetHeightAt(x, y - 1);
-		glm::vec3 N = glm::vec3(hL - hR, hD - hU, 2.0);
-		glm::normalize(N);
-		mNormals.get()[i * 3] = N.x;
-		mNormals.get()[(i * 3) + 1] = N.y;
-		mNormals.get()[(i * 3) + 2] = N.z;
-		i++;
+		int x = (i % mWidth);
+		int y = (i / mWidth);
+		glm::vec3	AA = glm::vec3(x, GetHeightAt(x, y), y);
+		glm::vec3	BB = glm::vec3(x, GetHeightAt(x, y - 1), y - 1);
+		glm::vec3	CC = glm::vec3(x + 1, GetHeightAt(x + 1, y), y);
+		glm::vec3	DD = glm::vec3(x, GetHeightAt(x, y + 1), y + 1);
+		glm::vec3	EE = glm::vec3(x - 1, GetHeightAt(x - 1, y), y);
+		glm::vec3	normal = glm::cross(BB - AA, CC - AA);
+		normal += glm::cross(DD - AA, CC - AA);
+		normal += glm::cross(EE - AA, DD - AA);
+		normal += glm::cross(BB - AA, EE - AA);
+		normal = glm::normalize(normal);
+		mNormals.get()[(i * 3)] = normal.x;
+		mNormals.get()[(i * 3) + 1] = normal.y;
+		mNormals.get()[(i * 3) + 2] = normal.z;
+		i += 1;
+		//std::cout << " X: " << normal.x << "  Y: " << normal.y << "  Z: " << normal.z <<  std::endl;
 	}
-
-	initMesh();
 }
 
 float		Terrain::GetHeightAt(int x, int z)
@@ -125,7 +135,7 @@ float		Terrain::GetHeightAt(int x, int z)
 	
 	x = std::clamp(x, 0, mWidth - 1);
 	z = std::clamp(z, 0, mLength - 1);
-	return mVertices.get()[((z * mWidth * 3) + (x * 3) ) + 1];
+	return mVertices.get()[(((z * mWidth) + (x)) * 3) + 1];
 }
 
 } // namespace mf

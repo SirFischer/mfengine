@@ -26,9 +26,9 @@ uniform Light	lights[MAX_LIGHTS];
 
 vec3		CalcLight(Light light, vec3 normal, vec3 fragpos)
 {
-	normal = normalize(normal);
+	vec3 norm = normalize(normal);
 	vec3 diff = normalize(light.position - fragpos);
-	vec3 res = (max(dot(normal, diff), 0.0) /*/ length(fragpos - light.position)*/) * light.diffuse;
+	vec3 res = (max(dot(norm, diff), 0.0) / length(fragpos - light.position)) * light.diffuse;
 	return (light.ambient + res);
 }
 
