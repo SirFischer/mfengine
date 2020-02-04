@@ -13,6 +13,8 @@ namespace mf
 		glm::vec3	mAmbient;
 		glm::vec3	mDiffuse;
 		glm::vec3	mSpecular;
+		float		mSpecularStrength = 0.03;
+		int			mSpecularPower = 32;
 		
 	public:
 		Light(/* args */);
@@ -27,6 +29,8 @@ namespace mf
 		glm::vec3	GetAmbientLight() {return (mAmbient);}
 		glm::vec3	GetDiffuseLight() {return (mDiffuse);}
 		glm::vec3	GetSpecularLight() {return (mSpecular);}
+		float		GetSpecularStrength() {return (mSpecularStrength);}
+		int			GetSpecularPower() {return (mSpecularPower);}
 	};
 }
 

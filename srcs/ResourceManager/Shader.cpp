@@ -45,4 +45,10 @@ void		Shader::SetInt(std::string name, int var)
 	glUniform1i(glGetUniformLocation(mShader->getNativeHandle(), name.c_str()), var);
 }
 
+void		Shader::SetFloat(std::string name, float var)
+{
+	glUniform1f(glGetUniformLocation(mShader->getNativeHandle(), name.c_str()), var);
+}
+
+
 } // namespace mf

@@ -47,9 +47,10 @@ public:
 	void			SetScreenDimensions(float ratio);
 	void			SetScreenDimensions(float width, float height);
 
-	glm::mat4		GetViewMatrix() {return mViewMatrix;}
-	glm::mat4		GetProjectionMatrix() {return mProjectionMatrix;}
-	glm::vec3		GetDir() {return mDir;}
+	glm::mat4		GetViewMatrix() {return (mViewMatrix);}
+	glm::mat4		GetProjectionMatrix() {return (mProjectionMatrix);}
+	glm::vec3		GetDir() {return (mDir);}
+	glm::vec3		GetPos() {return (mPos);}
 };
 
 }

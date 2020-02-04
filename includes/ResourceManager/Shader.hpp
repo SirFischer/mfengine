@@ -25,6 +25,7 @@ public:
 	void		SetVec3(std::string name, glm::vec3 vec);
 	void		SetMat4(std::string name, glm::mat4 mat);
 	void		SetInt(std::string name, int var);
+	void		SetFloat(std::string name, float var);
 };
 
 } // namespace mf

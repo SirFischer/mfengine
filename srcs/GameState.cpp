@@ -4,7 +4,8 @@ GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
 mWorld(&mResourceManager, &mCamera),
 mPlayer(&mEventHandler),
-mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
+mFPSDisplay(tWindow, &mResourceManager, &mEventHandler),
+mRenderer(&mCamera)
 {
 	mWindow = tWindow;
 	mPlayer.SetCamera(&mCamera);

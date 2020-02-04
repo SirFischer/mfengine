@@ -2,8 +2,9 @@
 
 namespace mf
 {
-	Renderer::Renderer(/* args */)
+	Renderer::Renderer(mf::Camera *tCamera)
 	{
+		mCamera = tCamera;
 	}
 
 	Renderer::~Renderer()
@@ -28,9 +29,13 @@ namespace mf
 			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].ambient", mLights[i]->GetAmbientLight());
 			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].position", mLights[i]->GetPosition());
 			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].diffuse", mLights[i]->GetDiffuseLight());
+			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].specular", mLights[i]->GetSpecularLight());
+			mMeshes.back()->GetShaderProgram()->SetInt("lights[" + std::to_string(i) + "].specular_pow", mLights[i]->GetSpecularPower());
+			mMeshes.back()->GetShaderProgram()->SetFloat("lights[" + std::to_string(i) + "].specular_strength", mLights[i]->GetSpecularStrength());
 			i++;
 		}
 		mMeshes.back()->GetShaderProgram()->SetInt("lightNum", i);
+		mMeshes.back()->GetShaderProgram()->SetVec3("viewPos", mCamera->GetPos());
 	}
 
 	void		Renderer::Render()

@@ -19,17 +19,24 @@ struct Light {
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+	int specular_pow;
+	float specular_strength;
 };
 
 uniform int		lightNum;
+uniform vec3	viewPos;
 uniform Light	lights[MAX_LIGHTS];
 
 vec3		CalcLight(Light light, vec3 normal, vec3 fragpos)
 {
 	vec3 norm = normalize(normal);
-	vec3 diff = normalize(light.position - fragpos);
-	vec3 res = (max(dot(norm, diff), 0.0) / length(fragpos - light.position)) * light.diffuse;
-	return (light.ambient + res);
+	vec3 lightdir = normalize(light.position - fragpos);
+	vec3 diffuse = (max(dot(norm, lightdir), 0.0) / length(fragpos - light.position)) * light.diffuse;
+	vec3 viewDir = normalize(viewPos - fragpos);
+	vec3 reflectDir = reflect(-lightdir, norm);
+	float flec = pow(max(dot(viewDir, reflectDir), 0.0), light.specular_pow);
+	vec3 spec = flec * light.specular * light.specular_strength;
+	return (light.ambient + diffuse + spec);
 }
 
 void main()
