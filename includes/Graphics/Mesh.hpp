@@ -48,6 +48,8 @@ public:
 
 	void			Bind();
 
+	void			PrepareShader();
+
 	void			Draw();
 	void			Draw(GLenum mode);
 
@@ -57,6 +59,8 @@ public:
 	void			SetShaderProgram(mf::Shader *shader);
 
 	void			SetTexture(sf::Image tImage);
+
+	mf::Shader		*GetShaderProgram() {return (mShader);}
 };
 
 }

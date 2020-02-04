@@ -2,7 +2,7 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-mWorld(&mResourceManager, mCamera.GetProjectionMatrix()),
+mWorld(&mResourceManager, &mCamera),
 mPlayer(&mEventHandler),
 mFPSDisplay(tWindow, &mResourceManager, &mEventHandler)
 {
@@ -63,7 +63,7 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	mWorld.Draw();
+	mWorld.Draw(&mRenderer);
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

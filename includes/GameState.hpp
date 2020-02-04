@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "Terminal.hpp"
 #include "World.hpp"
+#include "Renderer.hpp"
 
 #include <math.h>
 #include <experimental/filesystem>
@@ -25,6 +26,7 @@ private:
 	bool					mTerminalActive = false;
 	bool					mTerminalToggleReset = true;
 	mf::TextBox				mFPSDisplay;
+	mf::Renderer			mRenderer;
 
 public:
 	explicit GameState(mf::Window *tWindow);

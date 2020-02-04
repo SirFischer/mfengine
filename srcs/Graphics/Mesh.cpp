@@ -63,7 +63,7 @@ void		Mesh::Draw()
 	Draw(GL_TRIANGLES);
 }
 
-void		Mesh::Draw(GLenum mode)
+void		Mesh::PrepareShader()
 {
 	glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, mTexture);
@@ -75,6 +75,10 @@ void		Mesh::Draw(GLenum mode)
 		mShader->SetMat4("projection", mProjection);
 		mShader->SetInt("texture1", 0);
 	}
+}
+
+void		Mesh::Draw(GLenum mode)
+{
 	glBindVertexArray(mVAO);
 	if (mIndices)
 		glDrawElements(mode, mIndiceSize, GL_UNSIGNED_INT, 0);
