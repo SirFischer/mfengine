@@ -3,12 +3,45 @@
 namespace mf
 {
 
-Mesh::Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize) :
-mVertices(vertices),
-mIndices(indices)
+Mesh::Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize)
 {
+	try
+	{
+		mVertices = std::shared_ptr<float>(new float[verticesize / sizeof(float)]);
+		if (indicesize)
+			mIndices = std::shared_ptr<unsigned int>(new unsigned int[indicesize  / sizeof(unsigned int)]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::memmove(mVertices.get(), vertices, verticesize);
+	std::memmove(mIndices.get(), indices, indicesize);
 	mVerticeSize = verticesize;
 	mIndiceSize = indicesize;
+	initMesh();
+}
+
+Mesh::Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize)
+{
+	try
+	{
+		mVertices = std::shared_ptr<float>(new float[verticesize / sizeof(float)]);
+		if (indicesize)
+			mIndices = std::shared_ptr<unsigned int>(new unsigned int[indicesize  / sizeof(unsigned int)]);
+		if (textureCoordsSize)
+			mTextureCoords = std::shared_ptr<float>(new float[textureCoordsSize / sizeof(float)]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::memmove(mVertices.get(), vertices, verticesize);
+	std::memmove(mIndices.get(), indices, indicesize);
+	std::memmove(mTextureCoords.get(), textureCoords, textureCoordsSize);
+	mVerticeSize = verticesize;
+	mIndiceSize = indicesize;
+	mTextureCoordsSize = textureCoordsSize;
 	initMesh();
 }
 
@@ -65,8 +98,9 @@ void		Mesh::Draw()
 
 void		Mesh::PrepareShader()
 {
+	glBindVertexArray(mVAO);
 	glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, mTexture);
+    glBindTexture(mTextureType, mTexture);
 	if (mShader)
 	{
 		mShader->Bind();
@@ -119,6 +153,23 @@ void		Mesh::SetTexture(sf::Image tImage)
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tImage.getSize().x,tImage.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, tImage.getPixelsPtr());
 	glGenerateMipmap(GL_TEXTURE_2D);
+}
+
+void		Mesh::SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown)
+{
+	glGenTextures(1, &mTexture);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, mTexture);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 0, 0, GL_RGB, tFront.getSize().x, tFront.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tFront.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 1, 0, GL_RGB, tBack.getSize().x, tBack.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tBack.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 2, 0, GL_RGB, tLeft.getSize().x, tLeft.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tLeft.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 3, 0, GL_RGB, tRight.getSize().x, tRight.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tRight.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 4, 0, GL_RGB, tUp.getSize().x, tUp.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tUp.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 5, 0, GL_RGB, tDown.getSize().x, tDown.getSize().y, 0, GL_RGB, GL_UNSIGNED_BYTE, tDown.getPixelsPtr());
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
 
 }

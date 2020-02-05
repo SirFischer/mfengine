@@ -3,7 +3,12 @@
 World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 :mResourceManager(tResourceManager)
 ,mLevelTerrain(400, 400)
-,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/skybox_texture.jpg"))
+,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/skyrender0001.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0002.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0006.tga"))
 {
 	mResourceManager->LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
@@ -16,17 +21,12 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
 	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
 	mSkybox.SetProjectionMatrix(tCamera->GetProjectionMatrix());
-	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(300, 300, 300)));
+	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(200, 200, 200)));
 
 	mLight.SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
 	mLight.SetPosition(glm::vec3(50.f, 10.f, 50.f));
 	mLight.SetDiffuseLight(glm::vec3(50.1f, 0.1f, 0.1f));
 	mLight.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
-
-	mLight2.SetAmbientLight(glm::vec3(0.0f, 0.0f, 0.0f));
-	mLight2.SetPosition(glm::vec3(-50.f, 10.f, -50.f));
-	mLight2.SetDiffuseLight(glm::vec3(0.1f, 35.1f, 0.1f));
-	mLight2.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
 
 }
 
@@ -39,16 +39,14 @@ void	World::Update(glm::mat4 tViewMatrix)
 	static float xpos = 0; 
 	mLevelTerrain.SetViewMatrix(tViewMatrix);
 	mLight.SetPosition(glm::vec3(cos(xpos) * 150, (60.f), sin(xpos) * 150));
-	mLight2.SetPosition(glm::vec3(sin(xpos) * 150, (60.f), cos(xpos) * 150));
-	mSkybox.SetViewMatrix(tViewMatrix);
+	mSkybox.SetViewMatrix(glm::mat4(glm::mat3(tViewMatrix)));
 	xpos += 0.05;
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
 {
 	tRenderer->AddMesh(&mLevelTerrain);
-	tRenderer->AddMesh(&mSkybox);
+	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight);
-	tRenderer->AddLights(&mLight2);
 	tRenderer->Render();
 }

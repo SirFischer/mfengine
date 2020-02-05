@@ -2,7 +2,6 @@
 #include "Camera.hpp"
 #include "Mesh.hpp"
 #include "Light.hpp"
-#include "Skybox.hpp"
 #include "Terrain.hpp"
 
 namespace mf

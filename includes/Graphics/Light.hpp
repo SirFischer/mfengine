@@ -14,7 +14,7 @@ namespace mf
 		glm::vec3	mDiffuse;
 		glm::vec3	mSpecular;
 		float		mSpecularStrength = 0.25;
-		int			mSpecularPower = 64;
+		int			mSpecularPower = 128;
 		
 	public:
 		Light(/* args */);

@@ -22,6 +22,7 @@ protected:
 	std::shared_ptr<unsigned int>	mIndices;
 	GLuint							mVerticeSize = 0;
 	GLuint							mTexture;
+	GLuint							mTextureType = GL_TEXTURE_2D;
 	GLuint							mTextureCoordsSize = 0;
 	GLuint							mIndiceSize = 0;
 	GLuint							mVAO, mVBO, mTBO, mNBO, mEBO;
@@ -43,6 +44,7 @@ void				initMesh();
 
 public:
 					Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize);
+					Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize);
 					Mesh();
 					~Mesh();
 
@@ -59,6 +61,7 @@ public:
 	void			SetShaderProgram(mf::Shader *shader);
 
 	void			SetTexture(sf::Image tImage);
+	void			SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown);
 
 	mf::Shader		*GetShaderProgram() {return (mShader);}
 };
