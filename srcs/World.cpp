@@ -3,12 +3,12 @@
 World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 :mResourceManager(tResourceManager)
 ,mLevelTerrain(400, 400)
-,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/skyrender0001.tga"),
-		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0002.tga"),
-		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
-		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
-		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0005.tga"),
-		 tResourceManager->LoadImage("assets/textures/skybox/skyrender0006.tga"))
+,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/Embassyft.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/Embassylf.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/Embassybk.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/Embassyrt.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/Embassyup.tga"),
+		 tResourceManager->LoadImage("assets/textures/skybox/Embassydn.tga"))
 {
 	mResourceManager->LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
@@ -21,7 +21,7 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
 	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
 	mSkybox.SetProjectionMatrix(tCamera->GetProjectionMatrix());
-	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(200, 200, 200)));
+	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(250, 250, 250)));
 
 	mLight.SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
 	mLight.SetPosition(glm::vec3(50.f, 10.f, 50.f));

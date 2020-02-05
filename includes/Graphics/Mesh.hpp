@@ -23,6 +23,7 @@ protected:
 	GLuint							mVerticeSize = 0;
 	GLuint							mTexture;
 	GLuint							mTextureType = GL_TEXTURE_2D;
+	GLuint							mDepthFunc = GL_LESS;
 	GLuint							mTextureCoordsSize = 0;
 	GLuint							mIndiceSize = 0;
 	GLuint							mVAO, mVBO, mTBO, mNBO, mEBO;
@@ -59,6 +60,8 @@ public:
 	void			SetViewMatrix(glm::mat4 mat);
 	void			SetProjectionMatrix(glm::mat4 mat);
 	void			SetShaderProgram(mf::Shader *shader);
+
+	void			SetDepthFunc(GLuint tDepthFunc) {mDepthFunc = tDepthFunc;}
 
 	void			SetTexture(sf::Image tImage);
 	void			SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown);

@@ -98,6 +98,7 @@ void		Mesh::Draw()
 
 void		Mesh::PrepareShader()
 {
+	glDepthFunc(mDepthFunc);
 	glBindVertexArray(mVAO);
 	glActiveTexture(GL_TEXTURE0);
     glBindTexture(mTextureType, mTexture);
@@ -119,6 +120,7 @@ void		Mesh::Draw(GLenum mode)
 	else
 		glDrawArrays(mode, 0, mVerticeSize / 3);
 	glBindVertexArray(0);
+	glDepthFunc(GL_LESS);
 }
 
 void		Mesh::SetTransformMatrix(glm::mat4 mat)

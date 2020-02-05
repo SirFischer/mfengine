@@ -72,12 +72,36 @@ namespace mf
 			0.0f, 0.0f,
 			0.0f, 0.0f,
 			1.0f, 0.0f,
-			1.0f, 1.0f
+			1.0f, 1.0f,
+
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			1.0f, 0.0f,
+			1.0f, 0.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f
 		};
 
 		mf::Mesh	mFront;
 		mf::Mesh	mBack;
 		mf::Mesh	mRight;
+		mf::Mesh	mLeft;
+		mf::Mesh	mUp;
+		mf::Mesh	mDown;
 
 		void		LoadCubeMap();
 		

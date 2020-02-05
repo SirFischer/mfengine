@@ -19,7 +19,7 @@ void main()
 	gl_Position = projection * view * transform * vec4(aPos, 1.0);
 	FragPos = vec3(transform * vec4(aPos, 1.0));
 	vertexColor = vec4(0.1, 1.0, 0.1, 1.0);
-	zpos = FragPos.y;
+	zpos = aPos.y;
 	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 	Normal = aNormal;
 }
