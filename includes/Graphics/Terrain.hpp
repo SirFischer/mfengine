@@ -27,6 +27,7 @@ public:
 	void		GenHeightMap(int seed, double xLow, double xHigh, double zLow, double zHigh);
 
 	float		GetHeightAt(int x, int z);
+	float		GetHeightInWorld(int x, int z);
 };
 
 }

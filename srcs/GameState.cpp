@@ -2,7 +2,7 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-mWorld(&mResourceManager, &mCamera),
+mWorld(&mResourceManager, &mCamera, &mPlayer),
 mPlayer(&mEventHandler),
 mFPSDisplay(tWindow, &mResourceManager, &mEventHandler),
 mRenderer(&mCamera)

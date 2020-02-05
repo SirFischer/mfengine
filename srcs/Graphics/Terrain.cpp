@@ -133,12 +133,24 @@ void		Terrain::CalculateNormals()
 float		Terrain::GetHeightAt(int x, int z)
 {
 	
-	x = std::clamp(x, 0, mWidth - 1);
-	z = std::clamp(z, 0, mLength - 1);
+	
 	glm::vec4 tmp = glm::vec4(mVertices.get()[(((z * mWidth) + (x)) * 3)], mVertices.get()[(((z * mWidth) + (x)) * 3) + 1], mVertices.get()[(((z * mWidth) + (x)) * 3) + 2], 1.0);
 	tmp = mTransform * tmp;
 	//return mVertices.get()[(((z * mWidth) + (x)) * 3) + 1];
 	return (tmp.y);
 }
+
+float		Terrain::GetHeightInWorld(int x, int z)
+{	
+	glm::vec4 pos = glm::inverse(mTransform) * glm::vec4(x, 1.0, z, 1.0);
+	pos.x += (mWidth / 2.0);
+	pos.z += (mLength / 2.0);
+	pos.x = (int)std::clamp(pos.x, 0.f, mWidth - 1.f);
+	pos.z = (int)std::clamp(pos.z, 0.f, mLength - 1.f);
+	glm::vec4 tmp = glm::vec4(mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3)], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 1], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 2], 1.0f);
+	tmp = mTransform * tmp;
+	return (tmp.y);
+}
+
 
 } // namespace mf

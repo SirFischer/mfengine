@@ -1,6 +1,6 @@
 #include "World.hpp"
 
-World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
+World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer)
 :mResourceManager(tResourceManager)
 ,mLevelTerrain(400, 400)
 ,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/Embassyft.tga"),
@@ -10,11 +10,13 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 		 tResourceManager->LoadImage("assets/textures/skybox/Embassyup.tga"),
 		 tResourceManager->LoadImage("assets/textures/skybox/Embassydn.tga"))
 {
+	mCamera = tCamera;
+	mPlayer = tPlayer;
 	mResourceManager->LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
 	mLevelTerrain.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mLevelTerrain.SetTexture(mResourceManager->LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
-	glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(1, 40.0, 1));
+	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 50)), glm::vec3(3, 100.0, 3));
 	mLevelTerrain.SetTransformMatrix(scale);
 	mLevelTerrain.GenHeightMap(time(0), 0, 5.5, 0, 5.5);
 
@@ -27,7 +29,6 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera)
 	mLight.SetPosition(glm::vec3(50.f, 10.f, 50.f));
 	mLight.SetDiffuseLight(glm::vec3(50.1f, 0.1f, 0.1f));
 	mLight.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
-
 }
 
 World::~World()
@@ -41,6 +42,10 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mLight.SetPosition(glm::vec3(cos(xpos) * 150, (60.f), sin(xpos) * 150));
 	mSkybox.SetViewMatrix(glm::mat4(glm::mat3(tViewMatrix)));
 	xpos += 0.05;
+	if (mPlayer->GetPosition().y - 5 < mLevelTerrain.GetHeightInWorld(mPlayer->GetPosition().x, mPlayer->GetPosition().z))
+		mPlayer->MoveUp();
+	else
+		mPlayer->MoveDown();
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
