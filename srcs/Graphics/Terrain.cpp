@@ -140,16 +140,30 @@ float		Terrain::GetHeightAt(int x, int z)
 	return (tmp.y);
 }
 
-float		Terrain::GetHeightInWorld(int x, int z)
-{	
+float		Terrain::GetHeightInWorld(float x, float z)
+{
 	glm::vec4 pos = glm::inverse(mTransform) * glm::vec4(x, 1.0, z, 1.0);
+	glm::vec4 tmppos = pos;
 	pos.x += (mWidth / 2.0);
 	pos.z += (mLength / 2.0);
 	pos.x = (int)std::clamp(pos.x, 0.f, mWidth - 1.f);
 	pos.z = (int)std::clamp(pos.z, 0.f, mLength - 1.f);
-	glm::vec4 tmp = glm::vec4(mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3)], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 1], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 2], 1.0f);
-	tmp = mTransform * tmp;
-	return (tmp.y);
+	glm::vec4 A = glm::vec4(mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3)], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 1], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x)) * 3) + 2], 1.0f);
+	glm::vec4 B = glm::vec4(mVertices.get()[(int)(((pos.z * mWidth) + (pos.x + 1)) * 3)], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x + 1)) * 3) + 1], mVertices.get()[(int)(((pos.z * mWidth) + (pos.x + 1)) * 3) + 2], 1.0f);
+	glm::vec4 C = glm::vec4(mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x + 1)) * 3)], mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x + 1)) * 3) + 1], mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x + 1)) * 3) + 2], 1.0f);
+	glm::vec4 D = glm::vec4(mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x)) * 3)], mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x)) * 3) + 1], mVertices.get()[(int)((((pos.z + 1) * mWidth) + (pos.x)) * 3) + 2], 1.0f);
+	glm::vec4 height = glm::vec4(0.f, 0.f, 0.f, 1.f);
+	if ((pos.x / mWidth) + (pos.z / mLength) > 1)
+	{
+		//lower triangle
+		height.y = mf::utils::BarryCentric(A, B, D, glm::vec2(tmppos.x, tmppos.z));
+	}
+	else
+	{
+		//upper triangle
+		height.y = mf::utils::BarryCentric(D, B, C, glm::vec2(tmppos.x, tmppos.z));
+	}
+	return ((mTransform * height).y);
 }
 
 

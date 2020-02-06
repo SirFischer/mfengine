@@ -6,6 +6,7 @@
 #include <libnoise/noise.h>
 #include <libnoise/misc.h>
 #include "noiseutils.h"
+#include "Utils/Utils.hpp"
 
 namespace mf
 {
@@ -27,7 +28,7 @@ public:
 	void		GenHeightMap(int seed, double xLow, double xHigh, double zLow, double zHigh);
 
 	float		GetHeightAt(int x, int z);
-	float		GetHeightInWorld(int x, int z);
+	float		GetHeightInWorld(float x, float z);
 };
 
 }
