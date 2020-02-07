@@ -4,11 +4,20 @@ My personal game engine attempt...
 Check this out if you would like to join in on the madness!
 https://trello.com/b/BmizwhuA/mfengine
 
+**UPDATE #4**
+* Fixed terrain normals
+* Added better lighting including ambient, diffuse and specular lighting
+* Added Skybox
+* Added basic player physics
+* Added terrain collision
+
+![Alt Text](README/Update4.gif)
+
 **UPDATE #3**
-* - Added better terrain generation control
-* - Added basic texture capability to meshes
-* - Added simple lighting with no material yet
-* - Reworked certain architectures
+* Added better terrain generation control
+* Added basic texture capability to meshes
+* Added simple lighting with no material yet
+* Reworked certain architectures
 
 ![Alt Text](/README/Light_Update.png)
 
