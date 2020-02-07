@@ -16,9 +16,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
 	mLevelTerrain.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mLevelTerrain.SetTexture(mResourceManager->LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
-	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0)), glm::vec3(1, 50.0, 1));
+	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0)), glm::vec3(1, 70.0, 1));
 	mLevelTerrain.SetTransformMatrix(scale);
-	mLevelTerrain.GenHeightMap(0, 0, 1, 0, 1);
+	mLevelTerrain.GenHeightMap(time(0), 0, 1, 0, 1);
 
 	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
 	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
