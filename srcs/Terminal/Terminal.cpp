@@ -33,6 +33,7 @@ void				Terminal::LoadActions()
 	mActions["move_right"]		=	ACTION::MOVE_RIGHT;
 	mActions["move_up"]			=	ACTION::MOVE_UP;
 	mActions["move_down"]		=	ACTION::MOVE_DOWN;
+	mActions["jump"]			=	ACTION::JUMP;
 	mActions["toggle_console"]	=	ACTION::TOGGLE_CONSOLE;
 	mActions["quit"]			=	ACTION::QUIT;
 	mActions["submit"]			=	ACTION::SUBMIT;

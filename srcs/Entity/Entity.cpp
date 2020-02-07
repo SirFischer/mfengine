@@ -51,9 +51,29 @@ void		Entity::MoveDown()
 	mVelocity.y -= mAcceleration;
 }
 
+void		Entity::MoveJump()
+{
+	if (mOnGround)
+		mVelocity.y += mAcceleration * 15;
+}
+
 void		Entity::SetCamera(Camera *tCamera)
 {
 	mCamera = (tCamera);
+}
+
+void		Entity::HandleTerrainCollision(mf::Terrain *terrain)
+{
+	if (!mOnGround)
+		mVelocity.y -= 0.010f;
+	mOnGround = false;
+	float terrainHeight = terrain->GetHeightInWorld(mPos.x, mPos.z);
+	if (mPos.y - mHeight - 0.1 < terrainHeight)
+	{
+		mOnGround = true;
+		mPos.y = terrainHeight + mHeight;
+		mVelocity.y = 0;
+	}
 }
 
 } // namespace mf

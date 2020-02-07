@@ -2,7 +2,7 @@
 
 World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer)
 :mResourceManager(tResourceManager)
-,mLevelTerrain(300, 300)
+,mLevelTerrain(500, 500)
 ,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/Embassyft.tga"),
 		 tResourceManager->LoadImage("assets/textures/skybox/Embassylf.tga"),
 		 tResourceManager->LoadImage("assets/textures/skybox/Embassybk.tga"),
@@ -48,17 +48,7 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mLight.SetPosition(glm::vec3(cos(xpos) * 150, (70.f), sin(xpos) * 150));
 	mSkybox.SetViewMatrix(glm::mat4(glm::mat3(tViewMatrix)));
 	xpos += 0.05;
-	float terrainHeight = mLevelTerrain.GetHeightInWorld(mPlayer->GetPosition().x, mPlayer->GetPosition().z);
-	if (mPlayer->GetPosition().y - 2 < terrainHeight)
-	{
-		glm::vec3 pos = mPlayer->GetPosition();
-		pos.y = terrainHeight + 2;
-		mPlayer->SetPosition(pos);
-	}
-	else
-	{
-		mPlayer->MoveDown();
-	}
+	mPlayer->HandleTerrainCollision(&mLevelTerrain);
 }
 
 void	World::Draw(mf::Renderer *tRenderer)

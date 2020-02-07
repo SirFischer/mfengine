@@ -11,6 +11,7 @@ namespace mf
 		MOVE_RIGHT,
 		MOVE_UP,
 		MOVE_DOWN,
+		JUMP,
 		TOGGLE_CONSOLE,
 		QUIT,
 		SUBMIT

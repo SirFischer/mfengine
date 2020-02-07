@@ -15,7 +15,8 @@ Player::~Player()
 void		Player::Update()
 {
 	mPos += mVelocity;
-	mVelocity *= 0.90;
+	mVelocity.x *= 0.93;
+	mVelocity.z *= 0.93;
 	if (mCamera)
 	{
 		mCamera->UpdateFront(mEventHandler);
@@ -39,6 +40,8 @@ void		Player::HandleEvents()
 		MoveUp();
 	if (mEventHandler->GetActionState(ACTION::MOVE_DOWN))
 		MoveDown();
+	if (mEventHandler->GetActionState(ACTION::JUMP))
+		MoveJump();
 }
 
 } // namespace mf
