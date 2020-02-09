@@ -2,7 +2,7 @@
 
 World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer)
 :mResourceManager(tResourceManager)
-,mLevelTerrain(500, 500)
+,mLevelTerrain(1000, 1000)
 ,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Front.png"),
 		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Left.png"),
 		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Back.png"),
@@ -16,9 +16,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
 	mLevelTerrain.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mLevelTerrain.SetTexture(mResourceManager->LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
-	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0)), glm::vec3(1, 90.0, 1));
+	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0)), glm::vec3(5, 90.0, 5));
 	mLevelTerrain.SetTransformMatrix(scale);
-	mLevelTerrain.GenHeightMap(time(0), 0, 1, 0, 1);
+	mLevelTerrain.GenHeightMap(time(0), 0, 5, 0, 5);
 
 	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
 	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
@@ -34,6 +34,8 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight2.SetPosition(glm::vec3(50.f, 60.f, 50.f));
 	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
 	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
+	
+	mTestModel.LoadFromOBJ("assets/objects/cottage_obj.obj");
 }
 
 World::~World()

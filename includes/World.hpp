@@ -6,6 +6,7 @@
 
 #include "Terrain.hpp"
 #include "Skybox.hpp"
+#include "Model.hpp"
 
 
 class World
@@ -20,6 +21,8 @@ private:
 
 	mf::Light				mLight;
 	mf::Light				mLight2;
+
+	mf::Model				mTestModel;
 
 public:
 			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer);
