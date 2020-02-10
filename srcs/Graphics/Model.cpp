@@ -57,7 +57,7 @@ namespace mf
 		mMeshes.push_back(mesh);
 	}
 
-	void	Model::LoadFromOBJ(std::string path)
+	void	Model::LoadFromOBJ(std::string path, ResourceManager *tResourceManager)
 	{
 		std::ifstream		file(path, std::ios::in);
 		std::string			line;
@@ -68,22 +68,21 @@ namespace mf
 			std::cerr << "Failed to read" << path << std::endl;
 			return ;
 		}
+		data.mRelPath = path.substr(0, path.find_last_of('/') + 1);
 		while (std::getline(file, line))
 		{
-			switch (OBJParser::ParseLine(line, &data))
+			switch (OBJParser::ParseLine(line, &data, this, tResourceManager))
 			{
 			case OBJParser::e_status::FAIL:
 				break;
 			case OBJParser::e_status::NEW_GROUP:
-				if (data.mIndices.size() > 0)
-					this->AddMesh(CreateMesh(&data));
 				break;
 			default:
 				break;
 			};
 		}
 		if (data.mIndices.size() > 0)
-			this->AddMesh(CreateMesh(&data));
+			this->AddMesh(CreateMesh(&data, tResourceManager));
 	}
 
 } // namespace mf

@@ -4,7 +4,7 @@ namespace mf
 {
 	namespace OBJParser
 	{
-		Mesh		*CreateMesh(t_data *data)
+		Mesh		*CreateMesh(t_data *data, ResourceManager *tResourceManager)
 		{
 			Mesh				*result;
 			std::vector<float>	vertices;
@@ -32,12 +32,14 @@ namespace mf
 			if (!(result = new Mesh(vertices.data(), NULL, textureCoords.data(), normals.data(), vertices.size() * sizeof(float), 0, textureCoords.size() * sizeof(float), normals.size() * sizeof(float))))
 				return (NULL);
 			result->SetName(data->mGroupName);
+			result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
+			std::cout << "TEXTURE: " << data->mMap_Kd << std::endl;
 			//SET MTLLIB DATA
 			data->mIndices.clear();
 			return (result);
 		}
 
-		e_status	ParseLine(std::string &line, t_data *data)
+		e_status	ParseLine(std::string &line, t_data *data, Model *model, ResourceManager *tResourceManager)
 		{
 			if (line.find("#", 0, 1) != std::string::npos)
 				return (e_status::OK);
@@ -52,7 +54,11 @@ namespace mf
 			if (line.find("vt ", 0, 3) != std::string::npos)
 				return (ReadTextureCoords(line, data));
 			if (line.find("usemtl ", 0, 7) != std::string::npos)
+			{
+				if (data->mIndices.size() > 0)
+					model->AddMesh(CreateMesh(data, tResourceManager));
 				return (ReadMTL(line, data));
+			}
 			if (line.find("f ", 0, 2) != std::string::npos)
 				return (ReadIndices(line, data));
 			return (e_status::OK);
@@ -115,8 +121,11 @@ namespace mf
 				return (e_status::FAIL);
 			bzero(path, line.length());
 			sscanf(line.c_str(), "mtllib %s", path);
-			data->mGroupName = path;
-			//std::cout << path << std::endl;
+			std::ifstream	file(data->mRelPath + path);
+			std::stringstream		b;
+			b << file.rdbuf();
+			data->mMtlib = b.str();
+			std::cout << "mtllib: " << data->mRelPath + path << std::endl;
 			delete path;
 			return (e_status::OK);
 		}
@@ -129,8 +138,16 @@ namespace mf
 				return (e_status::FAIL);
 			bzero(name, line.length());
 			sscanf(line.c_str(), "usemtl %s", name);
-			data->mGroupName = name;
 			std::cout << name << std::endl;
+			std::istringstream stream(data->mMtlib.c_str() + data->mMtlib.find(name));
+			std::string		mtline;
+			while (std::getline(stream, mtline) && mtline.find("newmtl ") == std::string::npos)
+			{
+				if (mtline.find("map_Ka ", 0, 7) != std::string::npos)
+					data->mMap_Ka = mtline.substr(7);
+				if (mtline.find("map_Kd ", 0, 7) != std::string::npos)
+					data->mMap_Kd = mtline.substr(7);
+			}
 			delete name;
 			return (e_status::NEW_GROUP);
 		}
@@ -156,10 +173,12 @@ namespace mf
 				return (e_status::FAIL);
 			while (tmp)
 			{
-				data->mIndices.push_back(first);
-				data->mIndices.push_back(second);
 				vector = glm::uvec3((unsigned int)-1, (unsigned int)-1, (unsigned int)-1);
 				sscanf(tmp, "%u/%u/%u", &vector.x, &vector.y, &vector.z);
+				if (vector.x == (unsigned int)-1)
+					break;
+				data->mIndices.push_back(first);
+				data->mIndices.push_back(second);
 				data->mIndices.push_back(vector);
 				second = vector;
 				tmp = std::strtok(NULL, " ");

@@ -35,10 +35,10 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
 	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
 	
-	mTestModel.LoadFromOBJ("assets/objects/Tree.obj");
+	mTestModel.LoadFromOBJ("assets/objects/Tree1.obj", tResourceManager);
 	mTestModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
 	mTestModel.SetShaderProgram(mResourceManager->GetShader("terrain"));
-	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 0.5, 0)), glm::vec3(10, 10.0, 10));
+	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0), 0)), glm::vec3(0.10, 0.10, 0.10));
 	mTestModel.SetTransformMatrix(scale);
 }
 
