@@ -45,6 +45,33 @@ Mesh::Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint 
 	initMesh();
 }
 
+Mesh::Mesh(float *vertices, unsigned int *indices, float *textureCoords, float *normals, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize, GLuint normalsize)
+{
+	try
+	{
+		mVertices = std::shared_ptr<float>(new float[verticesize / sizeof(float)]);
+		if (indicesize)
+			mIndices = std::shared_ptr<unsigned int>(new unsigned int[indicesize  / sizeof(unsigned int)]);
+		if (textureCoordsSize)
+			mTextureCoords = std::shared_ptr<float>(new float[textureCoordsSize / sizeof(float)]);
+		if (normalsize)
+			mNormals = std::shared_ptr<float>(new float[normalsize / sizeof(float)]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::memmove(mVertices.get(), vertices, verticesize);
+	std::memmove(mIndices.get(), indices, indicesize);
+	std::memmove(mTextureCoords.get(), textureCoords, textureCoordsSize);
+	std::memmove(mNormals.get(), normals, normalsize);
+	mVerticeSize = verticesize;
+	mIndiceSize = indicesize;
+	mTextureCoordsSize = textureCoordsSize;
+	mNormalSize = normalsize;
+	initMesh();
+}
+
 Mesh::Mesh()
 {
 }

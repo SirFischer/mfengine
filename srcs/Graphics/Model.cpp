@@ -10,7 +10,49 @@ namespace mf
 	{
 	}
 
-	void	Model::AddMesh(Mesh &mesh)
+	void	Model::SetProjectionMatrix(glm::mat4 projmat)
+	{
+		for (auto &i : mMeshes)
+		{
+			i->SetProjectionMatrix(projmat);
+		}
+	}
+
+	void	Model::SetTransformMatrix(glm::mat4 transformmatrix)
+	{
+		for (auto &i : mMeshes)
+		{
+			i->SetTransformMatrix(transformmatrix);
+		}
+	}
+
+
+	void	Model::SetViewMatrix(glm::mat4 viewmat)
+	{
+		for (auto &i : mMeshes)
+		{
+			i->SetViewMatrix(viewmat);
+		}
+	}
+
+	void	Model::SetShaderProgram(Shader *shader)
+	{
+		for (auto &i : mMeshes)
+		{
+			i->SetShaderProgram(shader);
+		}
+	}
+
+	void	Model::Draw(GLenum mode)
+	{
+		for (auto &i : mMeshes)
+		{
+			i->PrepareShader();
+			i->Draw(mode);
+		}
+	}
+
+	void	Model::AddMesh(Mesh *mesh)
 	{
 		mMeshes.push_back(mesh);
 	}
@@ -33,12 +75,15 @@ namespace mf
 			case OBJParser::e_status::FAIL:
 				break;
 			case OBJParser::e_status::NEW_GROUP:
-				/* code */
+				if (data.mIndices.size() > 0)
+					this->AddMesh(CreateMesh(&data));
 				break;
 			default:
 				break;
 			};
 		}
+		if (data.mIndices.size() > 0)
+			this->AddMesh(CreateMesh(&data));
 	}
 
 } // namespace mf

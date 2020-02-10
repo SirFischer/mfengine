@@ -35,7 +35,11 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
 	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
 	
-	mTestModel.LoadFromOBJ("assets/objects/cottage_obj.obj");
+	mTestModel.LoadFromOBJ("assets/objects/Tree.obj");
+	mTestModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
+	mTestModel.SetShaderProgram(mResourceManager->GetShader("terrain"));
+	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 0.5, 0)), glm::vec3(10, 10.0, 10));
+	mTestModel.SetTransformMatrix(scale);
 }
 
 World::~World()
@@ -51,6 +55,7 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mSkybox.SetViewMatrix(glm::mat4(glm::mat3(tViewMatrix)));
 	xpos += 0.05;
 	mPlayer->HandleTerrainCollision(&mLevelTerrain);
+	mTestModel.SetViewMatrix(mCamera->GetViewMatrix());
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
@@ -59,5 +64,6 @@ void	World::Draw(mf::Renderer *tRenderer)
 	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight);
 	tRenderer->AddLights(&mLight2);
+	mTestModel.Draw(GL_TRIANGLES);
 	tRenderer->Render();
 }
