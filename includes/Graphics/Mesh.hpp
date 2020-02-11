@@ -50,6 +50,7 @@ public:
 					Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize);
 					Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize);
 					Mesh(float *vertices, unsigned int *indices, float *textureCoords, float *normals, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize, GLuint normalsize);
+					Mesh(const Mesh &tMesh);
 					Mesh();
 					~Mesh();
 

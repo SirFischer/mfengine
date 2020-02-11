@@ -3,6 +3,7 @@
 #include "Mesh.hpp"
 #include "Light.hpp"
 #include "Terrain.hpp"
+#include "Model.hpp"
 
 namespace mf
 {
@@ -20,6 +21,7 @@ namespace mf
 		~Renderer();
 
 		void						AddMesh(Mesh *tMesh);
+		void						AddModel(Model *tModel);
 		void						AddLights(Light *tLights);
 		void						Render();
 	};

@@ -6,6 +6,14 @@ namespace mf
 	{
 	}
 
+	Model::Model(const Model &tModel)
+	{
+		for ( auto &i : tModel.mMeshes)
+		{
+			AddMesh(new Mesh(*i));
+		}
+	}
+
 	Model::~Model()
 	{
 	}
@@ -69,6 +77,7 @@ namespace mf
 			return ;
 		}
 		data.mRelPath = path.substr(0, path.find_last_of('/') + 1);
+		std::cout << "REAL PATH: " << data.mRelPath << std::endl;
 		while (std::getline(file, line))
 		{
 			switch (OBJParser::ParseLine(line, &data, this, tResourceManager))
@@ -83,6 +92,18 @@ namespace mf
 		}
 		if (data.mIndices.size() > 0)
 			this->AddMesh(CreateMesh(&data, tResourceManager));
+	}
+
+	Model&	Model::operator=(Model tModel)
+	{
+		if (this != &tModel)
+		{
+			for ( auto &i : tModel.mMeshes)
+			{
+				AddMesh(new Mesh(*i));
+			}
+		}
+		return (*this);
 	}
 
 } // namespace mf

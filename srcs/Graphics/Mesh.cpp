@@ -72,6 +72,38 @@ Mesh::Mesh(float *vertices, unsigned int *indices, float *textureCoords, float *
 	initMesh();
 }
 
+Mesh::Mesh(const Mesh &tMesh)
+{
+	try
+	{
+		mVertices = std::shared_ptr<float>(new float[tMesh.mVerticeSize / sizeof(float)]);
+		if (tMesh.mIndiceSize)
+			mIndices = std::shared_ptr<unsigned int>(new unsigned int[tMesh.mIndiceSize  / sizeof(unsigned int)]);
+		if (tMesh.mTextureCoordsSize)
+			mTextureCoords = std::shared_ptr<float>(new float[tMesh.mTextureCoordsSize / sizeof(float)]);
+		if (tMesh.mNormalSize)
+			mNormals = std::shared_ptr<float>(new float[tMesh.mNormalSize / sizeof(float)]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::memmove(mVertices.get(), tMesh.mVertices.get(), tMesh.mVerticeSize);
+	std::memmove(mIndices.get(), tMesh.mIndices.get(), tMesh.mIndiceSize);
+	std::memmove(mTextureCoords.get(), tMesh.mTextureCoords.get(), tMesh.mTextureCoordsSize);
+	std::memmove(mNormals.get(), tMesh.mNormals.get(), tMesh.mNormalSize);
+	mVerticeSize = tMesh.mVerticeSize;
+	mIndiceSize = tMesh.mIndiceSize;
+	mTextureCoordsSize = tMesh.mTextureCoordsSize;
+	mNormalSize = tMesh.mNormalSize;
+	mShader = tMesh.mShader;
+	mTransform = tMesh.mTransform;
+	mProjection = tMesh.mProjection;
+	mMaterial = tMesh.mMaterial;
+	mTexture = tMesh.mTexture;
+	initMesh();
+}
+
 Mesh::Mesh()
 {
 }

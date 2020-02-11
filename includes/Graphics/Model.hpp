@@ -13,6 +13,7 @@ namespace mf
 
 	public:
 		Model();
+		Model(const Model &tModel);
 		~Model();
 
 		void	SetProjectionMatrix(glm::mat4 projmat);
@@ -20,10 +21,14 @@ namespace mf
 		void	SetTransformMatrix(glm::mat4 transformmatrix);
 		void	SetShaderProgram(Shader *shader);
 
+		std::vector<Mesh *>	GetMeshes(){return (mMeshes);}
+
 		void	AddMesh(Mesh *mesh);
 		void	LoadFromOBJ(std::string path, ResourceManager *tResourceManager);
 
 		void	Draw(GLenum mode);
+
+		Model&	operator=(Model tModel);
 	};
 
 	namespace OBJParser

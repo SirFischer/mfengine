@@ -46,14 +46,6 @@ void main()
         result += CalcLight(lights[i], Normal, FragPos);
 	
 	FragColor = vec4(result, 1.0) * texture(texture1, TexCoord);
-	if (zpos < 0.7)
-		FragColor = vec4(result, 1.0) * vertexColor;
-	if (zpos < 0.3)
-		FragColor = vec4(result, 1.0) * vec4(1, 1, 0, 1.0);
-	if (zpos < 0)
-		FragColor = vec4(result, 1.0) * vec4(0, 0, 1, 1.0);
-	if (zpos > 0.1)
-		FragColor = vec4(result, 1.0) * texture(texture1, TexCoord);
 	if (texture(texture1, TexCoord)[3] == 0)
 		discard;
 }

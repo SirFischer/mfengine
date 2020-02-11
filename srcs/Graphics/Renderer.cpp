@@ -16,6 +16,15 @@ namespace mf
 		mMeshes.push_back(tMesh);
 	}
 
+	void						Renderer::AddModel(Model *tModel)
+	{
+		std::vector<Mesh *>		mMeshes = tModel->GetMeshes();
+		for (auto &i : mMeshes)
+		{
+			this->AddMesh(i);
+		}
+	}
+
 	void		Renderer::AddLights(Light *tLights)
 	{
 		mLights.push_back(tLights);

@@ -49,7 +49,7 @@ void				Terminal::LoadKeys()
 	mKeys["lctrl"]				=	sf::Keyboard::LControl;
 	mKeys["esc"]				=	sf::Keyboard::Escape;
 	mKeys["tilde"]				=	sf::Keyboard::Tilde;
-	mKeys["enter"]				=	sf::Keyboard::Enter;
+	mKeys["enter"]				=	sf::Keyboard::Return;
 }
 
 void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler)

@@ -33,7 +33,6 @@ namespace mf
 				return (NULL);
 			result->SetName(data->mGroupName);
 			result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
-			std::cout << "TEXTURE: " << data->mMap_Kd << std::endl;
 			//SET MTLLIB DATA
 			data->mIndices.clear();
 			return (result);

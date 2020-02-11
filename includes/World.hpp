@@ -22,7 +22,8 @@ private:
 	mf::Light				mLight;
 	mf::Light				mLight2;
 
-	mf::Model				mTestModel;
+	std::vector<mf::Model>	mTrees;
+	mf::Model				mTreeModel;
 
 public:
 			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer);
