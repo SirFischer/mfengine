@@ -16,7 +16,7 @@ namespace mf
 		mMeshes.push_back(tMesh);
 	}
 
-	void						Renderer::AddModel(Model *tModel)
+	void		Renderer::AddModel(Model *tModel)
 	{
 		std::vector<Mesh *>		mMeshes = tModel->GetMeshes();
 		for (auto &i : mMeshes)

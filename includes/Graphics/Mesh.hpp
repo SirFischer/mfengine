@@ -73,7 +73,16 @@ public:
 	void			SetTexture(sf::Image tImage);
 	void			SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown);
 
-	mf::Shader		*GetShaderProgram() {return (mShader);}
+	mf::Shader						*GetShaderProgram() {return (mShader);}
+	std::shared_ptr<float>			GetVertices() {return (mVertices);}
+	std::shared_ptr<float>			GetNormals() {return (mNormals);}
+	std::shared_ptr<float>			GetTextureCoords() {return (mTextureCoords);}
+	std::shared_ptr<unsigned int>	GetIndices() {return (mIndices);}
+	GLuint							GetVerticesSize() {return (mVerticeSize);}
+	GLuint							GetNormalsSize() {return (mNormalSize);}
+	GLuint							GetTextureCoordsSize() {return (mTextureCoordsSize);}
+	GLuint							GetIndicesSize() {return (mIndiceSize);}
+	GLuint							GetTexture() {return (mTexture);}
 };
 
 }

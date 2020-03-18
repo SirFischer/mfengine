@@ -14,6 +14,7 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mPlayer = tPlayer;
 	mResourceManager->LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
 	mResourceManager->LoadShader("generic", "assets/shaders/vertex/generic.glsl", "assets/shaders/fragment/generic.glsl");
+	mResourceManager->LoadShader("instanced", "assets/shaders/vertex/instanced_generic.glsl", "assets/shaders/fragment/instanced_generic.glsl");
 	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
 	mLevelTerrain.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mLevelTerrain.SetTexture(mResourceManager->LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
@@ -35,27 +36,25 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight2.SetPosition(glm::vec3(50.f, 60.f, 50.f));
 	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
 	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
-	
+
 	mTreeModel.LoadFromOBJ("assets/objects/Tree.obj", tResourceManager);
 	mTreeModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
-	mTreeModel.SetShaderProgram(mResourceManager->GetShader("generic"));
+	mTreeModel.SetShaderProgram(mResourceManager->GetShader("instanced"));
+	mTrees = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mTreeModel));
+	
 	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 0.5, 0)), glm::vec3(010, 010, 010));
-	mTreeModel.SetTransformMatrix(scale);
-
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < 400; i++)
 	{
 		float x, y;
-		x = rand() % 500;
-		y = rand() % 500;
+		x = (rand() % 5000) - 2500;
+		y = (rand() % 5000) - 2500;
 		if (mLevelTerrain.GetHeightInWorld(x, y) > 0.0)
 		{
 			scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) - 0.5, y)), glm::vec3(010, 010, 010));
-			mTrees.push_back(mf::Model(mTreeModel));
-			mTrees.back().SetTransformMatrix(scale);
+			mTreeModel.SetTransformMatrix(scale);
+			mTrees.get()->AddInstance(scale);
 		}
 	}
-	
-	
 }
 
 World::~World()
@@ -71,10 +70,7 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mSkybox.SetViewMatrix(glm::mat4(glm::mat3(tViewMatrix)));
 	xpos += 0.05;
 	mPlayer->HandleTerrainCollision(&mLevelTerrain);
-	for (auto &i : mTrees)
-	{
-		i.SetViewMatrix(tViewMatrix);
-	}
+	mTreeModel.SetViewMatrix(tViewMatrix);
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
@@ -83,9 +79,6 @@ void	World::Draw(mf::Renderer *tRenderer)
 	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight);
 	tRenderer->AddLights(&mLight2);
-	for (auto &i : mTrees)
-	{
-		tRenderer->AddModel(&i);
-	}
+	mTrees->Draw(GL_TRIANGLES);
 	tRenderer->Render();
 }

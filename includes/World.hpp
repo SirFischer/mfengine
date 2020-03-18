@@ -3,10 +3,11 @@
 
 #include "Player.hpp"
 #include "Camera.hpp"
-
 #include "Terrain.hpp"
 #include "Skybox.hpp"
 #include "Model.hpp"
+
+#include "StaticInstancingBatch.hpp"
 
 
 class World
@@ -22,8 +23,8 @@ private:
 	mf::Light				mLight;
 	mf::Light				mLight2;
 
-	std::vector<mf::Model>	mTrees;
 	mf::Model				mTreeModel;
+	std::unique_ptr<mf::StaticInstancingBatch> mTrees;
 
 public:
 			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer);
