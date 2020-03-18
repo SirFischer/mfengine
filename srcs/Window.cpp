@@ -40,6 +40,27 @@ bool	Window::create()
 	return (true);
 }
 
+// void GLAPIENTRY
+// MessageCallback( GLenum source,
+//                  GLenum type,
+//                  GLuint id,
+//                  GLenum severity,
+//                  GLsizei length,
+//                  const GLchar* message,
+//                  const void* userParam )
+// {
+// 	(void)source;
+// 	(void)type;
+// 	(void)id;
+// 	(void)length;
+// 	(void)userParam;
+//   fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+//            ( type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "" ),
+//             type, severity, message );
+// }
+
+// During init, enable debug output
+
 
 void	Window::initOpengl()
 {
@@ -50,6 +71,8 @@ void	Window::initOpengl()
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable              ( GL_DEBUG_OUTPUT );
+	//glDebugMessageCallback( MessageCallback, 0 );
 }
 
 void	Window::destroy()

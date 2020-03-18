@@ -21,6 +21,6 @@ namespace mf
 
 		void					AddInstance(glm::mat4 tTransform);
 		void					Finalize();
-		void					Draw(GLenum mode);
+		void					Draw(GLenum mode, Light	*light);
 	};	
 } // namespace mf

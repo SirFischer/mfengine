@@ -10,15 +10,16 @@ namespace mf
 	class Renderer
 	{
 	private:
-		mf::Camera					*mCamera = NULL;
-		std::vector<Mesh *>			mMeshes;
-		std::vector<Light *>		mLights;
+		mf::Camera								*mCamera = NULL;
+		std::vector<Mesh *>						mMeshes;
+		std::vector<Light *>					mLights;
 
-		void						LoadLights();
+		void						LoadLights(Shader *tShader);
 
 	public:
 		Renderer(mf::Camera *tCamera);
 		~Renderer();
+
 
 		void						AddMesh(Mesh *tMesh);
 		void						AddModel(Model *tModel);

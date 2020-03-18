@@ -2,7 +2,7 @@
 
 World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer)
 :mResourceManager(tResourceManager)
-,mLevelTerrain(1000, 1000)
+,mLevelTerrain(500, 500)
 ,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Front.png"),
 		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Left.png"),
 		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Back.png"),
@@ -43,11 +43,11 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mTrees = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mTreeModel));
 	
 	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 0.5, 0)), glm::vec3(010, 010, 010));
-	for (size_t i = 0; i < 400; i++)
+	for (size_t i = 0; i < 100; i++)
 	{
 		float x, y;
-		x = (rand() % 5000) - 2500;
-		y = (rand() % 5000) - 2500;
+		x = (rand() % 2500) - 1250;
+		y = (rand() % 2500) - 1250;
 		if (mLevelTerrain.GetHeightInWorld(x, y) > 0.0)
 		{
 			scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) - 0.5, y)), glm::vec3(010, 010, 010));
@@ -79,6 +79,6 @@ void	World::Draw(mf::Renderer *tRenderer)
 	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight);
 	tRenderer->AddLights(&mLight2);
-	mTrees->Draw(GL_TRIANGLES);
+	mTrees->Draw(GL_TRIANGLES, &mLight);
 	tRenderer->Render();
 }

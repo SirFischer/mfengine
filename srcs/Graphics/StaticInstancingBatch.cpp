@@ -53,15 +53,22 @@ void			StaticInstancingBatch::Finalize()
 	}
 }
 
-void			StaticInstancingBatch::Draw(GLenum mode)
+
+void			StaticInstancingBatch::Draw(GLenum mode, Light	*light)
 {
 	if (!mFinalized)
 		this->Finalize();
 	for (auto &mesh : mMeshes)
 	{
 		mesh->PrepareShader();
-		mesh->GetShaderProgram()->SetInt("lightNum", 0);
-		glDrawElementsInstanced(mode, mesh->GetVerticesSize() / 3, GL_UNSIGNED_INT, 0, mTransformMatrices.size());
+		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].ambient", light->GetAmbientLight());
+		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].position", light->GetPosition());
+		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].diffuse", light->GetDiffuseLight());
+		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].specular", light->GetSpecularLight());
+		mesh->GetShaderProgram()->SetInt("lights[" + std::to_string(0) + "].specular_pow", light->GetSpecularPower());
+		mesh->GetShaderProgram()->SetFloat("lights[" + std::to_string(0) + "].specular_strength", light->GetSpecularStrength());
+		mesh->GetShaderProgram()->SetInt("lightNum", 1);
+		glDrawArraysInstanced(mode, 0, mesh->GetVerticesSize() / 3, mTransformMatrices.size());
 		glBindVertexArray(0);
 	}
 }

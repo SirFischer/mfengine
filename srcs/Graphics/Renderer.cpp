@@ -30,21 +30,21 @@ namespace mf
 		mLights.push_back(tLights);
 	}
 
-	void		Renderer::LoadLights()
+	void		Renderer::LoadLights(Shader *tShader)
 	{
 		int i = 0;
 		while (i < (int)mLights.size())
 		{
-			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].ambient", mLights[i]->GetAmbientLight());
-			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].position", mLights[i]->GetPosition());
-			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].diffuse", mLights[i]->GetDiffuseLight());
-			mMeshes.back()->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].specular", mLights[i]->GetSpecularLight());
-			mMeshes.back()->GetShaderProgram()->SetInt("lights[" + std::to_string(i) + "].specular_pow", mLights[i]->GetSpecularPower());
-			mMeshes.back()->GetShaderProgram()->SetFloat("lights[" + std::to_string(i) + "].specular_strength", mLights[i]->GetSpecularStrength());
+			tShader->SetVec3("lights[" + std::to_string(i) + "].ambient", mLights[i]->GetAmbientLight());
+			tShader->SetVec3("lights[" + std::to_string(i) + "].position", mLights[i]->GetPosition());
+			tShader->SetVec3("lights[" + std::to_string(i) + "].diffuse", mLights[i]->GetDiffuseLight());
+			tShader->SetVec3("lights[" + std::to_string(i) + "].specular", mLights[i]->GetSpecularLight());
+			tShader->SetInt("lights[" + std::to_string(i) + "].specular_pow", mLights[i]->GetSpecularPower());
+			tShader->SetFloat("lights[" + std::to_string(i) + "].specular_strength", mLights[i]->GetSpecularStrength());
 			i++;
 		}
-		mMeshes.back()->GetShaderProgram()->SetInt("lightNum", i);
-		mMeshes.back()->GetShaderProgram()->SetVec3("viewPos", mCamera->GetPos());
+		tShader->SetInt("lightNum", i);
+		tShader->SetVec3("viewPos", mCamera->GetPos());
 	}
 
 	void		Renderer::Render()
@@ -52,7 +52,7 @@ namespace mf
 		while (mMeshes.size())
 		{
 			mMeshes.back()->PrepareShader();
-			LoadLights();
+			LoadLights(mMeshes.back()->GetShaderProgram());
 			mMeshes.back()->Draw(GL_TRIANGLES);
 			mMeshes.pop_back();
 		}
