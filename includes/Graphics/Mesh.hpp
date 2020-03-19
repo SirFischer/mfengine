@@ -71,6 +71,7 @@ public:
 	void			SetAmbientLight(glm::vec3 tAmbient){mMaterial.ambient = tAmbient;}
 	void			SetDiffuseLight(glm::vec3 tDiffuse){mMaterial.diffuse = tDiffuse;}
 	void			SetSpecularLight(glm::vec3 tSpecular){mMaterial.specular = tSpecular;}
+	void			SetShininess(float tShininess) {mMaterial.shininess = tShininess;}
 
 	void			SetDepthFunc(GLuint tDepthFunc) {mDepthFunc = tDepthFunc;}
 

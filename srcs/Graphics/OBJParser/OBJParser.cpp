@@ -36,6 +36,7 @@ namespace mf
 			result->SetAmbientLight(data->mKa);
 			result->SetDiffuseLight(data->mKd);
 			result->SetSpecularLight(data->mKs);
+			result->SetShininess(data->mNs);
 			//SET MTLLIB DATA
 			data->mIndices.clear();
 			return (result);
@@ -161,6 +162,8 @@ namespace mf
 					Read3Floats((mtline = mtline.substr(3)), &data->mKd);
 				if (mtline.find("Ks ", 0, 3) != std::string::npos)
 					Read3Floats((mtline = mtline.substr(3)), &data->mKs);
+				if (mtline.find("Ns ", 0, 3) != std::string::npos)
+					sscanf((mtline = mtline.substr(3)).c_str(), "%f", &data->mNs);
 			}
 			delete name;
 			return (e_status::NEW_GROUP);
@@ -179,15 +182,18 @@ namespace mf
 				return (e_status::FAIL);
 			if (!(tmp = std::strtok(NULL, " ")))
 				return (e_status::FAIL);
+			sscanf(tmp, "%u//%u", &first.x, &first.z);
 			sscanf(tmp, "%u/%u/%u", &first.x, &first.y, &first.z);
 			if (!(tmp = std::strtok(NULL, " ")))
 				return (e_status::FAIL);
+			sscanf(tmp, "%u//%u", &second.x, &second.z);
 			sscanf(tmp, "%u/%u/%u", &second.x, &second.y, &second.z);
 			if (!(tmp = std::strtok(NULL, " ")))
 				return (e_status::FAIL);
 			while (tmp)
 			{
 				vector = glm::uvec3((unsigned int)-1, (unsigned int)-1, (unsigned int)-1);
+				sscanf(tmp, "%u//%u", &vector.x, &vector.z);
 				sscanf(tmp, "%u/%u/%u", &vector.x, &vector.y, &vector.z);
 				if (vector.x == (unsigned int)-1)
 					break;

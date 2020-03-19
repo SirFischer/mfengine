@@ -54,7 +54,7 @@ void			StaticInstancingBatch::Finalize()
 }
 
 
-void			StaticInstancingBatch::Draw(GLenum mode, Light	*light)
+void			StaticInstancingBatch::Draw(GLenum mode, Light	*light, Camera *tCamera)
 {
 	if (!mFinalized)
 		this->Finalize();
@@ -67,6 +67,7 @@ void			StaticInstancingBatch::Draw(GLenum mode, Light	*light)
 		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].specular", light->GetSpecularLight());
 		mesh->GetShaderProgram()->SetInt("lights[" + std::to_string(0) + "].specular_pow", light->GetSpecularPower());
 		mesh->GetShaderProgram()->SetFloat("lights[" + std::to_string(0) + "].specular_strength", light->GetSpecularStrength());
+		mesh->GetShaderProgram()->SetVec3("viewPos", tCamera->GetPos());
 		mesh->GetShaderProgram()->SetInt("lightNum", 1);
 		glDrawArraysInstanced(mode, 0, mesh->GetVerticesSize() / 3, mTransformMatrices.size());
 		glBindVertexArray(0);

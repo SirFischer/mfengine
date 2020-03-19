@@ -47,6 +47,7 @@ namespace mf
 			glm::vec3					mKa;
 			glm::vec3					mKd;
 			glm::vec3					mKs;
+			float						mNs;
 		}								t_data;
 
 		enum class						e_status
