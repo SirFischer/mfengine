@@ -44,6 +44,9 @@ namespace mf
 			std::string					mRelPath;
 			std::string					mMap_Ka;
 			std::string					mMap_Kd;
+			glm::vec3					mKa;
+			glm::vec3					mKd;
+			glm::vec3					mKs;
 		}								t_data;
 
 		enum class						e_status

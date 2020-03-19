@@ -32,25 +32,25 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight.SetDiffuseLight(glm::vec3(50.1f, 0.1f, 0.1f));
 	mLight.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
 
-	mLight2.SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
+	mLight2.SetAmbientLight(glm::vec3(0.2f, 0.2f, 0.2f));
 	mLight2.SetPosition(glm::vec3(50.f, 60.f, 50.f));
 	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
 	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
 
-	mTreeModel.LoadFromOBJ("assets/objects/Tree.obj", tResourceManager);
+	mTreeModel.LoadFromOBJ("assets/objects/lowpolytree.obj", tResourceManager);
 	mTreeModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
 	mTreeModel.SetShaderProgram(mResourceManager->GetShader("instanced"));
 	mTrees = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mTreeModel));
 	
-	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 0.5, 0)), glm::vec3(010, 010, 010));
-	for (size_t i = 0; i < 100; i++)
+	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 10, 0)), glm::vec3(0.1, 0.1, 0.1));
+	for (size_t i = 0; i < 2000; i++)
 	{
 		float x, y;
 		x = (rand() % 2500) - 1250;
 		y = (rand() % 2500) - 1250;
 		if (mLevelTerrain.GetHeightInWorld(x, y) > 0.0)
 		{
-			scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) - 0.5, y)), glm::vec3(010, 010, 010));
+			scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) + 10.5, y)), glm::vec3(010, 010, 010));
 			mTreeModel.SetTransformMatrix(scale);
 			mTrees.get()->AddInstance(scale);
 		}

@@ -50,6 +50,19 @@
 		"bit": "cpp",
 		"chrono": "cpp",
 		"codecvt": "cpp",
-		"ratio": "cpp"
+		"ratio": "cpp",
+		"csignal": "cpp",
+		"strstream": "cpp",
+		"bitset": "cpp",
+		"complex": "cpp",
+		"condition_variable": "cpp",
+		"list": "cpp",
+		"set": "cpp",
+		"iomanip": "cpp",
+		"mutex": "cpp",
+		"thread": "cpp",
+		"cfenv": "cpp",
+		"typeindex": "cpp",
+		"variant": "cpp"
 	}
 }

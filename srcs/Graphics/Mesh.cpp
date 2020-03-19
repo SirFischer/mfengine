@@ -167,6 +167,14 @@ void		Mesh::PrepareShader()
 		mShader->SetMat4("transform", mTransform);
 		mShader->SetMat4("view", mView);
 		mShader->SetMat4("projection", mProjection);
+		mShader->SetVec3("material.ambient", mMaterial.ambient);
+		mShader->SetVec3("material.diffuse", mMaterial.diffuse);
+		mShader->SetVec3("material.specular", mMaterial.specular);
+		mShader->SetFloat("material.shininess", mMaterial.shininess);
+		if (mTexture == 1)
+			mShader->SetInt("hasTexture", 1);
+		else
+			mShader->SetInt("hasTexture", 0);
 		mShader->SetInt("texture1", 0);
 	}
 }

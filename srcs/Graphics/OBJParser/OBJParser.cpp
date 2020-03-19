@@ -33,6 +33,9 @@ namespace mf
 				return (NULL);
 			result->SetName(data->mGroupName);
 			result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
+			result->SetAmbientLight(data->mKa);
+			result->SetDiffuseLight(data->mKd);
+			result->SetSpecularLight(data->mKs);
 			//SET MTLLIB DATA
 			data->mIndices.clear();
 			return (result);
@@ -60,6 +63,12 @@ namespace mf
 			}
 			if (line.find("f ", 0, 2) != std::string::npos)
 				return (ReadIndices(line, data));
+			return (e_status::OK);
+		}
+
+		e_status	Read3Floats(std::string &line, glm::vec3 *vec)
+		{
+			sscanf(line.c_str(), "%f %f %f", &vec->x, &vec->y, &vec->z);
 			return (e_status::OK);
 		}
 
@@ -146,6 +155,12 @@ namespace mf
 					data->mMap_Ka = mtline.substr(7);
 				if (mtline.find("map_Kd ", 0, 7) != std::string::npos)
 					data->mMap_Kd = mtline.substr(7);
+				if (mtline.find("Ka ", 0, 3) != std::string::npos)
+					Read3Floats((mtline = mtline.substr(3)), &data->mKa);
+				if (mtline.find("Kd ", 0, 3) != std::string::npos)
+					Read3Floats((mtline = mtline.substr(3)), &data->mKd);
+				if (mtline.find("Ks ", 0, 3) != std::string::npos)
+					Read3Floats((mtline = mtline.substr(3)), &data->mKs);
 			}
 			delete name;
 			return (e_status::NEW_GROUP);

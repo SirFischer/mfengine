@@ -22,7 +22,7 @@ protected:
 	std::shared_ptr<unsigned int>	mIndices;
 	GLuint							mVerticeSize = 0;
 	GLuint							mNormalSize = 0;
-	GLuint							mTexture;
+	GLuint							mTexture = 0;
 	GLuint							mTextureType = GL_TEXTURE_2D;
 	GLuint							mDepthFunc = GL_LESS;
 	GLuint							mTextureCoordsSize = 0;
@@ -38,7 +38,7 @@ protected:
 
 	struct							s_material
 	{
-		glm::vec3					ambient = glm::vec3(0, 0, 0);
+		glm::vec3					ambient = glm::vec3(0.2, 0.2, 0.2);
 		glm::vec3					diffuse = glm::vec3(0.1, 0.1, 0.1);
 		glm::vec3					specular = glm::vec3(0.5, 0.5, 0.5);
 		float						shininess = 0.25;
@@ -67,6 +67,10 @@ public:
 	void			SetViewMatrix(glm::mat4 mat);
 	void			SetProjectionMatrix(glm::mat4 mat);
 	void			SetShaderProgram(mf::Shader *shader);
+
+	void			SetAmbientLight(glm::vec3 tAmbient){mMaterial.ambient = tAmbient;}
+	void			SetDiffuseLight(glm::vec3 tDiffuse){mMaterial.diffuse = tDiffuse;}
+	void			SetSpecularLight(glm::vec3 tSpecular){mMaterial.specular = tSpecular;}
 
 	void			SetDepthFunc(GLuint tDepthFunc) {mDepthFunc = tDepthFunc;}
 
