@@ -27,7 +27,7 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mSkybox.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(450, 450, 450)));
 
-	mLight.SetAmbientLight(glm::vec3(0.6f, 0.6f, 0.6f));
+	mLight.SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
 	mLight.SetPosition(glm::vec3(50.f, 10.f, 50.f));
 	mLight.SetDiffuseLight(glm::vec3(50.1f, 0.1f, 0.1f));
 	mLight.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
@@ -78,6 +78,7 @@ void	World::Draw(mf::Renderer *tRenderer)
 	tRenderer->AddMesh(&mLevelTerrain);
 	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight2);
-	mTrees->Draw(GL_TRIANGLES, &mLight, mCamera);
+	tRenderer->AddLights(&mLight);
+	tRenderer->AddInstanceBatch(mTrees.get());
 	tRenderer->Render();
 }

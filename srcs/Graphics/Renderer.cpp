@@ -25,6 +25,11 @@ namespace mf
 		}
 	}
 
+	void		Renderer::AddInstanceBatch(StaticInstancingBatch *tBatch)
+	{
+		mInstancedBatch.push_back(tBatch);
+	}
+
 	void		Renderer::AddLights(Light *tLights)
 	{
 		mLights.push_back(tLights);
@@ -55,6 +60,11 @@ namespace mf
 			LoadLights(mMeshes.back()->GetShaderProgram());
 			mMeshes.back()->Draw(GL_TRIANGLES);
 			mMeshes.pop_back();
+		}
+		while (mInstancedBatch.size())
+		{
+			mInstancedBatch.back()->Draw(GL_TRIANGLES, mLights, mCamera);
+			mInstancedBatch.pop_back();
 		}
 		mLights.clear();
 	}

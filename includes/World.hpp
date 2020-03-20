@@ -7,7 +7,6 @@
 #include "Skybox.hpp"
 #include "Model.hpp"
 
-#include "StaticInstancingBatch.hpp"
 
 
 class World

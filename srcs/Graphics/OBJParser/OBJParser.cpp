@@ -134,7 +134,6 @@ namespace mf
 			std::stringstream		b;
 			b << file.rdbuf();
 			data->mMtlib = b.str();
-			std::cout << "mtllib: " << data->mRelPath + path << std::endl;
 			delete path;
 			return (e_status::OK);
 		}
@@ -147,7 +146,6 @@ namespace mf
 				return (e_status::FAIL);
 			bzero(name, line.length());
 			sscanf(line.c_str(), "usemtl %s", name);
-			std::cout << name << std::endl;
 			std::istringstream stream(data->mMtlib.c_str() + data->mMtlib.find(name));
 			std::string		mtline;
 			while (std::getline(stream, mtline) && mtline.find("newmtl ") == std::string::npos)

@@ -21,6 +21,6 @@ namespace mf
 
 		void					AddInstance(glm::mat4 tTransform);
 		void					Finalize();
-		void					Draw(GLenum mode, Light	*light, Camera *tCamera);
+		void					Draw(GLenum mode, std::vector<Light *> tLights, Camera *tCamera);
 	};	
 } // namespace mf

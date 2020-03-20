@@ -53,22 +53,26 @@ void			StaticInstancingBatch::Finalize()
 	}
 }
 
-
-void			StaticInstancingBatch::Draw(GLenum mode, Light	*light, Camera *tCamera)
+void			StaticInstancingBatch::Draw(GLenum mode, std::vector<Light *> tLights, Camera *tCamera)
 {
 	if (!mFinalized)
 		this->Finalize();
 	for (auto &mesh : mMeshes)
 	{
 		mesh->PrepareShader();
-		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].ambient", light->GetAmbientLight());
-		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].position", light->GetPosition());
-		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].diffuse", light->GetDiffuseLight());
-		mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(0) + "].specular", light->GetSpecularLight());
-		mesh->GetShaderProgram()->SetInt("lights[" + std::to_string(0) + "].specular_pow", light->GetSpecularPower());
-		mesh->GetShaderProgram()->SetFloat("lights[" + std::to_string(0) + "].specular_strength", light->GetSpecularStrength());
+		int i = 0;
+		while (i < (int)tLights.size())
+		{
+			mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].ambient", tLights[i]->GetAmbientLight());
+			mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].position", tLights[i]->GetPosition());
+			mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].diffuse", tLights[i]->GetDiffuseLight());
+			mesh->GetShaderProgram()->SetVec3("lights[" + std::to_string(i) + "].specular", tLights[i]->GetSpecularLight());
+			mesh->GetShaderProgram()->SetInt("lights[" + std::to_string(i) + "].specular_pow", tLights[i]->GetSpecularPower());
+			mesh->GetShaderProgram()->SetFloat("lights[" + std::to_string(i) + "].specular_strength", tLights[i]->GetSpecularStrength());
+			i++;
+		}
+		mesh->GetShaderProgram()->SetInt("lightNum", i);
 		mesh->GetShaderProgram()->SetVec3("viewPos", tCamera->GetPos());
-		mesh->GetShaderProgram()->SetInt("lightNum", 1);
 		glDrawArraysInstanced(mode, 0, mesh->GetVerticesSize() / 3, mTransformMatrices.size());
 		glBindVertexArray(0);
 	}
