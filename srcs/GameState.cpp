@@ -15,7 +15,7 @@ mRenderer(&mCamera)
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
-	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler);
+	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler, &mRenderer);
 	mWindow->setMouseCursorVisible(false);
 }
 

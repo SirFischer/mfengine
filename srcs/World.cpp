@@ -43,7 +43,7 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mTrees = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mTreeModel));
 	
 	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 10, 0)), glm::vec3(0.1, 0.1, 0.1));
-	for (size_t i = 0; i < 2000; i++)
+	for (size_t i = 0; i < 1000; i++)
 	{
 		float x, y;
 		x = (rand() % 2500) - 1250;
@@ -53,6 +53,25 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 			scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) + 10.5, y)), glm::vec3(010, 010, 010));
 			mTreeModel.SetTransformMatrix(scale);
 			mTrees.get()->AddInstance(scale);
+		}
+	}
+
+	mGrassModel.LoadFromOBJ("assets/objects/Treelow.obj", tResourceManager);
+	mGrassModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
+	mGrassModel.SetShaderProgram(mResourceManager->GetShader("instanced"));
+	mGrass = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mGrassModel));
+	
+	for (size_t i = 0; i < 2000; i++)
+	{
+		float x, y;
+		x = (rand() % 2500) - 1250;
+		y = (rand() % 2500) - 1250;
+		if (mLevelTerrain.GetHeightInWorld(x, y) > 0.0)
+		{
+			scale = glm::mat4(1);
+			scale = glm::scale(glm::translate(scale, glm::vec3(x, mLevelTerrain.GetHeightInWorld(x, y) - 1, y)), glm::vec3(0.10, 0.10, 0.10));
+			mGrassModel.SetTransformMatrix(scale);
+			mGrass.get()->AddInstance(scale);
 		}
 	}
 }
@@ -71,6 +90,7 @@ void	World::Update(glm::mat4 tViewMatrix)
 	xpos += 0.05;
 	mPlayer->HandleTerrainCollision(&mLevelTerrain);
 	mTreeModel.SetViewMatrix(tViewMatrix);
+	mGrassModel.SetViewMatrix(tViewMatrix);
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
@@ -80,5 +100,6 @@ void	World::Draw(mf::Renderer *tRenderer)
 	tRenderer->AddLights(&mLight2);
 	tRenderer->AddLights(&mLight);
 	tRenderer->AddInstanceBatch(mTrees.get());
+	tRenderer->AddInstanceBatch(mGrass.get());
 	tRenderer->Render();
 }

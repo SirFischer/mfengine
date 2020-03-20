@@ -58,12 +58,12 @@ namespace mf
 		{
 			mMeshes.back()->PrepareShader();
 			LoadLights(mMeshes.back()->GetShaderProgram());
-			mMeshes.back()->Draw(GL_TRIANGLES);
+			mMeshes.back()->Draw(mDrawMode);
 			mMeshes.pop_back();
 		}
 		while (mInstancedBatch.size())
 		{
-			mInstancedBatch.back()->Draw(GL_TRIANGLES, mLights, mCamera);
+			mInstancedBatch.back()->Draw(mDrawMode, mLights, mCamera);
 			mInstancedBatch.pop_back();
 		}
 		mLights.clear();

@@ -99,4 +99,24 @@ Terminal::TERMINAL_ERROR_CODE		Execute(Terminal *term, std::vector<std::string> 
     return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
 }
 
+Terminal::TERMINAL_ERROR_CODE		SetDrawMode(Terminal *term, std::vector<std::string> params)
+{
+    if (params.size() == 1)
+    {
+		if (!term->mRenderer)
+			return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
+		term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "Client: Setting draw mode to " + params.at(0) + "...\n");
+		if (params.at(0) == "0")
+			term->mRenderer->SetDrawMode(GL_TRIANGLES);
+		else if (params.at(0) == "1")
+			term->mRenderer->SetDrawMode(GL_LINES);
+		else if (params.at(0) == "2")
+			term->mRenderer->SetDrawMode(GL_POINTS);
+		else
+			return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+		return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);
+    }
+    return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
+}
+
 }

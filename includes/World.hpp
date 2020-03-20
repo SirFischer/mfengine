@@ -24,6 +24,8 @@ private:
 
 	mf::Model				mTreeModel;
 	std::unique_ptr<mf::StaticInstancingBatch> mTrees;
+	mf::Model				mGrassModel;
+	std::unique_ptr<mf::StaticInstancingBatch> mGrass;
 
 public:
 			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer);

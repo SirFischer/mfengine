@@ -16,12 +16,15 @@ namespace mf
 		std::vector<StaticInstancingBatch *>	mInstancedBatch;
 		std::vector<Light *>					mLights;
 
+		GLenum									mDrawMode = GL_TRIANGLES;
+
 		void						LoadLights(Shader *tShader);
 
 	public:
 		Renderer(mf::Camera *tCamera);
 		~Renderer();
 
+		void						SetDrawMode(GLenum tMode){mDrawMode = tMode;}
 
 		void						AddMesh(Mesh *tMesh);
 		void						AddModel(Model *tModel);

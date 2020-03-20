@@ -23,6 +23,7 @@ void				Terminal::LoadCommands()
 	mCommands.emplace("toggle", (t_terminal_command){&Toggle, "Toggles an action on or off", "..."});
 	mCommands.emplace("clear", (t_terminal_command){&Clear, "Clear terminal", "Clear the terminal output screen"});
 	mCommands.emplace("execute", (t_terminal_command){&Execute, "Execute cfg file", "Execute a cfg file"});
+	mCommands.emplace("cl_setdrawmode", (t_terminal_command){&SetDrawMode, "SetDrawMode", "Set drawing mode for the client renderer"});
 }
 
 void				Terminal::LoadActions()
@@ -52,8 +53,9 @@ void				Terminal::LoadKeys()
 	mKeys["enter"]				=	sf::Keyboard::Return;
 }
 
-void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler)
+void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler, Renderer *tRenderer)
 {
+	mRenderer = tRenderer;
 	try
 	{
 		mGUI = std::unique_ptr<Container>(new Container(tWindow));

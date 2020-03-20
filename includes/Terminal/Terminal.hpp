@@ -13,6 +13,7 @@
 #include "ResourceManager.hpp"
 #include "Window.hpp"
 #include "GUI.hpp"
+#include "Renderer.hpp"
 
 namespace mf
 {
@@ -37,6 +38,7 @@ public:
 	}				t_terminal_command;
 
 	EventHandler								*mEventHandler = NULL;
+	Renderer									*mRenderer = NULL;
 
 	std::map<std::string, t_terminal_command>	mCommands;
 	std::map<std::string, ACTION>				mActions;
@@ -48,7 +50,7 @@ public:
 	TERMINAL_ERROR_CODE							ProcessCommand(std::string line);
 	TERMINAL_ERROR_CODE							ReadFromFile(std::string path);
 
-	void										LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler);
+	void										LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler, Renderer *tRenderer);
 	void										UpdateGUI();
 	void										RenderGUI();
 
@@ -77,7 +79,8 @@ Terminal::TERMINAL_ERROR_CODE		Help(Terminal *term, std::vector<std::string> par
 Terminal::TERMINAL_ERROR_CODE		UnbindAll(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Bind(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Toggle(Terminal *term, std::vector<std::string> params);
-Terminal::TERMINAL_ERROR_CODE       Clear(Terminal *term, std::vector<std::string> params);
+Terminal::TERMINAL_ERROR_CODE		Clear(Terminal *term, std::vector<std::string> params);
 Terminal::TERMINAL_ERROR_CODE		Execute(Terminal *term, std::vector<std::string> params);
+Terminal::TERMINAL_ERROR_CODE		SetDrawMode(Terminal *term, std::vector<std::string> params);
 
 } // namespace mf
