@@ -150,11 +150,6 @@ void		Mesh::Bind()
 	glBindVertexArray(mVAO);
 }
 
-void		Mesh::Draw()
-{
-	Draw(GL_TRIANGLES);
-}
-
 void		Mesh::PrepareShader()
 {
 	glDepthFunc(mDepthFunc);
@@ -177,6 +172,11 @@ void		Mesh::PrepareShader()
 			mShader->SetInt("hasTexture", 0);
 		mShader->SetInt("texture1", 0);
 	}
+}
+
+void		Mesh::Draw()
+{
+	Draw(GL_TRIANGLES);
 }
 
 void		Mesh::Draw(GLenum mode)

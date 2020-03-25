@@ -44,39 +44,39 @@ protected:
 		float						shininess = 0.25;
 	}								mMaterial;
 
-void				initMesh();
+void								initMesh();
 
 public:
-					Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize);
-					Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize);
-					Mesh(float *vertices, unsigned int *indices, float *textureCoords, float *normals, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize, GLuint normalsize);
-					Mesh(const Mesh &tMesh);
-					Mesh();
-					~Mesh();
+									Mesh(float *vertices, unsigned int *indices, GLuint verticesize, GLuint indicesize);
+									Mesh(float *vertices, unsigned int *indices, float *textureCoords, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize);
+									Mesh(float *vertices, unsigned int *indices, float *textureCoords, float *normals, GLuint verticesize, GLuint indicesize, GLuint textureCoordsSize, GLuint normalsize);
+									Mesh(const Mesh &tMesh);
+									Mesh();
+									~Mesh();
 
-	void			Bind();
+	void							Bind();
 
-	void			PrepareShader();
+	void							PrepareShader();
 
-	void			Draw();
-	void			Draw(GLenum mode);
+	void							Draw();
+	void							Draw(GLenum mode);
 
 
-	void			SetName(std::string tName){mName = tName;}
-	void			SetTransformMatrix(glm::mat4 mat);
-	void			SetViewMatrix(glm::mat4 mat);
-	void			SetProjectionMatrix(glm::mat4 mat);
-	void			SetShaderProgram(mf::Shader *shader);
+	void							SetName(std::string tName){mName = tName;}
+	void							SetTransformMatrix(glm::mat4 mat);
+	void							SetViewMatrix(glm::mat4 mat);
+	void							SetProjectionMatrix(glm::mat4 mat);
+	void							SetShaderProgram(mf::Shader *shader);
 
-	void			SetAmbientLight(glm::vec3 tAmbient){mMaterial.ambient = tAmbient;}
-	void			SetDiffuseLight(glm::vec3 tDiffuse){mMaterial.diffuse = tDiffuse;}
-	void			SetSpecularLight(glm::vec3 tSpecular){mMaterial.specular = tSpecular;}
-	void			SetShininess(float tShininess) {mMaterial.shininess = tShininess;}
+	void							SetAmbientLight(glm::vec3 tAmbient){mMaterial.ambient = tAmbient;}
+	void							SetDiffuseLight(glm::vec3 tDiffuse){mMaterial.diffuse = tDiffuse;}
+	void							SetSpecularLight(glm::vec3 tSpecular){mMaterial.specular = tSpecular;}
+	void							SetShininess(float tShininess) {mMaterial.shininess = tShininess;}
 
-	void			SetDepthFunc(GLuint tDepthFunc) {mDepthFunc = tDepthFunc;}
+	void							SetDepthFunc(GLuint tDepthFunc) {mDepthFunc = tDepthFunc;}
 
-	void			SetTexture(sf::Image tImage);
-	void			SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown);
+	void							SetTexture(sf::Image tImage);
+	void							SetCubeMap(sf::Image tFront, sf::Image tBack, sf::Image tLeft, sf::Image tRight, sf::Image tUp, sf::Image tDown);
 
 	mf::Shader						*GetShaderProgram() {return (mShader);}
 	std::shared_ptr<float>			GetVertices() {return (mVertices);}

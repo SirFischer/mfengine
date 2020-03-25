@@ -74,6 +74,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 			mGrass.get()->AddInstance(scale);
 		}
 	}
+	mTestModel.LoadFromOBJ("assets/objects/IronMan.obj", tResourceManager);
+	mTestModel.SetProjectionMatrix(tCamera->GetProjectionMatrix());
+	mTestModel.SetShaderProgram(mResourceManager->GetShader("generic"));
 }
 
 World::~World()
@@ -91,11 +94,13 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mPlayer->HandleTerrainCollision(&mLevelTerrain);
 	mTreeModel.SetViewMatrix(tViewMatrix);
 	mGrassModel.SetViewMatrix(tViewMatrix);
+	mTestModel.SetViewMatrix(tViewMatrix);
 }
 
 void	World::Draw(mf::Renderer *tRenderer)
 {
 	tRenderer->AddMesh(&mLevelTerrain);
+	tRenderer->AddModel(&mTestModel);
 	mSkybox.Draw(tRenderer);
 	tRenderer->AddLights(&mLight2);
 	tRenderer->AddLights(&mLight);

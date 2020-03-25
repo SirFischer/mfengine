@@ -13,15 +13,17 @@ namespace mf
 
 			for (auto &item : data->mIndices)
 			{
+				if ((int)item.x - 1 < 0 || (item.x - 1) * 3 >= data->mVertices.size())
+					continue ;
 				vertices.push_back(data->mVertices.at(((item.x - 1) * 3)));
 				vertices.push_back(data->mVertices.at(((item.x - 1) * 3) + 1));
 				vertices.push_back(data->mVertices.at(((item.x - 1) * 3) + 2));
-				if (item.y != (glm::u32)-1)
+				if (item.y != (glm::u32)-1 && (item.y - 1) * 2 < data->mTexCoords.size())
 				{
 					textureCoords.push_back(data->mTexCoords.at(((item.y - 1) * 2)));
 					textureCoords.push_back(data->mTexCoords.at(((item.y - 1) * 2) + 1));
 				}
-				if (item.z != (glm::u32)-1)
+				if (item.z != (glm::u32)-1 && (item.z - 1) * 3 < data->mNormals.size())
 				{
 					normals.push_back(data->mNormals.at(((item.z - 1) * 3)));
 					normals.push_back(data->mNormals.at(((item.z - 1) * 3) + 1));
