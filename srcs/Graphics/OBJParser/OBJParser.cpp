@@ -34,7 +34,9 @@ namespace mf
 			if (!(result = new Mesh(vertices.data(), NULL, textureCoords.data(), normals.data(), vertices.size() * sizeof(float), 0, textureCoords.size() * sizeof(float), normals.size() * sizeof(float))))
 				return (NULL);
 			result->SetName(data->mGroupName);
-			result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
+			if (data->mMap_Kd != "")
+				result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
+			std::cout << "Loaded image: " + data->mRelPath + data->mMap_Kd << std::endl;
 			result->SetAmbientLight(data->mKa);
 			result->SetDiffuseLight(data->mKd);
 			result->SetSpecularLight(data->mKs);
@@ -148,13 +150,16 @@ namespace mf
 				return (e_status::FAIL);
 			bzero(name, line.length());
 			sscanf(line.c_str(), "usemtl %s", name);
-			std::istringstream stream(data->mMtlib.c_str() + data->mMtlib.find(name));
+			std::istringstream stream(data->mMtlib.c_str() + data->mMtlib.find("newmtl " + std::string(name)));
+			std::cout << name << std::endl;
 			std::string		mtline;
+			std::getline(stream, mtline);
 			while (std::getline(stream, mtline) && mtline.find("newmtl ") == std::string::npos)
 			{
-				if (mtline.find("map_Ka ", 0, 7) != std::string::npos)
+				std::cout << "MTL: " << mtline << std::endl;
+				if (mtline.find("map_Ka", 0, 6) != std::string::npos)
 					data->mMap_Ka = mtline.substr(7);
-				if (mtline.find("map_Kd ", 0, 7) != std::string::npos)
+				if (mtline.find("map_Kd", 0, 6) != std::string::npos)
 					data->mMap_Kd = mtline.substr(7);
 				if (mtline.find("Ka ", 0, 3) != std::string::npos)
 					Read3Floats((mtline = mtline.substr(3)), &data->mKa);

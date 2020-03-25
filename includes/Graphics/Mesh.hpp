@@ -38,7 +38,7 @@ protected:
 
 	struct							s_material
 	{
-		glm::vec3					ambient = glm::vec3(0.2, 0.2, 0.2);
+		glm::vec3					ambient = glm::vec3(0.5, 0.5, 0.5);
 		glm::vec3					diffuse = glm::vec3(0.1, 0.1, 0.1);
 		glm::vec3					specular = glm::vec3(0.5, 0.5, 0.5);
 		float						shininess = 0.25;

@@ -33,9 +33,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight.SetSpecularLight(glm::vec3(0.45, 0.55, 0.45));
 
 	mLight2.SetAmbientLight(glm::vec3(0.2f, 0.2f, 0.2f));
-	mLight2.SetPosition(glm::vec3(50.f, 60.f, 50.f));
-	mLight2.SetDiffuseLight(glm::vec3(0.1f, 30.1f, 0.1f));
-	mLight2.SetSpecularLight(glm::vec3(0.85, 0.95, 0.85));
+	mLight2.SetPosition(glm::vec3(0.f, 10.f, 0.f));
+	mLight2.SetDiffuseLight(glm::vec3(30.5f, 30.5f, 30.5f));
+	mLight2.SetSpecularLight(glm::vec3(2.85, 2.95, 2.85));
 
 	mTreeModel.LoadFromOBJ("assets/objects/lowpolytree.obj", tResourceManager);
 	mTreeModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
@@ -74,9 +74,12 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 			mGrass.get()->AddInstance(scale);
 		}
 	}
-	mTestModel.LoadFromOBJ("assets/objects/IronMan.obj", tResourceManager);
+	mTestModel.LoadFromOBJ("assets/objects/Item01.obj", tResourceManager);
 	mTestModel.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mTestModel.SetShaderProgram(mResourceManager->GetShader("generic"));
+	scale = glm::mat4(1);
+	scale = glm::scale(scale, glm::vec3(2, 2, 2));
+	mTestModel.SetTransformMatrix(scale);
 }
 
 World::~World()

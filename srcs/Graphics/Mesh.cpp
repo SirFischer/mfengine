@@ -166,7 +166,7 @@ void		Mesh::PrepareShader()
 		mShader->SetVec3("material.diffuse", mMaterial.diffuse);
 		mShader->SetVec3("material.specular", mMaterial.specular);
 		mShader->SetFloat("material.shininess", mMaterial.shininess);
-		if (mTexture == 1)
+		if (mTexture > 0)
 			mShader->SetInt("hasTexture", 1);
 		else
 			mShader->SetInt("hasTexture", 0);
