@@ -99,14 +99,14 @@ void	World::Update(glm::mat4 tViewMatrix)
 	mTestModel.SetViewMatrix(tViewMatrix);
 }
 
-void	World::Draw(mf::Renderer *tRenderer)
+void	World::Draw()
 {
-	tRenderer->AddMesh(&mLevelTerrain);
-	tRenderer->AddModel(&mTestModel);
-	mSkybox.Draw(tRenderer);
-	tRenderer->AddLights(&mLight2);
-	tRenderer->AddLights(&mLight);
-	tRenderer->AddInstanceBatch(mTrees.get());
-	tRenderer->AddInstanceBatch(mGrass.get());
-	tRenderer->Render();
+	mf::Renderer::AddMesh(&mLevelTerrain);
+	mf::Renderer::AddModel(&mTestModel);
+	mSkybox.Draw();
+	mf::Renderer::AddLights(&mLight2);
+	mf::Renderer::AddLights(&mLight);
+	mf::Renderer::AddInstanceBatch(mTrees.get());
+	mf::Renderer::AddInstanceBatch(mGrass.get());
+	mf::Renderer::Render();
 }

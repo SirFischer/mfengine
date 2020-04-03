@@ -103,15 +103,13 @@ Terminal::TERMINAL_ERROR_CODE		SetDrawMode(Terminal *term, std::vector<std::stri
 {
     if (params.size() == 1)
     {
-		if (!term->mRenderer)
-			return (Terminal::TERMINAL_ERROR_CODE::BAD_CONTEXT);
 		term->UpdateOutputStringGUI(term->GetOutputStringGUI() + "Client: Setting draw mode to " + params.at(0) + "...\n");
 		if (params.at(0) == "0")
-			term->mRenderer->SetDrawMode(GL_TRIANGLES);
+			mf::Renderer::mDrawMode = GL_TRIANGLES;
 		else if (params.at(0) == "1")
-			term->mRenderer->SetDrawMode(GL_LINES);
+			mf::Renderer::mDrawMode = GL_LINES;
 		else if (params.at(0) == "2")
-			term->mRenderer->SetDrawMode(GL_POINTS);
+			mf::Renderer::mDrawMode = GL_POINTS;
 		else
 			return (Terminal::TERMINAL_ERROR_CODE::BAD_ARGUMENTS);
 		return (Terminal::TERMINAL_ERROR_CODE::SUCCESS);

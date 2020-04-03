@@ -38,7 +38,6 @@ public:
 	}				t_terminal_command;
 
 	EventHandler								*mEventHandler = NULL;
-	Renderer									*mRenderer = NULL;
 
 	std::map<std::string, t_terminal_command>	mCommands;
 	std::map<std::string, ACTION>				mActions;
@@ -50,7 +49,7 @@ public:
 	TERMINAL_ERROR_CODE							ProcessCommand(std::string line);
 	TERMINAL_ERROR_CODE							ReadFromFile(std::string path);
 
-	void										LoadGUI(Window *tWindow, EventHandler *tEventHandler, Renderer *tRenderer);
+	void										LoadGUI(Window *tWindow, EventHandler *tEventHandler);
 	void										UpdateGUI();
 	void										RenderGUI();
 

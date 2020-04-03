@@ -70,13 +70,13 @@ namespace mf
 		mDown.SetViewMatrix(tMat);
 	}
 
-	void	Skybox::Draw(mf::Renderer *tRenderer)
+	void	Skybox::Draw()
 	{
-		tRenderer->AddMesh(&mFront);
-		tRenderer->AddMesh(&mBack);
-		tRenderer->AddMesh(&mRight);
-		tRenderer->AddMesh(&mLeft);
-		tRenderer->AddMesh(&mUp);
-		tRenderer->AddMesh(&mDown);
+		mf::Renderer::AddMesh(&mFront);
+		mf::Renderer::AddMesh(&mBack);
+		mf::Renderer::AddMesh(&mRight);
+		mf::Renderer::AddMesh(&mLeft);
+		mf::Renderer::AddMesh(&mUp);
+		mf::Renderer::AddMesh(&mDown);
 	}
 } // namespace mf

@@ -53,9 +53,8 @@ void				Terminal::LoadKeys()
 	mKeys["enter"]				=	sf::Keyboard::Return;
 }
 
-void				Terminal::LoadGUI(Window *tWindow, EventHandler *tEventHandler, Renderer *tRenderer)
+void				Terminal::LoadGUI(Window *tWindow, EventHandler *tEventHandler)
 {
-	mRenderer = tRenderer;
 	try
 	{
 		mGUI = std::unique_ptr<Container>(new Container(tWindow));

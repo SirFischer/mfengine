@@ -33,5 +33,5 @@ public:
 			~World();
 
 	void	Update(glm::mat4 tViewMatrix);
-	void	Draw(mf::Renderer *tRenderer);
+	void	Draw();
 };

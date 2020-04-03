@@ -114,7 +114,7 @@ namespace mf
 		void			SetProjectionMatrix(glm::mat4 mat);
 		void			SetShaderProgram(mf::Shader *shader);
 
-		void		Draw(mf::Renderer *tRenderer);
+		void			Draw();
 	};
 	
 } // namespace mf

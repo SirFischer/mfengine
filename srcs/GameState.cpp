@@ -4,8 +4,7 @@ GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
 mWorld(&mCamera, &mPlayer),
 mPlayer(&mEventHandler),
-mFPSDisplay(tWindow, &mEventHandler),
-mRenderer(&mCamera)
+mFPSDisplay(tWindow, &mEventHandler)
 {
 	mWindow = tWindow;
 	mPlayer.SetCamera(&mCamera);
@@ -15,8 +14,9 @@ mRenderer(&mCamera)
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
-	mTerminal.LoadGUI(tWindow, &mEventHandler, &mRenderer);
+	mTerminal.LoadGUI(tWindow, &mEventHandler);
 	mWindow->setMouseCursorVisible(false);
+	mf::Renderer::mCamera = &mCamera;
 }
 
 GameState::~GameState()
@@ -64,7 +64,7 @@ void				GameState::render()
 {
 	mWindow->clear();
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	mWorld.Draw(&mRenderer);
+	mWorld.Draw();
 	mWindow->pushGLStates();
 	glBindBuffer(GL_ARRAY_BUFFER,0);
     glDisableVertexArrayAttribEXT(0,0);

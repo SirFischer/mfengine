@@ -2,9 +2,15 @@
 
 namespace mf
 {
-	Renderer::Renderer(mf::Camera *tCamera)
+	mf::Camera		*Renderer::mCamera = NULL;
+	GLenum			Renderer::mDrawMode = GL_TRIANGLES;
+
+	std::vector<Mesh *>						Renderer::mMeshes = std::vector<Mesh *>();
+	std::vector<StaticInstancingBatch *>	Renderer::mInstancedBatch = std::vector<StaticInstancingBatch *>();
+	std::vector<Light *>					Renderer::mLights = std::vector<Light *>();
+
+	Renderer::Renderer()
 	{
-		mCamera = tCamera;
 	}
 
 	Renderer::~Renderer()
@@ -21,7 +27,7 @@ namespace mf
 		std::vector<Mesh *>		mMeshes = tModel->GetMeshes();
 		for (auto &i : mMeshes)
 		{
-			this->AddMesh(i);
+			AddMesh(i);
 		}
 	}
 

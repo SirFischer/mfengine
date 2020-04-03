@@ -25,7 +25,6 @@ private:
 	bool					mTerminalActive = false;
 	bool					mTerminalToggleReset = true;
 	mf::TextBox				mFPSDisplay;
-	mf::Renderer			mRenderer;
 
 public:
 	explicit GameState(mf::Window *tWindow);

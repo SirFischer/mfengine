@@ -11,25 +11,23 @@ namespace mf
 	class Renderer
 	{
 	private:
-		mf::Camera								*mCamera = NULL;
-		std::vector<Mesh *>						mMeshes;
-		std::vector<StaticInstancingBatch *>	mInstancedBatch;
-		std::vector<Light *>					mLights;
-
-		GLenum									mDrawMode = GL_TRIANGLES;
-
-		void						LoadLights(Shader *tShader);
-
-	public:
-		Renderer(mf::Camera *tCamera);
+		Renderer();
 		~Renderer();
 
-		void						SetDrawMode(GLenum tMode){mDrawMode = tMode;}
+		static std::vector<Mesh *>						mMeshes;
+		static std::vector<StaticInstancingBatch *>		mInstancedBatch;
+		static std::vector<Light *>						mLights;
 
-		void						AddMesh(Mesh *tMesh);
-		void						AddModel(Model *tModel);
-		void						AddInstanceBatch(StaticInstancingBatch *tBatch);
-		void						AddLights(Light *tLights);
-		void						Render();
+		static void										LoadLights(Shader *tShader);
+
+	public:
+		static mf::Camera				*mCamera;
+		static GLenum					mDrawMode;
+
+		static void						AddMesh(Mesh *tMesh);
+		static void						AddModel(Model *tModel);
+		static void						AddInstanceBatch(StaticInstancingBatch *tBatch);
+		static void						AddLights(Light *tLights);
+		static void						Render();
 	};
 }
