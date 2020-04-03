@@ -1,29 +1,28 @@
 #include "World.hpp"
 
-World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer)
-:mResourceManager(tResourceManager)
-,mLevelTerrain(500, 500)
-,mSkybox(tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Front.png"),
-		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Left.png"),
-		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Back.png"),
-		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Right.png"),
-		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Up.png"),
-		 tResourceManager->LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Down.png"))
+World::World(mf::Camera	*tCamera, mf::Player *tPlayer)
+:mLevelTerrain(500, 500)
+,mSkybox(mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Front.png"),
+		 mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Left.png"),
+		 mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Back.png"),
+		 mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Right.png"),
+		 mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Up.png"),
+		 mf::ResourceManager::LoadImage("assets/textures/skybox/CloudyCrown_Sunset_Down.png"))
 {
 	mCamera = tCamera;
 	mPlayer = tPlayer;
-	mResourceManager->LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
-	mResourceManager->LoadShader("generic", "assets/shaders/vertex/generic.glsl", "assets/shaders/fragment/generic.glsl");
-	mResourceManager->LoadShader("instanced", "assets/shaders/vertex/instanced_generic.glsl", "assets/shaders/fragment/instanced_generic.glsl");
-	mLevelTerrain.SetShaderProgram(mResourceManager->GetShader("terrain"));
+	mf::ResourceManager::LoadShader("terrain", "assets/shaders/vertex/terrain.glsl", "assets/shaders/fragment/terrain.glsl");
+	mf::ResourceManager::LoadShader("generic", "assets/shaders/vertex/generic.glsl", "assets/shaders/fragment/generic.glsl");
+	mf::ResourceManager::LoadShader("instanced", "assets/shaders/vertex/instanced_generic.glsl", "assets/shaders/fragment/instanced_generic.glsl");
+	mLevelTerrain.SetShaderProgram(mf::ResourceManager::GetShader("terrain"));
 	mLevelTerrain.SetProjectionMatrix(tCamera->GetProjectionMatrix());
-	mLevelTerrain.SetTexture(mResourceManager->LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
+	mLevelTerrain.SetTexture(mf::ResourceManager::LoadImage("assets/textures/terrain/grass_grass_0131_01.jpg"));
 	glm::mat4 scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0)), glm::vec3(5, 90.0, 5));
 	mLevelTerrain.SetTransformMatrix(scale);
 	mLevelTerrain.GenHeightMap(time(0), 0, 5, 0, 5);
 
-	mResourceManager->LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
-	mSkybox.SetShaderProgram(mResourceManager->GetShader("skybox"));
+	mf::ResourceManager::LoadShader("skybox", "assets/shaders/vertex/skybox.glsl", "assets/shaders/fragment/skybox.glsl");
+	mSkybox.SetShaderProgram(mf::ResourceManager::GetShader("skybox"));
 	mSkybox.SetProjectionMatrix(tCamera->GetProjectionMatrix());
 	mSkybox.SetTransformMatrix(glm::scale(glm::mat4(1.0), glm::vec3(450, 450, 450)));
 
@@ -37,9 +36,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 	mLight2.SetDiffuseLight(glm::vec3(30.5f, 30.5f, 30.5f));
 	mLight2.SetSpecularLight(glm::vec3(2.85, 2.95, 2.85));
 
-	mTreeModel.LoadFromOBJ("assets/objects/lowpolytree.obj", tResourceManager);
+	mTreeModel.LoadFromOBJ("assets/objects/lowpolytree.obj");
 	mTreeModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
-	mTreeModel.SetShaderProgram(mResourceManager->GetShader("instanced"));
+	mTreeModel.SetShaderProgram(mf::ResourceManager::GetShader("instanced"));
 	mTrees = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mTreeModel));
 	
 	scale = glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, mLevelTerrain.GetHeightInWorld(0, 0) - 10, 0)), glm::vec3(0.1, 0.1, 0.1));
@@ -56,9 +55,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 		}
 	}
 
-	mGrassModel.LoadFromOBJ("assets/objects/Treelow.obj", tResourceManager);
+	mGrassModel.LoadFromOBJ("assets/objects/Treelow.obj");
 	mGrassModel.SetProjectionMatrix(mCamera->GetProjectionMatrix());
-	mGrassModel.SetShaderProgram(mResourceManager->GetShader("instanced"));
+	mGrassModel.SetShaderProgram(mf::ResourceManager::GetShader("instanced"));
 	mGrass = std::unique_ptr<mf::StaticInstancingBatch>(new mf::StaticInstancingBatch(&mGrassModel));
 	
 	for (size_t i = 0; i < 2000; i++)
@@ -74,9 +73,9 @@ World::World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Pla
 			mGrass.get()->AddInstance(scale);
 		}
 	}
-	mTestModel.LoadFromOBJ("assets/objects/Item01.obj", tResourceManager);
+	mTestModel.LoadFromOBJ("assets/objects/Item01.obj");
 	mTestModel.SetProjectionMatrix(tCamera->GetProjectionMatrix());
-	mTestModel.SetShaderProgram(mResourceManager->GetShader("generic"));
+	mTestModel.SetShaderProgram(mf::ResourceManager::GetShader("generic"));
 	scale = glm::mat4(1);
 	scale = glm::scale(scale, glm::vec3(2, 2, 2));
 	mTestModel.SetTransformMatrix(scale);

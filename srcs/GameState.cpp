@@ -2,9 +2,9 @@
 
 GameState::GameState(mf::Window *tWindow) :
 mEventHandler(tWindow),
-mWorld(&mResourceManager, &mCamera, &mPlayer),
+mWorld(&mCamera, &mPlayer),
 mPlayer(&mEventHandler),
-mFPSDisplay(tWindow, &mResourceManager, &mEventHandler),
+mFPSDisplay(tWindow, &mEventHandler),
 mRenderer(&mCamera)
 {
 	mWindow = tWindow;
@@ -15,7 +15,7 @@ mRenderer(&mCamera)
 		mTerminal.ReadFromFile("assets/cfg/controls.cfg");
 	else
 		mTerminal.ReadFromFile("assets/cfg/controls_default.cfg");
-	mTerminal.LoadGUI(tWindow, &mResourceManager, &mEventHandler, &mRenderer);
+	mTerminal.LoadGUI(tWindow, &mEventHandler, &mRenderer);
 	mWindow->setMouseCursorVisible(false);
 }
 

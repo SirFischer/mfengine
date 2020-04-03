@@ -3,12 +3,11 @@
 namespace mf
 {
 
-TextBox::TextBox(Window *tWindow, mf::ResourceManager *tResourceManager, EventHandler *tEventHandler)
+TextBox::TextBox(Window *tWindow, EventHandler *tEventHandler)
 {
     mWindow = tWindow;
-    mResourceManager = tResourceManager;
     mEventHandler = tEventHandler;
-    mFont = mResourceManager->LoadFont("assets/fonts/pdark.ttf");
+    mFont = mf::ResourceManager::LoadFont("assets/fonts/pdark.ttf");
     mText.setFont(mFont);
 }
 

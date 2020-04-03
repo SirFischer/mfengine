@@ -16,10 +16,8 @@ namespace mf
 		sf::Texture				mOnHoverTexture;
 		sf::Vector2f			mTextPos;
 
-		mf::ResourceManager		*mResourceManager;
-
 	public:
-						Button(Window *tWindow, mf::ResourceManager *tResourceManager);
+						Button(Window *tWindow);
 						~Button();
 
 		void			Draw();

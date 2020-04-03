@@ -1,12 +1,11 @@
 #include "Button.hpp"
 
-mf::Button::Button(Window *tWindow, mf::ResourceManager *tResourceManager)
+mf::Button::Button(Window *tWindow)
 {
 	mWindow = tWindow;
-	mResourceManager = tResourceManager;
-	mDefaultTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
-	mOnClickTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
-	mOnHoverTexture.loadFromImage(mResourceManager->LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(34, 0, 28, 18));
+	mDefaultTexture.loadFromImage(mf::ResourceManager::LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
+	mOnClickTexture.loadFromImage(mf::ResourceManager::LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(1, 0, 28, 18));
+	mOnHoverTexture.loadFromImage(mf::ResourceManager::LoadImage("assets/textures/GUI/Button_1.png"), sf::IntRect(34, 0, 28, 18));
 	mSprite.setTexture(mDefaultTexture);
 	mTextPos = sf::Vector2f(10, 10);
 }
@@ -38,7 +37,7 @@ void	mf::Button::Update()
 
 void	mf::Button::SetFont(std::string path)
 {
-	mFont = mResourceManager->LoadFont(path);
+	mFont = mf::ResourceManager::LoadFont(path);
 	mText.setFont(mFont);
 }
 

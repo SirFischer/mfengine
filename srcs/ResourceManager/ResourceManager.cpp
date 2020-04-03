@@ -2,7 +2,10 @@
 
 namespace mf
 {
-bool mf::ResourceManager::verbose = false;
+bool								mf::ResourceManager::verbose = false;
+std::map<std::string, sf::Font>		mf::ResourceManager::mFonts = std::map<std::string, sf::Font>();
+std::map<std::string, sf::Image>	mf::ResourceManager::mImages = std::map<std::string, sf::Image>();
+std::map<std::string, mf::Shader>	mf::ResourceManager::mShaders = std::map<std::string, mf::Shader>();
 
 ResourceManager::ResourceManager()
 {

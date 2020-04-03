@@ -3,13 +3,13 @@
 MenuState::MenuState(mf::Window *tWindow):
 mEventHandler(tWindow),
 mContainer(tWindow),
-mPlayButton(tWindow, &mResourceManager),
-mOptionsButton(tWindow, &mResourceManager),
-mQuitButton(tWindow, &mResourceManager),
-mTitle(tWindow, &mResourceManager, &mEventHandler),
+mPlayButton(tWindow),
+mOptionsButton(tWindow),
+mQuitButton(tWindow),
+mTitle(tWindow, &mEventHandler),
 mContainerOptions(tWindow),
-mFullScreenButton(tWindow, &mResourceManager),
-mBackButton(tWindow, &mResourceManager)
+mFullScreenButton(tWindow),
+mBackButton(tWindow)
 {
 	mWindow = tWindow;
 	mState = MENU_STATE::MAIN;

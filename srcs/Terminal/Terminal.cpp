@@ -53,15 +53,15 @@ void				Terminal::LoadKeys()
 	mKeys["enter"]				=	sf::Keyboard::Return;
 }
 
-void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler, Renderer *tRenderer)
+void				Terminal::LoadGUI(Window *tWindow, EventHandler *tEventHandler, Renderer *tRenderer)
 {
 	mRenderer = tRenderer;
 	try
 	{
 		mGUI = std::unique_ptr<Container>(new Container(tWindow));
-		mTextArea = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
-		mTextInput = std::unique_ptr<TextBox>(new TextBox(tWindow, tResourceManager, tEventHandler));
-		mSubmitButton = std::unique_ptr<Button>(new Button(tWindow, tResourceManager));
+		mTextArea = std::unique_ptr<TextBox>(new TextBox(tWindow, tEventHandler));
+		mTextInput = std::unique_ptr<TextBox>(new TextBox(tWindow, tEventHandler));
+		mSubmitButton = std::unique_ptr<Button>(new Button(tWindow));
 	}
 	catch(const std::exception& e)
 	{
@@ -89,14 +89,14 @@ void				Terminal::LoadGUI(Window *tWindow, ResourceManager *tResourceManager, Ev
 	mTextArea->SetBackground(sf::Color(30, 30, 30, 100));
 	mTextArea->SetFontSize(15);
 	mTextArea->SetAllowFocus(false);
-	mTextArea->SetFont(tResourceManager->LoadFont("assets/fonts/firacode.otf"));
+	mTextArea->SetFont(mf::ResourceManager::LoadFont("assets/fonts/firacode.otf"));
 
 	mTextInput->SetPlacement(mf::ContainerPlacement::RELATIVE);
 	mTextInput->SetPosition(sf::Vector2f(5, 460));
 	mTextInput->SetSize(sf::Vector2f(680, 30));
 	mTextInput->SetFontSize(15);
 	mTextInput->SetBackground(sf::Color(30, 30, 30, 150));
-	mTextInput->SetFont(tResourceManager->LoadFont("assets/fonts/firacode.otf"));
+	mTextInput->SetFont(mf::ResourceManager::LoadFont("assets/fonts/firacode.otf"));
 }
 
 void				Terminal::UpdateGUI()

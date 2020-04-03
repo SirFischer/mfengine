@@ -14,7 +14,6 @@ private:
 		OPTIONS
 	};
 
-	mf::ResourceManager		mResourceManager;
 	mf::EventHandler		mEventHandler;
 	mf::Container			mContainer;
 	mf::Button				mPlayButton;

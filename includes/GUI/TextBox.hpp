@@ -10,7 +10,6 @@ namespace mf
 class TextBox : public aContainerItem
 {
 private:
-    ResourceManager     *mResourceManager;
     EventHandler        *mEventHandler;
     std::string         mString = "";
     sf::Vector2f		mTextPos = sf::Vector2f(5, 5);
@@ -20,7 +19,7 @@ private:
     void                UpdateText();
    
 public:
-    TextBox(Window *tWindow, mf::ResourceManager *tResourceManager, EventHandler *tEventHandler);
+    TextBox(Window *tWindow, EventHandler *tEventHandler);
     ~TextBox();
 
     void                Update();

@@ -12,7 +12,6 @@
 class World
 {
 private:
-	mf::ResourceManager		*mResourceManager;
 	mf::Camera				*mCamera;
 	mf::Player				*mPlayer;
 
@@ -30,7 +29,7 @@ private:
 	mf::Model				mTestModel;
 
 public:
-			World(mf::ResourceManager *tResourceManager, mf::Camera	*tCamera, mf::Player *tPlayer);
+			World(mf::Camera *tCamera, mf::Player *tPlayer);
 			~World();
 
 	void	Update(glm::mat4 tViewMatrix);

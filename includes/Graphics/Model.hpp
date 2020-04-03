@@ -24,7 +24,7 @@ namespace mf
 		std::vector<Mesh *>	GetMeshes(){return (mMeshes);}
 
 		void	AddMesh(Mesh *mesh);
-		void	LoadFromOBJ(std::string path, ResourceManager *tResourceManager);
+		void	LoadFromOBJ(std::string path);
 
 		void	Draw(GLenum mode);
 
@@ -57,8 +57,8 @@ namespace mf
 										NEW_GROUP
 		};
 
-		Mesh							*CreateMesh(t_data *data, ResourceManager *tResourceManager);
-		e_status						ParseLine(std::string &line, t_data *data, Model *model, ResourceManager *tResourceManager);
+		Mesh							*CreateMesh(t_data *data);
+		e_status						ParseLine(std::string &line, t_data *data, Model *model);
 		e_status						ReadVertex(std::string &line, t_data *data);
 		e_status						ReadNormals(std::string &line, t_data *data);
 		e_status						ReadTextureCoords(std::string &line, t_data *data);

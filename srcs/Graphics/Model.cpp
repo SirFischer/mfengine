@@ -65,7 +65,7 @@ namespace mf
 		mMeshes.push_back(mesh);
 	}
 
-	void	Model::LoadFromOBJ(std::string path, ResourceManager *tResourceManager)
+	void	Model::LoadFromOBJ(std::string path)
 	{
 		std::ifstream		file(path, std::ios::in);
 		std::string			line;
@@ -80,7 +80,7 @@ namespace mf
 		std::cout << "REAL PATH: " << data.mRelPath << std::endl;
 		while (std::getline(file, line))
 		{
-			switch (OBJParser::ParseLine(line, &data, this, tResourceManager))
+			switch (OBJParser::ParseLine(line, &data, this))
 			{
 			case OBJParser::e_status::FAIL:
 				break;
@@ -91,7 +91,7 @@ namespace mf
 			};
 		}
 		if (data.mIndices.size() > 0)
-			this->AddMesh(CreateMesh(&data, tResourceManager));
+			this->AddMesh(CreateMesh(&data));
 	}
 
 	Model&	Model::operator=(Model tModel)

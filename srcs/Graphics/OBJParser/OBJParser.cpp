@@ -4,7 +4,7 @@ namespace mf
 {
 	namespace OBJParser
 	{
-		Mesh		*CreateMesh(t_data *data, ResourceManager *tResourceManager)
+		Mesh		*CreateMesh(t_data *data)
 		{
 			Mesh				*result;
 			std::vector<float>	vertices;
@@ -35,7 +35,7 @@ namespace mf
 				return (NULL);
 			result->SetName(data->mGroupName);
 			if (data->mMap_Kd != "")
-				result->SetTexture(tResourceManager->LoadImage(data->mRelPath + data->mMap_Kd));
+				result->SetTexture(mf::ResourceManager::LoadImage(data->mRelPath + data->mMap_Kd));
 			std::cout << "Loaded image: " + data->mRelPath + data->mMap_Kd << std::endl;
 			result->SetAmbientLight(data->mKa);
 			result->SetDiffuseLight(data->mKd);
@@ -46,7 +46,7 @@ namespace mf
 			return (result);
 		}
 
-		e_status	ParseLine(std::string &line, t_data *data, Model *model, ResourceManager *tResourceManager)
+		e_status	ParseLine(std::string &line, t_data *data, Model *model)
 		{
 			if (line.find("#", 0, 1) != std::string::npos)
 				return (e_status::OK);
@@ -63,7 +63,7 @@ namespace mf
 			if (line.find("usemtl ", 0, 7) != std::string::npos)
 			{
 				if (data->mIndices.size() > 0)
-					model->AddMesh(CreateMesh(data, tResourceManager));
+					model->AddMesh(CreateMesh(data));
 				return (ReadMTL(line, data));
 			}
 			if (line.find("f ", 0, 2) != std::string::npos)

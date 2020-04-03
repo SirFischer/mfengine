@@ -50,7 +50,7 @@ public:
 	TERMINAL_ERROR_CODE							ProcessCommand(std::string line);
 	TERMINAL_ERROR_CODE							ReadFromFile(std::string path);
 
-	void										LoadGUI(Window *tWindow, ResourceManager *tResourceManager, EventHandler *tEventHandler, Renderer *tRenderer);
+	void										LoadGUI(Window *tWindow, EventHandler *tEventHandler, Renderer *tRenderer);
 	void										UpdateGUI();
 	void										RenderGUI();
 

@@ -17,7 +17,6 @@
 class GameState : public mf::ScreenState
 {
 private:
-	mf::ResourceManager		mResourceManager;
 	mf::EventHandler		mEventHandler;
 	mf::Camera				mCamera;
 	World					mWorld;
