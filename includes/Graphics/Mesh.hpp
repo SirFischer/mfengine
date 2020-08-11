@@ -8,6 +8,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "ResourceManager.hpp"
+#include <memory>
+#include <cstring>
 
 
 namespace mf
